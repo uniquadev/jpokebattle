@@ -55,8 +55,6 @@ public class JPokeBattle extends Application {
     	
     	stage.setScene(scene);
         stage.show();
-
-        
     }
 
     public Scene getScene() {

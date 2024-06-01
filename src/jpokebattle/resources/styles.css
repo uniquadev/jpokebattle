@@ -8,13 +8,20 @@
 }
 
 .button {
+    -fx-font-size: 15px;
     -fx-background-color: transparent;
     -fx-border-width: 0;
     -fx-padding: 0;
 }
+.button:hover {
+    -fx-text-fill: rgba(0, 0, 0, 0.6);
+}
 
 .start-label {
     -fx-font-size: 25px;
+}
+.info-label {
+    -fx-font-size: 20px;
 }
 
 .start-menu .button {

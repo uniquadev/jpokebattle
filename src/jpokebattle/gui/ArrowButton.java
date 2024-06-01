@@ -1,10 +1,10 @@
 package jpokebattle.gui;
 
-import jpokebattle.services.SoundService;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import jpokebattle.service.SoundService;
 
 public class ArrowButton extends Button {
     private Image arrow;

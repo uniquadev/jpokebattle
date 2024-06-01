@@ -4,11 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import jpokebattle.services.SoundService;
+import jpokebattle.service.SoundService;
 
 public class ArrowTextButton extends HBox {
     private Button button;
     private ArrowButton arrow;
+
+    public ArrowTextButton() {
+        this("Button", true);
+    }
 
     public ArrowTextButton(String text, boolean enabled) {
         super();
@@ -16,7 +20,6 @@ public class ArrowTextButton extends HBox {
         setAlignment(Pos.CENTER_LEFT);
 
         button = new Button(text);
-        button.getStyleClass().add("simple-button");
         button.setDisable(!enabled);
 
         button.addEventHandler(ActionEvent.ACTION, e -> {

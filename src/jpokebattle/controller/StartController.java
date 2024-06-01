@@ -4,7 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
-import jpokebattle.services.SoundService;
+import jpokebattle.service.SoundService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -48,6 +48,7 @@ public class StartController implements Initializable {
     }
 
     private void moveToMenu() {
+        
         vbox.getScene().setOnKeyPressed(null);
         vbox.setOnMouseClicked(null);
         label.setOpacity(0);

@@ -1,4 +1,4 @@
-package jpokebattle.services;
+package jpokebattle.service;
 
 import javafx.scene.media.AudioClip;
 
