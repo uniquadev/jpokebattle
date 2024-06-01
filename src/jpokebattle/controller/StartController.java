@@ -57,7 +57,7 @@ public class StartController implements Initializable {
         fadeTransition.setFromValue(1.0);
         fadeTransition.setToValue(0.0);
         fadeTransition.setOnFinished(e -> {
-            JPokeBattle.getInstance().setView("test");
+            JPokeBattle.getInstance().setView("menu");
         });
         fadeTransition.play();
 

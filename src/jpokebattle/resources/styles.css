@@ -7,6 +7,16 @@
     -fx-font-family: 'PKMN RBYGSC'; 
 }
 
+.button {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+
 .start-label {
+    -fx-font-size: 25px;
+}
+
+.start-menu .button {
     -fx-font-size: 25px;
 }
