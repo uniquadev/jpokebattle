@@ -1,0 +1,12 @@
+@font-face {
+    font-style: normal;
+    src: url('fonts/PKMN.ttf');
+}
+
+.root {
+    -fx-font-family: 'PKMN RBYGSC'; 
+}
+
+.start-label {
+    -fx-font-size: 25px;
+}
