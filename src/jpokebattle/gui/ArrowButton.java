@@ -31,6 +31,7 @@ public class ArrowButton extends Button {
 
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
+        imageView.getStyleClass().add("arrow");
 
         addEventHandler(ActionEvent.ACTION, e -> {
             SoundService.getSingleton().playPress();

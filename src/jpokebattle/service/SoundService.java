@@ -1,6 +1,7 @@
 package jpokebattle.service;
 
 import javafx.scene.media.AudioClip;
+import jpokebattle.JPokeBattle;
 
 public class SoundService {
 
@@ -24,7 +25,7 @@ public class SoundService {
 
     private AudioClip loadAudio(String name) throws NullPointerException
     {
-        AudioClip audioClip = new AudioClip(getClass().getResource("../resources/sounds/" + name).toExternalForm());
+        AudioClip audioClip = new AudioClip(JPokeBattle.class.getResource("resources/sounds/" + name).toExternalForm());
         audioClip.setVolume(0.06);
         return audioClip;
     }

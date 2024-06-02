@@ -6,14 +6,11 @@ import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
 import jpokebattle.service.SoundService;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class StartController implements Initializable {
+public class StartController {
 
     private FadeTransition fadeTransition;
 
@@ -23,8 +20,7 @@ public class StartController implements Initializable {
     @FXML
     private VBox vbox;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize() {
         fadeTransition = new FadeTransition(Duration.seconds(1), label);
         fadeTransition.setFromValue(1.0);
         fadeTransition.setToValue(0.1);

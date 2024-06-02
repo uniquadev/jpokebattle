@@ -1,22 +1,17 @@
 package jpokebattle.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import jpokebattle.JPokeBattle;
 import jpokebattle.gui.GridMenu;
 import jpokebattle.gui.GridMenu.MenuOption;
 
-public class MenuController implements Initializable {
+public class MenuController  {
 
     @FXML
     private GridMenu gridMenu;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize() {
         gridMenu.Initialize(new MenuOption[]{
             new MenuOption("Nuova Partita", true),
             new MenuOption("Carica Partita", false),
@@ -42,7 +37,7 @@ public class MenuController implements Initializable {
                 break;
             case "Esci":
                 try {
-                    Thread.sleep(670);
+                    Thread.sleep(370);
                 }
                 catch (InterruptedException e) {
                     e.printStackTrace();
