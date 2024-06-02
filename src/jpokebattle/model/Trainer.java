@@ -2,11 +2,28 @@ package jpokebattle.model;
 
 public class Trainer {
     private Pokemon[] pokemons = new Pokemon[6];
+    private BaseItem[] items = new BaseItem[10];
     private String name = "Trainer";
 
     public Pokemon getPokemon(int index) {
         assert index >= 0 && index < 6;
         return pokemons[index];
+    }
+    public void setPokemon(int index, Pokemon pokemon) {
+        assert index >= 0 && index < 6;
+        pokemons[index] = pokemon;
+    }
+
+    public int getTeamLevel() {
+        int count = 0;
+        int sum = 0;
+        for (int i = 0; i < 6; i++) {
+            if (pokemons[i] == null)
+                continue;
+            count++;
+            sum += pokemons[i].getLevel();
+        }
+        return count == 0 ? 0 : sum / count;
     }
 
     public void setName(String name) {
@@ -14,8 +31,5 @@ public class Trainer {
     }
     public String getName() {
         return name;
-    }
-    public void generateRandomTeam() {
-        // TODO: implement
     }
 }

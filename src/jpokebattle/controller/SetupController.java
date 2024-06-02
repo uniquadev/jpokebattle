@@ -8,11 +8,13 @@ import jpokebattle.gui.ArrowButton;
 import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
-import jpokebattle.service.SoundService;;
+import jpokebattle.service.SoundService;
+import jpokebattle.utils.TrainerBuilder;;
 
 public class SetupController {
     private final int MAX_NAME_LEN = 16;
     ChangeListener<Boolean> focusListener;
+    private String defaultName = TrainerBuilder.getRandomName();
 
     @FXML
     ArrowTextButton backButton;
@@ -55,7 +57,7 @@ public class SetupController {
         focusListener = (observable, oldValue, newValue) -> {
             if (newValue) {
                 nameField.getParent().requestFocus();
-                nameField.setPromptText("Allenatore");
+                nameField.setPromptText(defaultName);
                 nameField.focusedProperty().removeListener(focusListener);
             }
         };
@@ -65,14 +67,18 @@ public class SetupController {
 
     private String getSanitizedName() {
         String text = nameField.getText();
-        return text.trim().isEmpty() ? "Allenatore" : text;
+        return text.trim().isEmpty() ? defaultName : text;
     }
 
     private void submit() {
         GameState game = GameState.getSingleton();
-        Trainer player = game.getPlayer();
+        Trainer player = new TrainerBuilder()
+            .setGenerateName(false)
+            .generate();
         player.setName(getSanitizedName());
-        player.generateRandomTeam();
+        game.setPlayer(player);
+        System.out.println("Giocatore generato!");
+
         JPokeBattle.getInstance().setView("battle");
     }
 }

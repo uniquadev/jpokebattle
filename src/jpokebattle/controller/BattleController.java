@@ -12,6 +12,7 @@ import jpokebattle.JPokeBattle;
 import jpokebattle.gui.GridMenu;
 import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.service.GameState;
+import jpokebattle.utils.TrainerBuilder;
 
 public class BattleController {
     
@@ -25,7 +26,7 @@ public class BattleController {
     GridMenu actionMenu;
 
     public void initialize() {
-        bottomStackPane.setPrefHeight(JPokeBattle.HEIGHT * 0.34);
+        bottomStackPane.setPrefHeight(JPokeBattle.HEIGHT * 0.3);
         battleLabel.setPrefWidth(JPokeBattle.WIDTH * 0.45);
         actionMenu.Initialize(new MenuOption[]{
             new GridMenu.MenuOption("Attacca", true),
@@ -40,8 +41,14 @@ public class BattleController {
 
     public void startBattle() {
         GameState.getSingleton().setState(GameState.State.BATTLE);
-        // TODO: generate new AI (make method)
-        // TODO: generate AI team
+        generateAI();
         // TODO: start intro animation (make method)
+    }
+
+    public void generateAI() {
+        // TODO: implement difficulty based on score and player team level
+        TrainerBuilder builder = new TrainerBuilder();
+        GameState.getSingleton().setAI(builder.generate());
+        System.out.println("AI generato!");
     }
 }

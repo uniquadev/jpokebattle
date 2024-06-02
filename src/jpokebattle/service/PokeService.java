@@ -1,6 +1,8 @@
 package jpokebattle.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import jpokebattle.model.PokeData;
 import jpokebattle.utils.PokeElement;
@@ -19,17 +21,20 @@ public class PokeService {
 
     private PokeService() {
         registerData(
-            PokeEnum.BULBASAUR,
-            "Bulbasaur",
-            PokeElement.GRASS,
-            false,
-            false
+            PokeEnum.BULBASAUR, "Bulbasaur", PokeElement.GRASS,
+            45, 49, 49, 65, 45,
+            false, false
         );
     }
 
-    private PokeData registerData(PokeEnum id, String name, PokeElement element, boolean isFemale, boolean isLegendary) {
+    private PokeData registerData(
+        PokeEnum id, String name, PokeElement element, 
+        int ps, int attack, int defense, int special, int speed,
+        boolean isFemale, boolean isLegendary) {
         PokeData data = new PokeData(
-            id, name, element, isFemale, isLegendary
+            id, name, element,
+            ps, attack, defense, special, speed,
+            isFemale, isLegendary
         );
         library.put(
             id,
@@ -43,5 +48,31 @@ public class PokeService {
     }
     static public PokeData getDataStatic(PokeEnum id) {
         return getSingleton().getData(id);
+    }
+
+    public PokeData[] getRandomData(int size)
+    {
+        PokeData[] result = new PokeData[size];
+        Random random = new Random();
+        PokeEnum[] keys = (PokeEnum[])library.keySet().toArray();
+        for (int i = 0; i < size; i++) {
+            PokeEnum id = keys[random.nextInt(keys.length)];
+            PokeData data = getData(id);
+            result[i] = data;
+        }
+        return result;
+    }
+
+    public ArrayList<PokeData> getRandomUniqueData(int size) {
+        ArrayList<PokeData> result = new ArrayList<>();
+        Random random = new Random();
+        ArrayList<PokeEnum> keys = new ArrayList<>(library.keySet());
+        for (int i = 0; i < size && keys.size() > 0; i++) {
+            PokeEnum id = keys.get(random.nextInt(keys.size()));
+            PokeData data = getData(id);
+            result.add(data);
+            keys.remove(id);
+        }
+        return result;
     }
 }

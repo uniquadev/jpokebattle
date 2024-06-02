@@ -18,7 +18,7 @@ public class GameState {
     }
     
     private State state = State.MENU;
-    private Trainer player = new Trainer();
+    private Trainer player;
     private TrainerAI trainer;
     private int score = 0;
 
@@ -32,11 +32,13 @@ public class GameState {
     public Trainer getPlayer() {
         return player;
     }
+    public void setPlayer(Trainer player) {
+        this.player = player;
+    }
     public Trainer getAI() {
         return trainer;
     }
-
-    public void startBattle() {
-         
+    public void setAI(TrainerAI trainer) {
+        this.trainer = trainer;
     }
 }

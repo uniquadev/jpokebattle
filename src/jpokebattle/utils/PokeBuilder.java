@@ -1,29 +1,31 @@
 package jpokebattle.utils;
 
+import java.util.Random;
+
+import jpokebattle.model.PokeData;
 import jpokebattle.model.Pokemon;
+import jpokebattle.service.PokeService;
 
 public class PokeBuilder {
-    private int minLevel;
-    private int maxLevel;
-    private int minHp;
-    private int maxHp;
-    private int minAttack;
-    private int maxAttack;
-    private int minDefense;
-    private int maxDefense;
-    private int minSpeed;
-    private int maxSpeed;
-    private int minSpecial;
-    private int maxSpecial;
-    private int minAccuracy;
-    private int maxAccuracy;
-    private int minEvasion;
-    private int maxEvasion;
-    private int minExp;
-    private int maxExp;
-    private int minExpToNextLevel;
-    private int maxExpToNextLevel;
-    private PokeEnum id;
+    private Random random = new Random();
+    private int minLevel = 1;
+    private int maxLevel = 1;
+    private int maxPS = 15;
+    private int maxAttack = 15;
+    private int maxDefense = 15;
+    private int maxSpecial = 15;
+    private int maxSpeed = 15;
+    
+    private PokeEnum id = PokeEnum.NONE;
+
+    public PokeBuilder(PokeEnum id) {
+        this.id = id;
+    }
+
+    public PokeBuilder()
+    {
+        this(PokeEnum.BULBASAUR);
+    }
 
     public void setId(PokeEnum id) {
         this.id = id;
@@ -37,7 +39,31 @@ public class PokeBuilder {
 
     public Pokemon generate()
     {
-        // TODO: implement
-        return null;
+        PokeData data = PokeService.getDataStatic(id);
+        if (data == null)
+            throw new RuntimeException("Pokemon not found: " + id);
+        
+        Pokemon pokemon = new Pokemon();
+        pokemon.setData(data);
+        pokemon.setName(data.getName());
+
+        pokemon.setPS(random.nextInt(maxPS));
+        pokemon.setAttack(random.nextInt(maxAttack));
+        pokemon.setDefense(random.nextInt(maxDefense));
+        pokemon.setSpecial(random.nextInt(maxSpecial));
+        pokemon.setSpeed(random.nextInt(maxSpeed));
+
+        pokemon.setLevel(nextInt(minLevel, maxLevel));
+
+        pokemon.restoreHealth();
+        
+        return pokemon;
+    }
+    
+    private int nextInt(int min, int max)
+    {
+        if (min == max)
+            return min;
+        return random.nextInt(max - min + 1) + min;
     }
 }
