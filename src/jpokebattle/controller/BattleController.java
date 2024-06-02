@@ -32,7 +32,7 @@ public class BattleController {
             new GridMenu.MenuOption("Attacca", true),
             new GridMenu.MenuOption("Pokemon", true),
             new GridMenu.MenuOption("Oggetti", true),
-            new GridMenu.MenuOption("Fuggi", true)
+            new GridMenu.MenuOption("Fuggi", false)
         }, 2);
         actionMenu.setArrowSize(25, 25);
         actionMenu.setAlignment(Pos.CENTER);
