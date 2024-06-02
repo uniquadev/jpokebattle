@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import jpokebattle.gui.GridMenu?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jpokebattle.controller.BattleController">
+   <children>
+      <StackPane prefHeight="689.0" prefWidth="600.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+         </children>
+      </StackPane>
+      <StackPane fx:id="bottomStackPane" minHeight="-Infinity" prefHeight="0.0" prefWidth="600.0">
+         <children>
+            <HBox alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="120.0" prefWidth="386.0" StackPane.alignment="CENTER_RIGHT">
+               <children>
+                  <GridMenu fx:id="actionMenu" styleClass="battle-menu" hgap="10.0"/>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <StackPane.margin>
+                  <Insets right="20.0" />
+               </StackPane.margin>
+            </HBox>
+            <Label fx:id="battleLabel" styleClass="battle-label" wrapText="true" prefHeight="149.0" prefWidth="264.0" text="Seleziona la tua mossa" StackPane.alignment="CENTER_LEFT">
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="30.0" top="5.0" />
+               </StackPane.margin>
+            </Label>
+         </children>
+      </StackPane>
+   </children>
+</VBox>

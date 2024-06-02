@@ -15,8 +15,8 @@ public class JPokeBattle extends Application {
 	
 	private static Stage stage = null;
 	
-	private static final int WIDTH = 800;
-	private static final int HEIGHT = 600;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
 
     private static JPokeBattle instance = null;
 
@@ -44,9 +44,9 @@ public class JPokeBattle extends Application {
     	Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("view/" + view + ".fxml"));
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            root = new StackPane();
+            return;
         }
 
     	Scene scene = new Scene(root, WIDTH, HEIGHT);

@@ -20,6 +20,8 @@ public class ArrowTextButton extends HBox {
         super();
         setSpacing(10);
         setAlignment(Pos.CENTER_LEFT);
+        setPrefHeight(0);
+        setMaxHeight(USE_PREF_SIZE);
 
         button = new Button(text);
         button.setDisable(!enabled);
@@ -61,5 +63,10 @@ public class ArrowTextButton extends HBox {
 
     public void showArrow(boolean show) {
         arrow.setVisible(show);
+    }
+
+    public void resizeArrow(int width, int height) {
+        arrow.setFitWidth(width);
+        arrow.setFitHeight(height);
     }
 }

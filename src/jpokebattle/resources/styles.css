@@ -14,7 +14,7 @@
     -fx-padding: 0;
 }
 .button:hover {
-    -fx-text-fill: rgba(0, 0, 0, 0.6);
+    -fx-text-fill: rgba(0, 0, 0, 0.7);
 }
 
 .start-label {
@@ -26,4 +26,16 @@
 
 .start-menu .button {
     -fx-font-size: 25px;
+}
+
+.setup-label {
+    -fx-font-size: 30px;
+}
+
+.battle-menu .button {
+    -fx-font-size: 20px;
+}
+
+.battle-label {
+    -fx-font-size: 22px;
 }

@@ -30,7 +30,7 @@ public class GridMenu extends GridPane {
         public void onClick(MenuOption option);
     }
 
-    private MenuOption[] options;
+    private MenuOption[] options = new MenuOption[0];
     private MenuOption selected;
     private MenuCallback callback;
 
@@ -78,6 +78,13 @@ public class GridMenu extends GridPane {
             if (opt == option)
                 continue;
             opt.showArrow(false);
+        }
+    }
+
+    public void setArrowSize(int width, int height)
+    {
+        for (var option : options) {
+            option.button.resizeArrow(width, height);
         }
     }
 

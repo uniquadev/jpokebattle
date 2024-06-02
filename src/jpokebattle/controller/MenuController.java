@@ -23,10 +23,10 @@ public class MenuController  {
         gridMenu.setCallback(this::onClick);
     }
     
-    public void onClick(MenuOption option) {
+    private void onClick(MenuOption option) {
         switch (option.text) {
             case "Nuova Partita":
-                // TODO
+                JPokeBattle.getInstance().setView("setup");
                 break;
             case "Carica Partita":
                 break;
@@ -49,5 +49,9 @@ public class MenuController  {
             default:
                 break;
         }
-    } 
+    }
+
+    private void caricaPartita() {
+        
+    }
 }
