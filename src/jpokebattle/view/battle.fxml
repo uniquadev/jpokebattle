@@ -15,6 +15,7 @@
 
 <?import jpokebattle.gui.GridMenu?>
 <?import jpokebattle.gui.PokemonView?>
+<?import jpokebattle.gui.PokeInfoCard?>
 
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jpokebattle.controller.BattleController">
@@ -29,6 +30,11 @@
                   <Insets left="24.0" />
                </StackPane.margin>
             </ImageView>
+            <PokeInfoCard fx:id="playerInfoCard" prefHeight="81.0" prefWidth="300.0" StackPane.alignment="BOTTOM_RIGHT">
+               <StackPane.margin>
+                  <Insets right="30.0" bottom="57.0" />
+               </StackPane.margin>
+            </PokeInfoCard>
             <PokemonView translateY="5.0" fx:id="playerPokemonView" fitHeight="190.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_LEFT">
                <StackPane.margin>
                   <Insets left="104.0" />
@@ -42,6 +48,11 @@
                   <Insets right="58.0" top="30.0" />
                </StackPane.margin>
             </ImageView>
+            <PokeInfoCard fx:id="botInfoCard" prefHeight="81.0" prefWidth="300.0" StackPane.alignment="TOP_LEFT">
+               <StackPane.margin>
+                  <Insets left="85.0" top="53.0" />
+               </StackPane.margin>
+            </PokeInfoCard>
             <PokemonView fx:id="botPokemonView" fitHeight="165.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
                <StackPane.margin>
                   <Insets right="114.0" top="20.0" />
@@ -73,7 +84,7 @@
             </HBox>
             <Label fx:id="battleLabel" styleClass="battle-label" wrapText="true" prefHeight="149.0" prefWidth="264.0" text="Seleziona la tua mossa" StackPane.alignment="CENTER_LEFT">
                <StackPane.margin>
-                  <Insets bottom="5.0" left="30.0" top="5.0" />
+                  <Insets bottom="5.0" left="50.0" />
                </StackPane.margin>
             </Label>
          </children>

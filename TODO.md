@@ -1,8 +1,7 @@
 # importanti
+* implementare delle freccie sotto la pokeinfocard
 * mettere uno stack pane come padre della view di combattimente
 (utile per permettere di mostrare schermate come zaino, evoluzioni ecc)
-* fare una classe gui custom PokemonView che estenda la classe ImageView e disegni il pokemon impostato. (ha un flag che indica se disegnare il dietro o il fronte)
-* disegnare i pokemon in combattimento (per ora ignorare le animazioni)
 * implementare la ui pokemon in combattimento
 * implementare mosse base nel pokeservice (leggere wiki per le mosse base)
 * implementare il generatore di mosse per i pokemon

@@ -39,3 +39,13 @@
 .battle-label {
     -fx-font-size: 22px;
 }
+
+.poke-info-card .name-label {
+    -fx-font-size: 25px;
+}
+.poke-info-card .hp-label {
+    -fx-font-size: 23px;
+}
+.poke-info-card .level-label {
+    -fx-font-size: 16px;
+}

@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import jpokebattle.JPokeBattle;
 import jpokebattle.gui.GridMenu;
+import jpokebattle.gui.PokeInfoCard;
 import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.model.Pokemon;
@@ -30,14 +31,18 @@ public class BattleController {
     @FXML
     PokemonView playerPokemonView;
     @FXML
+    PokeInfoCard playerInfoCard;
+    @FXML
+    PokeInfoCard botInfoCard;
+    @FXML
     PokemonView botPokemonView;
 
     public void initialize() {
         playerPokemonView.setRenderBack(true);
         bottomStackPane.setPrefHeight(JPokeBattle.HEIGHT * 0.3);
-        battleLabel.setPrefWidth(JPokeBattle.WIDTH * 0.45);
+        battleLabel.setPrefWidth(JPokeBattle.WIDTH * 0.4);
         actionMenu.Initialize(new MenuOption[]{
-            new GridMenu.MenuOption("Attacca", true),
+            new GridMenu.MenuOption("Azioni", true),
             new GridMenu.MenuOption("Pokemon", true),
             new GridMenu.MenuOption("Oggetti", true),
             new GridMenu.MenuOption("Fuggi", false)
@@ -46,7 +51,8 @@ public class BattleController {
         actionMenu.setAlignment(Pos.CENTER);
         pokeBox.fitWidthProperty().bind(bottomStackPane.widthProperty());
         pokeBox.fitHeightProperty().bind(bottomStackPane.heightProperty());
-        
+        botInfoCard.removeHpLabel();
+
         bottomStackPane.setBackground(
             new Background(new BackgroundFill(
                 Color.WHITESMOKE,
@@ -80,9 +86,11 @@ public class BattleController {
         Pokemon aiPokemon = ai.getCurrentPokemon();
         if (playerPokemon != null) {
             playerPokemonView.setId(playerPokemon.getId());
+            playerInfoCard.update(playerPokemon);
         }
         if (aiPokemon != null) {
             botPokemonView.setId(aiPokemon.getId());
+            botInfoCard.update(aiPokemon);
         }
     }
 }
