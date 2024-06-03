@@ -45,7 +45,6 @@ public class PokeBuilder {
         
         Pokemon pokemon = new Pokemon();
         pokemon.setData(data);
-        pokemon.setName(data.getName());
 
         pokemon.setPS(random.nextInt(maxPS));
         pokemon.setAttack(random.nextInt(maxAttack));

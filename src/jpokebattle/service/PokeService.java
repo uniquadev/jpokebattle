@@ -25,6 +25,16 @@ public class PokeService {
             45, 49, 49, 65, 45,
             false, false
         );
+        registerData(
+            PokeEnum.CHARMANDER, "Charmander", PokeElement.FIRE,
+            39, 52, 43, 60, 65,
+            false, false
+        );
+        registerData(
+            PokeEnum.SQUIRTLE, "Squirtle", PokeElement.WATER,
+            44, 48, 65, 50, 43,
+            false, false
+        );
     }
 
     private PokeData registerData(

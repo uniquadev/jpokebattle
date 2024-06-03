@@ -4,7 +4,6 @@ import jpokebattle.moves.BaseMove;
 
 public class Pokemon {
     private BaseMove[] moves = new BaseMove[4];
-    private String name;
     private int health = 0;
 
     private int ps = 0;
@@ -37,10 +36,7 @@ public class Pokemon {
     }
 
     public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
+        return data.getName();
     }
 
     public int getHealth() {
