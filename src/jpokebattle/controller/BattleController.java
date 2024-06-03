@@ -3,14 +3,16 @@ package jpokebattle.controller;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.Color;
 import jpokebattle.JPokeBattle;
 import jpokebattle.gui.GridMenu;
+import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
+import jpokebattle.model.Pokemon;
 import jpokebattle.service.GameState;
 import jpokebattle.utils.TrainerBuilder;
 
@@ -18,14 +20,20 @@ public class BattleController {
     
     @FXML
     StackPane bottomStackPane;
-
     @FXML
     Label battleLabel;
-
     @FXML
     GridMenu actionMenu;
+    @FXML
+    ImageView pokeBox;
+
+    @FXML
+    PokemonView playerPokemonView;
+    @FXML
+    PokemonView botPokemonView;
 
     public void initialize() {
+        playerPokemonView.setRenderBack(true);
         bottomStackPane.setPrefHeight(JPokeBattle.HEIGHT * 0.3);
         battleLabel.setPrefWidth(JPokeBattle.WIDTH * 0.45);
         actionMenu.Initialize(new MenuOption[]{
@@ -36,12 +44,24 @@ public class BattleController {
         }, 2);
         actionMenu.setArrowSize(25, 25);
         actionMenu.setAlignment(Pos.CENTER);
+        pokeBox.fitWidthProperty().bind(bottomStackPane.widthProperty());
+        pokeBox.fitHeightProperty().bind(bottomStackPane.heightProperty());
+        
+        bottomStackPane.setBackground(
+            new Background(new BackgroundFill(
+                Color.WHITESMOKE,
+                null,
+                null
+            ))
+        );
+        
         startBattle();
     }
 
-    public void startBattle() {
+    private void startBattle() {
         GameState.getSingleton().setState(GameState.State.BATTLE);
         generateAI();
+        updatePokemons();
         // TODO: start intro animation (make method)
     }
 
@@ -50,5 +70,19 @@ public class BattleController {
         TrainerBuilder builder = new TrainerBuilder();
         GameState.getSingleton().setAI(builder.generate());
         System.out.println("AI generato!");
+    }
+
+    private void updatePokemons() {
+        GameState state = GameState.getSingleton();
+        var player = state.getPlayer();
+        var ai = state.getAI();
+        Pokemon playerPokemon = player.getCurrentPokemon();
+        Pokemon aiPokemon = ai.getCurrentPokemon();
+        if (playerPokemon != null) {
+            playerPokemonView.setId(playerPokemon.getId());
+        }
+        if (aiPokemon != null) {
+            botPokemonView.setId(aiPokemon.getId());
+        }
     }
 }

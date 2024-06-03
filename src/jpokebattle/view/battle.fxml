@@ -10,24 +10,62 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
 <?import jpokebattle.gui.GridMenu?>
+<?import jpokebattle.gui.PokemonView?>
 
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jpokebattle.controller.BattleController">
    <children>
       <StackPane prefHeight="689.0" prefWidth="600.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+            <ImageView translateY="135.0" fitHeight="265.0" fitWidth="365.0" pickOnBounds="false" preserveRatio="false" StackPane.alignment="BOTTOM_LEFT">
+               <image>
+                  <Image url="jpokebattle/resources/sprites/battle-terrain.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets left="24.0" />
+               </StackPane.margin>
+            </ImageView>
+            <PokemonView translateY="5.0" fx:id="playerPokemonView" fitHeight="190.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_LEFT">
+               <StackPane.margin>
+                  <Insets left="104.0" />
+               </StackPane.margin>
+            </PokemonView>
+            <ImageView translateY="18.0" fitHeight="235.0" fitWidth="295.0" pickOnBounds="false" preserveRatio="false" StackPane.alignment="TOP_RIGHT">
+               <image>
+                  <Image url="jpokebattle/resources/sprites/battle-terrain.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets right="58.0" top="30.0" />
+               </StackPane.margin>
+            </ImageView>
+            <PokemonView fx:id="botPokemonView" fitHeight="165.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
+               <StackPane.margin>
+                  <Insets right="114.0" top="20.0" />
+               </StackPane.margin>
+            </PokemonView>
+            
          </children>
       </StackPane>
       <StackPane fx:id="bottomStackPane" minHeight="-Infinity" prefHeight="0.0" prefWidth="600.0">
          <children>
+            <ImageView fx:id="pokeBox" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="jpokebattle/resources/sprites/pokebox.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets bottom="5.0" />
+               </StackPane.margin>
+            </ImageView>
             <HBox alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="120.0" prefWidth="386.0" StackPane.alignment="CENTER_RIGHT">
                <children>
-                  <GridMenu fx:id="actionMenu" styleClass="battle-menu" hgap="10.0"/>
+                  <GridMenu fx:id="actionMenu" styleClass="battle-menu" hgap="10.0" vgap="10.0"/>
                </children>
                <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="15.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <StackPane.margin>
                   <Insets right="20.0" />

@@ -54,6 +54,9 @@ public class TrainerBuilder {
             builder.setId(data.getId());
             trainer.setPokemon(i, builder.generate());
         }
+        if (teamSize > 0) {
+            trainer.setCurrentPokemon(0);
+        }
     }
 
     private void generateItems(Trainer trainer) {

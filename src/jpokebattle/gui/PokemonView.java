@@ -1,0 +1,42 @@
+package jpokebattle.gui;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import jpokebattle.JPokeBattle;
+import jpokebattle.utils.PokeEnum;
+
+public class PokemonView extends ImageView {
+    private PokeEnum id = PokeEnum.BULBASAUR;
+    private boolean renderBack = false;
+
+    public PokemonView() {
+        super();
+        updateImage();
+    }
+
+    public void updateImage() {
+        String imagePath;
+        if (renderBack) {
+            imagePath = "resources/sprites/pokemons/back/" + id.ordinal() + ".png";
+        } else {
+            imagePath = "resources/sprites/pokemons/" + id.ordinal() + ".png";
+        }
+        System.out.println(imagePath);
+        Image image = new Image(
+            JPokeBattle.class.getResourceAsStream(imagePath),
+            168, 168,
+            false, false
+        );
+        setImage(image);
+    }
+
+    public void setId(PokeEnum id) {
+        this.id = id;
+        updateImage();
+    }
+
+    public void setRenderBack(boolean renderBack) {
+        this.renderBack = renderBack;
+        updateImage();
+    }
+}

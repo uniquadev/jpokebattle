@@ -1,6 +1,7 @@
 package jpokebattle.model;
 
 import jpokebattle.moves.BaseMove;
+import jpokebattle.utils.PokeEnum;
 
 public class Pokemon {
     private BaseMove[] moves = new BaseMove[4];
@@ -31,6 +32,9 @@ public class Pokemon {
     public PokeData getData() {
         return data;
     }
+    public PokeEnum getId() {
+        return data.getId();
+    }
     public void setData(PokeData data) {
         this.data = data;
     }
@@ -47,6 +51,9 @@ public class Pokemon {
     }
     public void restoreHealth() {
         this.health = getTotPS();
+    }
+    public boolean isDead() {
+        return health <= 0;
     }
 
     public void damage(int damage) {
