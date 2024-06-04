@@ -3,7 +3,8 @@
 * implementare mosse base nel pokeservice (leggere wiki per le mosse base)
 * implementare il generatore di mosse per i pokemon
 * implementare la grid mosse
-* proggettare un sistema a turni per il combattimento
+* implementare la logica di combattimento
+* implementare le mosse dell'ai
 * implementare la fine (quando si perde o si fa fuga)
 * ideare la view endgame che mostri il punteggio finale e la posizione nella top 10
 * implementare uno storage service che carichi e salvi i dati in un file json (in base64)

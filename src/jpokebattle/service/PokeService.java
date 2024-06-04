@@ -26,14 +26,44 @@ public class PokeService {
             true, false, false
         );
         registerData(
+            PokeEnum.IVYSAUR, "Ivysaur", PokeElement.GRASS,
+            60, 62, 63, 80, 60,
+            true, false, false
+        );
+        registerData(
+            PokeEnum.VENUSAUR, "Venusaur", PokeElement.GRASS,
+            80, 82, 83, 100, 80,
+            false, false, false
+        );
+        registerData(
             PokeEnum.CHARMANDER, "Charmander", PokeElement.FIRE,
             39, 52, 43, 60, 65,
             true, false, false
         );
         registerData(
+            PokeEnum.CHARMELEON, "Charmelion", PokeElement.FIRE,
+            58, 64, 58, 80, 80,
+            true, false, false
+        );
+        registerData(
+            PokeEnum.CHARIZARD, "Charizard", PokeElement.FIRE,
+            78, 84, 78, 109, 100,
+            false, false, false
+        );
+        registerData(
             PokeEnum.SQUIRTLE, "Squirtle", PokeElement.WATER,
             44, 48, 65, 50, 43,
             true, false, false
+        );
+        registerData(
+            PokeEnum.WARTORTLE, "Wartortle", PokeElement.WATER,
+            59, 63, 80, 65, 58,
+            true, false, false
+        );
+        registerData(
+            PokeEnum.BLASTOISE, "Blastoise", PokeElement.WATER,
+            79, 83, 100, 85, 78,
+            false, false, false
         );
     }
 
