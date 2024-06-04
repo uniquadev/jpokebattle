@@ -78,7 +78,9 @@ public class SetupController {
     private void submit() {
         GameState game = GameState.getSingleton();
         Trainer player = new TrainerBuilder()
-            .setGenerateName(false)
+            .setTeamSize(1)
+            .setMaxPokeLevel(5)
+            .useStarters(true)
             .generate();
         player.setName(getSanitizedName());
         game.setPlayer(player);

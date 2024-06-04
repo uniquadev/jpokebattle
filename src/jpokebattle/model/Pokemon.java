@@ -7,6 +7,7 @@ public class Pokemon {
     private BaseMove[] moves = new BaseMove[4];
     private int health = 0;
 
+    // statistiche personali
     private int ps = 0;
     private int psPA = 0;
 
@@ -25,8 +26,8 @@ public class Pokemon {
     private int level = 0;
     private int exp = 0;
     private int expToNextLevel = 0;
-    
-    // Dati base del pokemon
+
+    // dati base del pokemon
     private PokeData data;
 
     public PokeData getData() {
@@ -146,5 +147,7 @@ public class Pokemon {
         this.moves[index] = move;
     }
 
-
+    public boolean hasEvolution() {
+        return data.getCurrentEvolution() < data.getMaxEvolution();
+    }
 }

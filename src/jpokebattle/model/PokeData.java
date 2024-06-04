@@ -14,14 +14,24 @@ public class PokeData {
     private int special;
     private int speed;
 
-    private boolean hasEvolution;
     private boolean isFemale;
     private boolean isLegendary;
+
+    private int currentEvolution = 0;
+    private int maxEvolution = 0;
+
+    public int getCurrentEvolution(){
+        return currentEvolution;
+    }
+    public int getMaxEvolution(){
+        return maxEvolution;
+    }
 
     public PokeData(
         PokeEnum id, String name, PokeElement element, 
         int ps, int attack, int defense, int special, int speed,
-        boolean hasEvolution, boolean isFemale, boolean isLegendary) {
+        int currentEvolution, int maxEvolution,
+        boolean isFemale, boolean isLegendary) {
         this.id = id;
         this.name = name;
         this.element = element;
@@ -30,7 +40,8 @@ public class PokeData {
         this.defense = defense;
         this.special = special;
         this.speed = speed;
-        this.hasEvolution = hasEvolution;
+        this.currentEvolution = currentEvolution;
+        this.maxEvolution = maxEvolution;
         this.isFemale = isFemale;
         this.isLegendary = isLegendary;
     }

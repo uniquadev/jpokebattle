@@ -61,7 +61,7 @@ public class PokeBuilder {
     
     private int nextInt(int min, int max)
     {
-        if (min == max)
+        if (min >= max)
             return min;
         return random.nextInt(max - min + 1) + min;
     }

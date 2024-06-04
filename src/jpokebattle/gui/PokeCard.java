@@ -77,13 +77,6 @@ public class PokeCard extends StackPane {
         getStyleClass().add("poke-card");
 
         setAlignment(infoBox2, Pos.CENTER_RIGHT);
-
-        setOnMouseMoved(e -> {
-            toggleArrow(true);
-        });
-        setOnMouseExited(e -> {
-            toggleArrow(false);
-        });
     }
 
     public void toggleArrow(boolean flag)

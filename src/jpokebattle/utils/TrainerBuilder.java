@@ -5,12 +5,15 @@ import java.util.Random;
 
 import jpokebattle.model.PokeData;
 import jpokebattle.model.Trainer;
-import jpokebattle.service.PokeService;
 
 public class TrainerBuilder {
+    private PokeBuilder pokeBuilder = new PokeBuilder();
+    private PokeRandomizer randomizer = new PokeRandomizer();
     private boolean generateName = true;
     private boolean generateTeam = true;
     private boolean generateItems = true;
+    private boolean useStarters = false;
+
     private int teamSize = 6;
 
     private static final String[] NAMES = {
@@ -42,17 +45,19 @@ public class TrainerBuilder {
     private void generateName(Trainer trainer) {
         trainer.setName(getRandomName());
     }
-    
 
     private void generateTeam(Trainer trainer) {
-        PokeService service = PokeService.getSingleton();
-        ArrayList<PokeData> datas = service.getRandomUniqueData(teamSize);
-        PokeBuilder builder = new PokeBuilder();
-
-        for (int i = 0; i < datas.size(); i++) {
+        ArrayList<PokeData> datas;
+        if (useStarters) {
+            datas = randomizer.getRandomStarters(teamSize);
+        } else {
+            datas = randomizer.getRandomUniqueData(teamSize);
+        }
+        
+        for (int i = 0; i < Math.min(datas.size(), teamSize); i++) {
             PokeData data = datas.get(i);
-            builder.setId(data.getId());
-            trainer.setPokemon(i, builder.generate());
+            pokeBuilder.setId(data.getId());
+            trainer.setPokemon(i, pokeBuilder.generate());
         }
         if (teamSize > 0) {
             trainer.setCurrentPokemon(0);
@@ -70,6 +75,21 @@ public class TrainerBuilder {
 
     public TrainerBuilder setTeamSize(int teamSize) {
         this.teamSize = Math.min(6, teamSize);
+        return this;
+    }
+
+    public TrainerBuilder setMaxPokeLevel(int maxPokeLevel) {
+        pokeBuilder.setMaxLevel(maxPokeLevel);
+        return this;
+    }
+
+    public TrainerBuilder setMaxEvolution(int maxEvolution) {
+        randomizer.setMaxEvolution(maxEvolution);
+        return this;
+    }
+
+    public TrainerBuilder useStarters(boolean useStarters) {
+        this.useStarters = useStarters;
         return this;
     }
 }

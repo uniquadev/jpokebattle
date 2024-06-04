@@ -20,6 +20,7 @@ public class PokeInfoCard extends VBox  {
     private Rectangle healthRect;
     private Label nameLabel;
     private Label hpLabel;
+    private Label leveLabel;
     private Pokemon pokemon;
     private HealthBar healthBar;
 
@@ -33,13 +34,13 @@ public class PokeInfoCard extends VBox  {
         nameLabel = new Label();
         nameLabel.setText("Bulbasaur");
         nameLabel.getStyleClass().add("name-label");
-        Label level = new Label();
-        level.setText(":L1");
-        level.setAlignment(Pos.TOP_RIGHT);
-        level.setTextAlignment(TextAlignment.RIGHT);
-        level.setPrefWidth(getPrefWidth() * 0.3);
-        level.setPrefHeight(17.0);
-        level.getStyleClass().add("level-label");
+        leveLabel = new Label();
+        leveLabel.setText(":L1");
+        leveLabel.setAlignment(Pos.TOP_RIGHT);
+        leveLabel.setTextAlignment(TextAlignment.RIGHT);
+        leveLabel.setPrefWidth(getPrefWidth() * 0.3);
+        leveLabel.setPrefHeight(17.0);
+        leveLabel.getStyleClass().add("level-label");
         hpLabel = new Label();
         hpLabel.setText("20/20");
         hpLabel.setAlignment(Pos.CENTER);
@@ -52,7 +53,7 @@ public class PokeInfoCard extends VBox  {
         hbox.setPrefHeight(25.0);
         hbox.setPrefWidth(getPrefWidth());
 
-        getChildren().addAll(nameLabel, level, hbox, hpLabel);
+        getChildren().addAll(nameLabel, leveLabel, hbox, hpLabel);
 
         Label health = new Label("HP: ");
         healthBar = new HealthBar();
@@ -65,6 +66,7 @@ public class PokeInfoCard extends VBox  {
         this.pokemon = pokemon;
         nameLabel.setText(pokemon.getName());
         hpLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());
+        leveLabel.setText(":L" + pokemon.getLevel());
     }
 
     public void removeHpLabel() {

@@ -1,6 +1,7 @@
 package jpokebattle.service;
 
 import jpokebattle.model.Trainer;
+import jpokebattle.utils.AIGenerationSettings;
 import jpokebattle.utils.TrainerAI;
 import jpokebattle.utils.TrainerBuilder;
 
@@ -16,6 +17,12 @@ public class GameState {
     public static enum State {
         MENU,
         BATTLE
+    }
+    public static enum Difficulty {
+        EASY,
+        MEDIUM,
+        HARD,
+        IMPOSSIBLE
     }
     
     private State state = State.MENU;
@@ -45,6 +52,16 @@ public class GameState {
         this.trainer = trainer;
     }
 
+    public Difficulty getCurrentDifficulty() {
+        if (score < 10)
+            return Difficulty.EASY;
+        if (score < 20)
+            return Difficulty.MEDIUM;
+        if (score < 30)
+            return Difficulty.HARD;
+        return Difficulty.IMPOSSIBLE;
+    }
+
     public boolean isPlayerTurn() {
         return currentTrainerTurn == player;
     }
@@ -52,9 +69,12 @@ public class GameState {
         return currentTrainerTurn != player;
     }
 
-    public void generateAI() {
-        // TODO: implement difficulty based on score and player team level
-        TrainerBuilder builder = new TrainerBuilder();
+    public void generateAI() {        
+        AIGenerationSettings settings = new AIGenerationSettings(getCurrentDifficulty());
+        TrainerBuilder builder = new TrainerBuilder()
+            .setTeamSize(player.getTeamSize() + settings.getTeamDelta())
+            .setMaxPokeLevel(player.getTeamLevel() + settings.getLevelDelta())
+            .setMaxEvolution(player.getBestEvolution() + settings.getEvolutionDelta());
         setAI(builder.generate());
         System.out.println("AI generato!");
     }

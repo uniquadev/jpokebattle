@@ -17,64 +17,79 @@ public class PokeService {
         return singleton;
     }
 
-    private static HashMap<PokeEnum, PokeData> library = new HashMap<>();
-
+    private HashMap<PokeEnum, PokeData> library = new HashMap<>();
+    
     private PokeService() {
+        registerDatas(); 
+    }
+
+    private void registerDatas() {
         registerData(
             PokeEnum.BULBASAUR, "Bulbasaur", PokeElement.GRASS,
             45, 49, 49, 65, 45,
-            true, false, false
+            0, 2,
+            false, false
         );
         registerData(
             PokeEnum.IVYSAUR, "Ivysaur", PokeElement.GRASS,
             60, 62, 63, 80, 60,
-            true, false, false
+            1, 2,
+            false, false
         );
         registerData(
             PokeEnum.VENUSAUR, "Venusaur", PokeElement.GRASS,
             80, 82, 83, 100, 80,
-            false, false, false
+            2, 2,
+            false, false
         );
         registerData(
             PokeEnum.CHARMANDER, "Charmander", PokeElement.FIRE,
             39, 52, 43, 60, 65,
-            true, false, false
+            0, 2,
+            false, false
         );
         registerData(
             PokeEnum.CHARMELEON, "Charmelion", PokeElement.FIRE,
             58, 64, 58, 80, 80,
-            true, false, false
+            1, 2,
+            false, false
         );
         registerData(
             PokeEnum.CHARIZARD, "Charizard", PokeElement.FIRE,
             78, 84, 78, 109, 100,
-            false, false, false
+            2, 2,
+            false, false
         );
         registerData(
             PokeEnum.SQUIRTLE, "Squirtle", PokeElement.WATER,
             44, 48, 65, 50, 43,
-            true, false, false
+            0, 2,       
+            false, false
         );
         registerData(
             PokeEnum.WARTORTLE, "Wartortle", PokeElement.WATER,
             59, 63, 80, 65, 58,
-            true, false, false
+            1, 2,
+            false, false
         );
         registerData(
             PokeEnum.BLASTOISE, "Blastoise", PokeElement.WATER,
             79, 83, 100, 85, 78,
-            false, false, false
+            2, 2,
+            false, false
         );
     }
 
     private PokeData registerData(
         PokeEnum id, String name, PokeElement element, 
         int ps, int attack, int defense, int special, int speed,
-        boolean hasEvolution, boolean isFemale, boolean isLegendary) {
+        int currentEvolution, int maxEvolution,
+        boolean isFemale, boolean isLegendary) {
         PokeData data = new PokeData(
             id, name, element,
             ps, attack, defense, special, speed,
-            hasEvolution, isFemale, isLegendary
+            currentEvolution, maxEvolution,
+            isFemale, isLegendary
         );
         library.put(
             id,
@@ -82,7 +97,10 @@ public class PokeService {
         );
         return data;
     }
-
+    
+    public ArrayList<PokeData> getAvailablePokemons() {
+        return new ArrayList<>(library.values());
+    } 
     public PokeData getData(PokeEnum id) {
         return library.get(id);
     }
@@ -90,29 +108,11 @@ public class PokeService {
         return getSingleton().getData(id);
     }
 
-    public PokeData[] getRandomData(int size)
-    {
-        PokeData[] result = new PokeData[size];
-        Random random = new Random();
-        PokeEnum[] keys = (PokeEnum[])library.keySet().toArray();
-        for (int i = 0; i < size; i++) {
-            PokeEnum id = keys[random.nextInt(keys.length)];
-            PokeData data = getData(id);
-            result[i] = data;
-        }
-        return result;
-    }
-
-    public ArrayList<PokeData> getRandomUniqueData(int size) {
-        ArrayList<PokeData> result = new ArrayList<>();
-        Random random = new Random();
-        ArrayList<PokeEnum> keys = new ArrayList<>(library.keySet());
-        for (int i = 0; i < size && keys.size() > 0; i++) {
-            PokeEnum id = keys.get(random.nextInt(keys.size()));
-            PokeData data = getData(id);
-            result.add(data);
-            keys.remove(id);
-        }
-        return result;
+    public ArrayList<PokeData> getStarters() {
+        return new ArrayList<PokeData>() {{
+            add(getData(PokeEnum.BULBASAUR));
+            add(getData(PokeEnum.CHARMANDER));
+            add(getData(PokeEnum.SQUIRTLE));
+        }};
     }
 }
