@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -121,13 +120,11 @@ public class BattleController {
         playerPokemonView.setTranslateX(-JPokeBattle.WIDTH/2);
         botPokemonView.setTranslateX(JPokeBattle.WIDTH/2);
         // animate them to tween to translateX = 0
-        TranslateTransition playerTransition = new TranslateTransition(Duration.seconds(1), playerPokemonView);
+        TranslateTransition playerTransition = new TranslateTransition(Duration.seconds(1.2), playerPokemonView);
         playerTransition.setToX(0);
-        playerTransition.setDuration(Duration.seconds(1));
         playerTransition.play();
-        TranslateTransition botTransition = new TranslateTransition(Duration.seconds(1), botPokemonView);
+        TranslateTransition botTransition = new TranslateTransition(Duration.seconds(1.2), botPokemonView);
         botTransition.setToX(0);
-        botTransition.setDuration(Duration.seconds(1));
         botTransition.play();
         playerTransition.setOnFinished(e -> {
             toggleInfoCards(true);

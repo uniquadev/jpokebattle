@@ -43,7 +43,7 @@
                         <Image url="jpokebattle/resources/sprites/arrow-to-left.png" />
                      </image>
                      <StackPane.margin>
-                        <Insets right="97.0" bottom="57.0" />
+                        <Insets right="73.0" bottom="57.0" />
                      </StackPane.margin>
                   </ImageView>
                   <PokemonView translateY="5.0" fx:id="playerPokemonView" fitHeight="190.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_LEFT">

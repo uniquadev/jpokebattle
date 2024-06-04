@@ -21,9 +21,7 @@ public class PokeInfoCard extends VBox  {
     private Label nameLabel;
     private Label hpLabel;
     private Pokemon pokemon;
-
-    private static final int BAR_RECT_HDELTA = 8;
-    private static final int BAR_RECT_VDELTA = 10;
+    private HealthBar healthBar;
 
     public PokeInfoCard() {
         super();
@@ -56,30 +54,10 @@ public class PokeInfoCard extends VBox  {
 
         getChildren().addAll(nameLabel, level, hbox, hpLabel);
 
-        Label health = new Label();
-        health.setText("HP: ");
-        StackPane healthPane = new StackPane();
-        healthPane.setAlignment(Pos.CENTER_LEFT);
-        healthPane.setPrefHeight(hbox.getPrefHeight());
-        healthPane.setPrefWidth(hbox.getPrefWidth() * 0.7);
-        
-        healthRect = new Rectangle();
-        healthRect.setWidth(healthPane.getPrefWidth() - BAR_RECT_HDELTA);
-        healthRect.setHeight(healthPane.getPrefHeight() - BAR_RECT_VDELTA);
-        healthRect.setFill(Paint.valueOf("#1fff81"));
-        healthRect.setStrokeWidth(0);
-        healthRect.setTranslateX(4);
+        Label health = new Label("HP: ");
+        healthBar = new HealthBar();
 
-        ImageView healthBar = new ImageView(
-            new Image(
-                JPokeBattle.class.getResource("resources/sprites/bar.png").toExternalForm()
-            )
-        );
-        healthBar.setFitHeight(healthPane.getPrefHeight() * 0.6);
-        healthBar.setFitWidth(healthPane.getPrefWidth());
-
-        healthPane.getChildren().addAll(healthRect, healthBar);
-        hbox.getChildren().addAll(health, healthPane);
+        hbox.getChildren().addAll(health, healthBar);
         getStyleClass().add("poke-info-card");
     }
 
@@ -87,10 +65,6 @@ public class PokeInfoCard extends VBox  {
         this.pokemon = pokemon;
         nameLabel.setText(pokemon.getName());
         hpLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());
-    }
-
-    public void tweenHealthAndWait() {
-        // TODO
     }
 
     public void removeHpLabel() {
