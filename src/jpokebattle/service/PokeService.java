@@ -23,28 +23,28 @@ public class PokeService {
         registerData(
             PokeEnum.BULBASAUR, "Bulbasaur", PokeElement.GRASS,
             45, 49, 49, 65, 45,
-            false, false
+            true, false, false
         );
         registerData(
             PokeEnum.CHARMANDER, "Charmander", PokeElement.FIRE,
             39, 52, 43, 60, 65,
-            false, false
+            true, false, false
         );
         registerData(
             PokeEnum.SQUIRTLE, "Squirtle", PokeElement.WATER,
             44, 48, 65, 50, 43,
-            false, false
+            true, false, false
         );
     }
 
     private PokeData registerData(
         PokeEnum id, String name, PokeElement element, 
         int ps, int attack, int defense, int special, int speed,
-        boolean isFemale, boolean isLegendary) {
+        boolean hasEvolution, boolean isFemale, boolean isLegendary) {
         PokeData data = new PokeData(
             id, name, element,
             ps, attack, defense, special, speed,
-            isFemale, isLegendary
+            hasEvolution, isFemale, isLegendary
         );
         library.put(
             id,

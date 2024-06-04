@@ -14,13 +14,14 @@ public class PokeData {
     private int special;
     private int speed;
 
+    private boolean hasEvolution;
     private boolean isFemale;
     private boolean isLegendary;
 
     public PokeData(
         PokeEnum id, String name, PokeElement element, 
         int ps, int attack, int defense, int special, int speed,
-        boolean isFemale, boolean isLegendary) {
+        boolean hasEvolution, boolean isFemale, boolean isLegendary) {
         this.id = id;
         this.name = name;
         this.element = element;
@@ -29,6 +30,7 @@ public class PokeData {
         this.defense = defense;
         this.special = special;
         this.speed = speed;
+        this.hasEvolution = hasEvolution;
         this.isFemale = isFemale;
         this.isLegendary = isLegendary;
     }

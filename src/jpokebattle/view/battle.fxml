@@ -35,6 +35,14 @@
                   <Insets right="30.0" bottom="57.0" />
                </StackPane.margin>
             </PokeInfoCard>
+            <ImageView fx:id="arrowToLeft" translateY="18.0" fitHeight="81.0" fitWidth="294.0" pickOnBounds="false" preserveRatio="false" StackPane.alignment="BOTTOM_RIGHT">
+               <image>
+                  <Image url="jpokebattle/resources/sprites/arrow-to-left.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets right="97.0" bottom="57.0" />
+               </StackPane.margin>
+            </ImageView>
             <PokemonView translateY="5.0" fx:id="playerPokemonView" fitHeight="190.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_LEFT">
                <StackPane.margin>
                   <Insets left="104.0" />
@@ -53,6 +61,14 @@
                   <Insets left="85.0" top="53.0" />
                </StackPane.margin>
             </PokeInfoCard>
+            <ImageView fx:id="arrowToRight" translateY="47.0" fitHeight="51.0" fitWidth="294.0" pickOnBounds="false" preserveRatio="false" StackPane.alignment="TOP_LEFT">
+               <image>
+                  <Image url="jpokebattle/resources/sprites/arrow-to-right.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets left="65.0" top="53.0" />
+               </StackPane.margin>
+            </ImageView>
             <PokemonView fx:id="botPokemonView" fitHeight="165.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
                <StackPane.margin>
                   <Insets right="114.0" top="20.0" />
