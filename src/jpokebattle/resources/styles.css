@@ -49,3 +49,16 @@
 .poke-info-card .level-label {
     -fx-font-size: 16px;
 }
+
+.poke-card .name-label {
+    -fx-font-size: 23px;
+}
+.poke-card .hp-label {
+    -fx-font-size: 15px;
+}
+.poke-card .level-label {
+    -fx-font-size: 23px;
+}
+.poke-card .ps-label {
+    -fx-font-size: 22px;
+}

@@ -124,14 +124,14 @@
             </StackPane>
          </children>
       </VBox>
-      <VBox fx:id="pokemonBox" visible="false">
+      <VBox fx:id="pokemonBox" visible="false" fillWidth="true">
          <children>
             <ArrowTextButton fx:id="pokemonBackButton">
                <VBox.margin>
                   <Insets left="5.0" top="5.0" />
                </VBox.margin>
             </ArrowTextButton>
-            <PokeTeamList fx:id="pokeTeamList" prefHeight="400.0" prefWidth="600.0" maxWidth="-Infinity" minWidth="-Infinity" />
+            <PokeTeamList fx:id="pokeTeamList" />
          </children>
       </VBox>
    </children>

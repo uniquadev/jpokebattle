@@ -1,12 +1,17 @@
 package jpokebattle.gui;
 
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 
 public class PokeTeamList extends VBox {
     public PokeTeamList() {
         super();
+
+        setFillWidth(true);
     }
 
     public void update(Trainer trainer) {
