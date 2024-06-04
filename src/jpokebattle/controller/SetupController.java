@@ -3,6 +3,7 @@ package jpokebattle.controller;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.media.AudioClip;
 import jpokebattle.JPokeBattle;
 import jpokebattle.gui.ArrowButton;
 import jpokebattle.gui.ArrowTextButton;
@@ -18,14 +19,18 @@ public class SetupController {
 
     @FXML
     ArrowTextButton backButton;
-
     @FXML
     TextField nameField;
-
     @FXML
     ArrowButton submitArrow;
 
+    private AudioClip titleMusic;
+    private AudioClip battleMusic;
+
     public void initialize() {
+        titleMusic = SoundService.getSingleton().getTitleMusic();
+        battleMusic = SoundService.getSingleton().getBattleMusic();
+
         backButton.setText("< Indietro");
         backButton.removeArrow();
         
@@ -79,6 +84,8 @@ public class SetupController {
         game.setPlayer(player);
         System.out.println("Giocatore generato!");
 
+        titleMusic.stop();
+        battleMusic.play();
         JPokeBattle.getInstance().setView("battle");
     }
 }

@@ -34,7 +34,9 @@ public class SoundService {
     private SoundService() {
         // musics
         battleMusic = loadAudio("trainer-battle-music.wav", SoundType.MUSIC);
+        battleMusic.setCycleCount(AudioClip.INDEFINITE);
         titleMusic = loadAudio("title-screen-music.wav", SoundType.MUSIC);
+        titleMusic.setCycleCount(AudioClip.INDEFINITE);
         // effects
         purchaseSound = loadAudio("SFX_PURCHASE.wav", SoundType.EFFECT);
         pressSound = loadAudio("SFX_PRESS_AB.wav", SoundType.EFFECT);

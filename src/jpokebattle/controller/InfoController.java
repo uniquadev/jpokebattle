@@ -21,7 +21,6 @@ public class InfoController {
         backButton.setText("< Indietro");
         backButton.removeArrow();
         backButton.getButton().setOnMouseClicked(e -> {
-            System.out.println("Back to menu");
             JPokeBattle.getInstance().setView("menu");
         });
     }

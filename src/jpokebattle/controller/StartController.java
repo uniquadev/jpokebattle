@@ -29,6 +29,7 @@ public class StartController {
         fadeTransition.play();
 
         SoundService.getSingleton().playPurchase();
+        SoundService.getSingleton().getTitleMusic().play();
 
         vbox.sceneProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
