@@ -7,10 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
+import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.GridMenu;
 import jpokebattle.gui.PokeInfoCard;
 import jpokebattle.gui.PokemonView;
@@ -18,14 +21,27 @@ import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.model.BaseItem;
 import jpokebattle.model.Pokemon;
 import jpokebattle.service.GameState;
-import jpokebattle.utils.TrainerBuilder;
 
 public class BattleController {
 
     GameState game;
     
     @FXML
+    StackPane root;
+    @FXML
+    VBox pokemonBox;
+    @FXML
+    ArrowTextButton pokemonBackButton;
+    @FXML
+    VBox battleBox;
+    @FXML
+    StackPane battlePane;
+    @FXML
     StackPane bottomStackPane;
+    @FXML
+    StackPane mainActionPane;
+    @FXML
+    StackPane pokemonActionPane;
     @FXML
     Label battleLabel;
     @FXML
@@ -61,11 +77,18 @@ public class BattleController {
             new GridMenu.MenuOption("Oggetti", true),
             new GridMenu.MenuOption("Fuggi", false)
         }, 2);
+        actionMenu.setCallback(this::onMainGridClick);
         actionMenu.setArrowSize(25, 25);
         actionMenu.setAlignment(Pos.CENTER);
         pokeBox.fitWidthProperty().bind(bottomStackPane.widthProperty());
         pokeBox.fitHeightProperty().bind(bottomStackPane.heightProperty());
         botInfoCard.removeHpLabel();
+
+        pokemonBackButton.setText("< Indietro");
+        pokemonBackButton.removeArrow();
+        pokemonBackButton.getButton().setOnAction(e -> {
+            togglePokemonView(false);
+        });
 
         bottomStackPane.setBackground(
             new Background(new BackgroundFill(
@@ -80,7 +103,7 @@ public class BattleController {
 
     private void startBattle() {
         game.setState(GameState.State.BATTLE);
-        generateAI();
+        game.generateAI();
         updatePokemons();
         startIntroAnimation();
     }
@@ -111,13 +134,6 @@ public class BattleController {
         });
     }
 
-    public void generateAI() {
-        // TODO: implement difficulty based on score and player team level
-        TrainerBuilder builder = new TrainerBuilder();
-        game.setAI(builder.generate());
-        System.out.println("AI generato!");
-    }
-
     private void updatePokemons() {
         var player = game.getPlayer();
         var ai = game.getAI();
@@ -130,6 +146,29 @@ public class BattleController {
         if (aiPokemon != null) {
             botPokemonView.setId(aiPokemon.getId());
             botInfoCard.update(aiPokemon);
+        }
+    }
+
+    private void togglePokemonView(boolean flag) {
+        battlePane.setVisible(!flag);
+        mainActionPane.setVisible(!flag);
+        pokemonBox.setVisible(flag);
+        pokemonActionPane.setVisible(flag);
+    }
+
+    private void onMainGridClick(MenuOption option) {
+        switch (option.text) {
+            case "Fuggi":
+                break;
+            case "Pokemon":
+                togglePokemonView(true);
+                break;
+            case "Oggetti":
+                break;
+            case "Azioni":
+                break;
+            default:
+                break;
         }
     }
 

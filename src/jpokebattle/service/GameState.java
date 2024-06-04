@@ -2,6 +2,7 @@ package jpokebattle.service;
 
 import jpokebattle.model.Trainer;
 import jpokebattle.utils.TrainerAI;
+import jpokebattle.utils.TrainerBuilder;
 
 public class GameState {
     private static GameState singleton;
@@ -49,5 +50,12 @@ public class GameState {
     }
     public boolean isAITurn() {
         return currentTrainerTurn != player;
+    }
+
+    public void generateAI() {
+        // TODO: implement difficulty based on score and player team level
+        TrainerBuilder builder = new TrainerBuilder();
+        setAI(builder.generate());
+        System.out.println("AI generato!");
     }
 }

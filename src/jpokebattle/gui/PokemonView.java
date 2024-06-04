@@ -21,7 +21,6 @@ public class PokemonView extends ImageView {
         } else {
             imagePath = "resources/sprites/pokemons/" + id.ordinal() + ".png";
         }
-        System.out.println(imagePath);
         Image image = new Image(
             JPokeBattle.class.getResourceAsStream(imagePath),
             168, 168,

@@ -22,7 +22,8 @@ public class ArrowTextButton extends HBox {
         setAlignment(Pos.CENTER_LEFT);
         setPrefHeight(0);
         setMaxHeight(USE_PREF_SIZE);
-
+        setMaxSize(USE_PREF_SIZE, USE_PREF_SIZE);
+        
         button = new Button(text);
         button.setDisable(!enabled);
 

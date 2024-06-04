@@ -1,7 +1,4 @@
 # importanti
-* implementare delle freccie sotto la pokeinfocard
-* mettere uno stack pane come padre della view di combattimente
-(utile per permettere di mostrare schermate come zaino, evoluzioni ecc)
 * implementare la ui pokemon in combattimento
 * implementare mosse base nel pokeservice (leggere wiki per le mosse base)
 * implementare il generatore di mosse per i pokemon
