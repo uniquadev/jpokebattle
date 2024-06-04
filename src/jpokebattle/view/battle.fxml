@@ -17,6 +17,7 @@
 <?import jpokebattle.gui.PokemonView?>
 <?import jpokebattle.gui.PokeInfoCard?>
 <?import jpokebattle.gui.ArrowTextButton?>
+<?import jpokebattle.gui.PokeTeamList?>
 
 
 <StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jpokebattle.controller.BattleController">
@@ -130,6 +131,7 @@
                   <Insets left="5.0" top="5.0" />
                </VBox.margin>
             </ArrowTextButton>
+            <PokeTeamList fx:id="pokeTeamList" prefHeight="400.0" prefWidth="600.0" maxWidth="-Infinity" minWidth="-Infinity" />
          </children>
       </VBox>
    </children>

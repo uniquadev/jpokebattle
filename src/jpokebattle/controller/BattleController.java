@@ -15,6 +15,7 @@ import jpokebattle.JPokeBattle;
 import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.GridMenu;
 import jpokebattle.gui.PokeInfoCard;
+import jpokebattle.gui.PokeTeamList;
 import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.model.BaseItem;
@@ -41,6 +42,8 @@ public class BattleController {
     StackPane mainActionPane;
     @FXML
     StackPane pokemonActionPane;
+    @FXML
+    PokeTeamList pokeTeamList;
     @FXML
     Label battleLabel;
     @FXML
@@ -149,6 +152,7 @@ public class BattleController {
     private void togglePokemonView(boolean flag) {
         battlePane.setVisible(!flag);
         mainActionPane.setVisible(!flag);
+        pokeTeamList.update(game.getPlayer());
         pokemonBox.setVisible(flag);
         pokemonActionPane.setVisible(flag);
     }

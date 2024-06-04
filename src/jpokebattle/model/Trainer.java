@@ -7,6 +7,9 @@ public class Trainer {
 
     private int currentPokemon = 0;
 
+    public Pokemon[] getPokemons() {
+        return pokemons;
+    }
     public Pokemon getPokemon(int index) {
         assert index >= 0 && index < 6;
         return pokemons[index];
