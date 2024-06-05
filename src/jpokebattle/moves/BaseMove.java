@@ -9,12 +9,13 @@ import jpokebattle.utils.AttackResult;
 import jpokebattle.utils.PokeElement;
 
 public abstract class BaseMove implements MoveInterface {
-    private int uses = 0;
+    private int usesLeft = 0;
     private int requiredLevel = 0;
     private int slot = 0;
 
     public BaseMove(int requiredLevel) {
         this.requiredLevel = requiredLevel;
+        this.usesLeft = getMaxUses();
     }
 
     public void setSlot(int slot) {
@@ -24,14 +25,14 @@ public abstract class BaseMove implements MoveInterface {
         return slot;
     }
 
-    public int getUses() {
-        return uses;
+    public int getUsesLeft() {
+        return usesLeft;
     }
-    public void addUse() {
-        uses++;
+    public void consumeUse() {
+        usesLeft--;
     }
     public void resetUses() {
-        uses = 0;
+        usesLeft = getMaxUses();
     }
 
     public AttackData calculateDamage(Pokemon attacker, Pokemon defender) {
@@ -54,6 +55,7 @@ public abstract class BaseMove implements MoveInterface {
 
         Double damage = ((((2*level*critical)/5 + 2) * power * (attack/defense)) / 50 + 2) * stab * elemResult.getEffectiveness() * moveResult.getEffectiveness();
         return new AttackData(damage.intValue(),
+            critical == 2,
             moveResult,
             elemResult
         );

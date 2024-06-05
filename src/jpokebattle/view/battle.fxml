@@ -128,7 +128,7 @@
                         <GridMenu alignment="CENTER" fx:id="actionMenu" styleClass="battle-menu" hgap="10.0" vgap="10.0"/>
                         <ArrowTextButton fx:id="actionBackButton" StackPane.alignment="TOP_LEFT">
                            <StackPane.margin>
-                              <Insets left="29.0" top="25.0" />
+                              <Insets left="39.0" top="25.0" />
                            </StackPane.margin>
                         </ArrowTextButton>
                      </children>
@@ -147,5 +147,24 @@
             <PokeTeamList fx:id="pokeTeamList" />
          </children>
       </VBox>
+      <StackPane translateY="73.0" fx:id="moveInfoPane" styleClass="move-info-card" visible="false" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="101.0" prefWidth="320.0" StackPane.alignment="CENTER_LEFT">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="320.0" pickOnBounds="true">
+               <image>
+                  <Image url="jpokebattle/resources/sprites/pokebox.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="moveTypeLabel" text="TYPE/WATER">
+               <StackPane.margin>
+                  <Insets left="20.0" top="20.0" />
+               </StackPane.margin>
+            </Label>
+            <Label fx:id="moveUsesLabel" text="14/15" StackPane.alignment="BOTTOM_RIGHT">
+               <StackPane.margin>
+                  <Insets bottom="20.0" right="23.0" />
+               </StackPane.margin>
+            </Label>
+         </children>
+      </StackPane>
    </children>
 </StackPane>

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -55,6 +54,13 @@ public class BattleController {
     GridMenu mainMenu;
     @FXML
     ImageView pokeBox;
+
+    @FXML
+    StackPane moveInfoPane;
+    @FXML
+    Label moveTypeLabel;
+    @FXML
+    Label moveUsesLabel;
 
     @FXML
     StackPane actionPane;
@@ -113,6 +119,13 @@ public class BattleController {
         });
 
         bottomStackPane.setBackground(
+            new Background(new BackgroundFill(
+                Color.WHITESMOKE,
+                null,
+                null
+            ))
+        );
+        moveInfoPane.setBackground(
             new Background(new BackgroundFill(
                 Color.WHITESMOKE,
                 null,
@@ -193,6 +206,7 @@ public class BattleController {
             updateActionMenu(game.getPlayer().getCurrentPokemon());
         menuPane.setVisible(!flag);
         actionPane.setVisible(flag);
+        moveInfoPane.setVisible(flag);
     }
 
     private void onActionSelect(MenuOption option) {
@@ -200,7 +214,8 @@ public class BattleController {
             return;
         Pokemon pokemon = game.getPlayer().getCurrentPokemon();
         BaseMove move = pokemon.getMove(option.getValue());
-        System.out.println("Player selected " + move.getName());
+        moveTypeLabel.setText("TIPO/" + move.getElement().name());
+        moveUsesLabel.setText(move.getUsesLeft() + "/" + move.getMaxUses());
     }
 
     private void onActionGridClick(MenuOption option) {

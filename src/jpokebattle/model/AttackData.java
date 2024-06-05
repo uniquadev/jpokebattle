@@ -7,13 +7,15 @@ public class AttackData {
     private int damage;
     private AttackResult moveResult;
     private AttackResult elemResult;
+    private boolean critical;
     private PokeStats effects;
     private MoveType type;
 
-    public AttackData(int damage, AttackResult moveResult, AttackResult elemResult) {
+    public AttackData(int damage, boolean critical, AttackResult moveResult, AttackResult elemResult) {
         this.damage = damage;
         this.moveResult = moveResult;
         this.elemResult = elemResult;
+        this.critical = critical;
         type = MoveType.PHYSICAL;
     }
     public AttackData(PokeStats effects)
@@ -36,5 +38,8 @@ public class AttackData {
     }
     public AttackResult getElemResult() {
         return elemResult;
+    }
+    public boolean isCritical() {
+        return critical;
     }
 }

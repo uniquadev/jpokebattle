@@ -62,3 +62,7 @@
 .poke-card .ps-label {
     -fx-font-size: 22px;
 }
+
+.move-info-card .label {
+    -fx-font-size: 23px;
+}
