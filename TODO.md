@@ -1,6 +1,8 @@
 # importanti
 * invece che definire i pokemon come PokeData creare una classe astratta PokemonInfo che detenga tutte le informazioni necessarie che gia' sono presenti in PokeData, sviluppare una cartella pokemon
+* ideare una classe TurnManager in utils che vine usata da gamestate
 * implementare la logica di combattimento
+    - implementare il sistema EVs
 * implementare le mosse dell'ai
 * implementare la fine (quando si perde o si fa fuga)
 * ideare la view endgame che mostri il punteggio finale e la posizione nella top 10

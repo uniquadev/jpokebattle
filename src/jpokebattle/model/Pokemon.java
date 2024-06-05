@@ -2,7 +2,6 @@ package jpokebattle.model;
 
 import java.util.ArrayList;
 
-import jpokebattle.move.BaseMove;
 import jpokebattle.utils.PokeElement;
 import jpokebattle.utils.PokeEnum;
 
@@ -11,8 +10,8 @@ public class Pokemon {
     private int health = 0;
 
     // statistiche personali (iv)
-    private PokeStats iv = new PokeStats();
-    private PokeStats effects = new PokeStats();
+    private PokeStats iv = new PokeStats(15);
+    private PokeStats effects = new PokeStats(6);
 
     private int psPA = 0;
     private int attackEV = 0;
