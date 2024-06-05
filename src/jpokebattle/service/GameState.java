@@ -30,7 +30,7 @@ public class GameState {
     private TrainerAI trainer;
     
     private int score = 0;
-    private Trainer currentTrainerTurn = player;
+    private Trainer currentTrainerTurn;
 
     public State getState() {
         return state;
@@ -44,6 +44,7 @@ public class GameState {
     }
     public void setPlayer(Trainer player) {
         this.player = player;
+        currentTrainerTurn = player;
     }
     public Trainer getAI() {
         return trainer;

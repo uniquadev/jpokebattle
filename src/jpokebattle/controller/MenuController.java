@@ -25,7 +25,7 @@ public class MenuController  {
             new MenuOption("Informazioni", true),
             new MenuOption("Esci", true)
         }, 1);
-        gridMenu.setCallback(this::onClick);
+        gridMenu.setClickCallback(this::onClick);
     }
 
     public void deinitialize() {
@@ -33,7 +33,7 @@ public class MenuController  {
     }
     
     private void onClick(MenuOption option) {
-        switch (option.text) {
+        switch (option.getText()) {
             case "Nuova Partita":
                 JPokeBattle.getInstance().setView("setup");
                 break;

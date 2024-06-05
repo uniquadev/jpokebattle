@@ -2,7 +2,6 @@ package jpokebattle.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 import jpokebattle.model.PokeData;
 import jpokebattle.utils.PokeElement;

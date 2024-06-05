@@ -1,9 +1,12 @@
 package jpokebattle.utils;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import jpokebattle.model.PokeData;
 import jpokebattle.model.Pokemon;
+import jpokebattle.moves.BaseMove;
+import jpokebattle.service.MoveService;
 import jpokebattle.service.PokeService;
 
 public class PokeBuilder {
@@ -52,12 +55,35 @@ public class PokeBuilder {
         pokemon.setSpecial(random.nextInt(maxSpecial));
         pokemon.setSpeed(random.nextInt(maxSpeed));
 
-        pokemon.setLevel(nextInt(minLevel, maxLevel));
-
+        pokemon.setLevel(Math.max(1, nextInt(minLevel, maxLevel)));
         pokemon.restoreHealth();
+
+        generateMoves(pokemon);
         
         return pokemon;
     }
+
+    private void generateMoves(Pokemon pokemon) {
+        ArrayList<BaseMove> moves = MoveService.getSingleton().getSupportedMoves(pokemon);
+        if (moves.isEmpty())
+            return;
+        if (moves.size() <= 4) {
+            for (int i = 0; i < moves.size(); i++) {
+                pokemon.setMove(i, moves.get(i));
+            }
+            return;
+        }
+        // seleziona mosse casuali
+        int counter = 0;
+        while (counter < 4) {
+            BaseMove move = moves.get(random.nextInt(moves.size()));
+            pokemon.setMove(counter, move);
+            counter++;
+            moves.remove(move);
+        }
+        return;
+    }
+    
     
     private int nextInt(int min, int max)
     {

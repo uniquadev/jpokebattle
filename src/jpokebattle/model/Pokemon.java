@@ -1,28 +1,25 @@
 package jpokebattle.model;
 
+import java.util.ArrayList;
+
 import jpokebattle.moves.BaseMove;
+import jpokebattle.utils.PokeElement;
 import jpokebattle.utils.PokeEnum;
 
 public class Pokemon {
     private BaseMove[] moves = new BaseMove[4];
     private int health = 0;
 
-    // statistiche personali
-    private int ps = 0;
+    // statistiche personali (iv)
+    private PokeStats stats = new PokeStats();
+    private PokeStats effects = new PokeStats();
+
     private int psPA = 0;
-
-    private int attack = 0;
     private int attackPA = 0;
-
-    private int defense = 0;
     private int defensePA = 0;
-
-    private int special = 0;
     private int specialPA = 0;
-
-    private int speed = 0;
     private int speedPA = 0;
-
+    
     private int level = 0;
     private int exp = 0;
     private int expToNextLevel = 0;
@@ -67,53 +64,57 @@ public class Pokemon {
     }
 
     public int getPS() {
-        return ps;
+        return stats.getPS();
     }
     public int getTotPS() {
-        return ps + (psPA / 4) + data.getPs();
+        return getPS() + (psPA / 4) + data.getPs();
     }
     public void setPS(int ps) {
-        this.ps = ps;
+        stats.setPS(ps);
     }
 
     public int getAttack() {
-        return attack;
+        return stats.getAttack();
     }
     public int getTotAttack() {
-        return attack + (attackPA / 4) + data.getAttack();
+        return getAttack() + effects.getAttack() + (attackPA / 4) + data.getAttack();
     }
     public void setAttack(int attack) {
-        this.attack = attack;
+        stats.setAttack(attack);
     }
 
     public int getDefense() {
-        return defense;
+        return stats.getDefense();
     }
     public int getTotDefense() {
-        return defense + (defensePA / 4) + data.getDefense();
+        return getDefense() + effects.getDefense() + (defensePA / 4) + data.getDefense();
     }
     public void setDefense(int defense) {
-        this.defense = defense;
+        stats.setDefense(defense);
     }
 
     public int getSpecial() {
-        return special;
+        return stats.getSpecial();
     }
     public int getTotSpecial() {
-        return special + (specialPA / 4) + data.getSpecial();
+        return getSpecial() + effects.getSpecial() + (specialPA / 4) + data.getSpecial();
     }
     public void setSpecial(int special) {
-        this.special = special;
+        stats.setSpecial(special);
     }
 
     public int getSpeed() {
-        return speed;
+        return stats.getSpeed();
     }
     public int getTotSpeed() {
-        return speed + (speedPA / 4) + data.getSpeed();
+        return getSpeed() + effects.getSpecial() + (speedPA / 4) + data.getSpeed();
     }
     public void setSpeed(int speed) {
-        this.speed = speed;
+        stats.setSpeed(speed);
+    }
+
+    public PokeStats getEffects() {
+        return effects;
     }
 
     public int getLevel() {
@@ -137,17 +138,46 @@ public class Pokemon {
         this.expToNextLevel = expToNextLevel;
     }
 
-    public BaseMove[] getMoves() {
-        return moves;
+    public ArrayList<BaseMove> getMoves() {
+        ArrayList<BaseMove> result = new ArrayList<>();
+        for (BaseMove move : moves) {
+            if (move != null)
+                result.add(move);
+        }
+        return result;
     }
     public void setMoves(BaseMove[] moves) {
         this.moves = moves;
     }
+    public BaseMove getMove(int index) {
+        return moves[index];
+    }
     public void setMove(int index, BaseMove move) {
         this.moves[index] = move;
+        move.setSlot(index);
+    }
+    public int getAvailableMoves() {
+        int count = 0;
+        for (BaseMove move : moves) {
+            if (move != null)
+                count++;
+        }
+        return count;
+    }
+
+
+    public PokeElement getElement() {
+        return data.getElement();
     }
 
     public boolean hasEvolution() {
         return data.getCurrentEvolution() < data.getMaxEvolution();
+    }
+
+    public void restore() {
+        restoreHealth();
+        effects.reset();
+        for (BaseMove move : getMoves())
+            move.resetUses();
     }
 }

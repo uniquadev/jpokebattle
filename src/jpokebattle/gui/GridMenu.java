@@ -5,34 +5,61 @@ import javafx.scene.layout.GridPane;
 public class GridMenu extends GridPane {
 
     static public class MenuOption {
-        public String text;
-        public boolean enabled = true;
+        private String text;
+        private boolean enabled = true;
+        private int value = 0;
 
         protected ArrowTextButton button;
 
-        public MenuOption(String text, boolean enabled)
-        {
+        public MenuOption(String text, boolean enabled, int value) {
             button = new ArrowTextButton(text, enabled);
 
             this.text = text;
             this.enabled = enabled;
+            this.value = value;
 
             showArrow(false);
         }
+        public MenuOption(String text, boolean enabled) {
+            this(text, enabled, 0);
+        }
+        
+        public String getText() {
+            return text;
+        }
+        public void setText(String text) {
+            this.text = text;
+            button.setText(text);
+        }
 
-        public void showArrow(boolean show)
-        {
+        public boolean isEnabled() {
+            return enabled;
+        }
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+            button.getButton().setDisable(!enabled);
+        }
+
+        public int getValue() {
+            return value;
+        }
+        public void setValue(int value) {
+            this.value = value;
+        }
+
+        public void showArrow(boolean show) {
             button.showArrow(show);
         }
     }
 
     static public interface MenuCallback {
-        public void onClick(MenuOption option);
+        public void onEvent(MenuOption option);
     }
 
     private MenuOption[] options = new MenuOption[0];
     private MenuOption selected;
-    private MenuCallback callback;
+    private MenuCallback clickCallback;
+    private MenuCallback selectCallback;
 
     public GridMenu()
     {
@@ -42,6 +69,7 @@ public class GridMenu extends GridPane {
     public void Initialize(MenuOption[] options, int cols)
     {
         assert options.length == 0;
+        this.getChildren().clear();
 
         this.options = options;
         for (int i = 0; i < options.length; i++) {
@@ -56,7 +84,7 @@ public class GridMenu extends GridPane {
             });
         }
 
-        options[0].showArrow(true);
+        selectOption(options[0]);
     }
 
     public void handleClick(MenuOption option)
@@ -65,11 +93,12 @@ public class GridMenu extends GridPane {
             return;
         handleMouseHover(option);
 
-        if (callback != null)
-            callback.onClick(option);
+        if (clickCallback != null)
+            clickCallback.onEvent(option);
     }
 
-    private void handleMouseHover(MenuOption option) {
+    public void selectOption(MenuOption option)
+    {
         if (selected == option)
             return;
         selected = option;
@@ -79,6 +108,12 @@ public class GridMenu extends GridPane {
                 continue;
             opt.showArrow(false);
         }
+        if (selectCallback != null)
+            selectCallback.onEvent(option);
+    }
+
+    private void handleMouseHover(MenuOption option) {
+        selectOption(option);
     }
 
     public void setArrowSize(int width, int height)
@@ -88,8 +123,13 @@ public class GridMenu extends GridPane {
         }
     }
 
-    public void setCallback(MenuCallback callback)
+    public void setClickCallback(MenuCallback callback)
     {
-        this.callback = callback;
+        this.clickCallback = callback;
+    }
+
+    public void setSelectCallback(MenuCallback callback)
+    {
+        this.selectCallback = callback;
     }
 }

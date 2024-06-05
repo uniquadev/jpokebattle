@@ -1,5 +1,7 @@
 package jpokebattle.controller;
 
+import java.util.ArrayList;
+
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -20,6 +22,7 @@ import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.model.BaseItem;
 import jpokebattle.model.Pokemon;
+import jpokebattle.moves.BaseMove;
 import jpokebattle.service.GameState;
 
 public class BattleController {
@@ -33,13 +36,15 @@ public class BattleController {
     @FXML
     ArrowTextButton pokemonBackButton;
     @FXML
+    ArrowTextButton actionBackButton;
+    @FXML
     VBox battleBox;
     @FXML
     StackPane battlePane;
     @FXML
     StackPane bottomStackPane;
     @FXML
-    StackPane mainActionPane;
+    StackPane menuPane;
     @FXML
     StackPane pokemonActionPane;
     @FXML
@@ -47,9 +52,14 @@ public class BattleController {
     @FXML
     Label battleLabel;
     @FXML
-    GridMenu actionMenu;
+    GridMenu mainMenu;
     @FXML
     ImageView pokeBox;
+
+    @FXML
+    StackPane actionPane;
+    @FXML
+    GridMenu actionMenu;
 
     @FXML
     PokemonView playerPokemonView;
@@ -73,15 +83,19 @@ public class BattleController {
         playerPokemonView.setRenderBack(true);
         bottomStackPane.setPrefHeight(JPokeBattle.HEIGHT * 0.3);
         battleLabel.setPrefWidth(JPokeBattle.WIDTH * 0.4);
-        actionMenu.Initialize(new MenuOption[]{
+        mainMenu.Initialize(new MenuOption[]{
             new GridMenu.MenuOption("Azioni", true),
             new GridMenu.MenuOption("Pokemon", true),
             new GridMenu.MenuOption("Oggetti", true),
             new GridMenu.MenuOption("Fuggi", false)
         }, 2);
-        actionMenu.setCallback(this::onMainGridClick);
+        mainMenu.setClickCallback(this::onMainGridClick);
+        mainMenu.setArrowSize(25, 25);
+        actionMenu.setClickCallback(this::onActionGridClick);
+        actionMenu.setSelectCallback(this::onActionSelect);
         actionMenu.setArrowSize(25, 25);
-        actionMenu.setAlignment(Pos.CENTER);
+        actionMenu.setHgap(180);
+
         pokeBox.fitWidthProperty().bind(bottomStackPane.widthProperty());
         pokeBox.fitHeightProperty().bind(bottomStackPane.heightProperty());
         botInfoCard.removeHpLabel();
@@ -90,6 +104,12 @@ public class BattleController {
         pokemonBackButton.removeArrow();
         pokemonBackButton.getButton().setOnAction(e -> {
             togglePokemonView(false);
+        });
+
+        actionBackButton.setText("Indietro");
+        actionBackButton.removeArrow();
+        actionBackButton.getButton().setOnAction(e -> {
+            toggleActionView(false);
         });
 
         bottomStackPane.setBackground(
@@ -151,14 +171,48 @@ public class BattleController {
 
     private void togglePokemonView(boolean flag) {
         battlePane.setVisible(!flag);
-        mainActionPane.setVisible(!flag);
+        menuPane.setVisible(!flag);
         pokeTeamList.update(game.getPlayer());
         pokemonBox.setVisible(flag);
         pokemonActionPane.setVisible(flag);
     }
 
+    private void updateActionMenu(Pokemon pokemon) {
+        ArrayList<BaseMove> moves = pokemon.getMoves();
+        MenuOption[] options = new MenuOption[moves.size()];
+        for (int i = 0; i < moves.size(); i++) {
+            BaseMove move = moves.get(i);
+            MenuOption option = new MenuOption(move.getName(), true, move.getSlot());
+            options[i] = option;
+        }
+        actionMenu.Initialize(options, 2);
+    }
+
+    private void toggleActionView(boolean flag) {
+        if (flag)
+            updateActionMenu(game.getPlayer().getCurrentPokemon());
+        menuPane.setVisible(!flag);
+        actionPane.setVisible(flag);
+    }
+
+    private void onActionSelect(MenuOption option) {
+        if (!game.isPlayerTurn())
+            return;
+        Pokemon pokemon = game.getPlayer().getCurrentPokemon();
+        BaseMove move = pokemon.getMove(option.getValue());
+        System.out.println("Player selected " + move.getName());
+    }
+
+    private void onActionGridClick(MenuOption option) {
+        if (!game.isPlayerTurn())
+            return;
+        Pokemon player = game.getPlayer().getCurrentPokemon();
+        BaseMove move = player.getMove(option.getValue());
+        System.out.println("Player used " + move.getName());
+    }
+
     private void onMainGridClick(MenuOption option) {
-        switch (option.text) {
+        switch (option.getText()) {
             case "Fuggi":
                 break;
             case "Pokemon":
@@ -167,6 +221,7 @@ public class BattleController {
             case "Oggetti":
                 break;
             case "Azioni":
+                toggleActionView(true);
                 break;
             default:
                 break;

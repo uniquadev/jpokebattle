@@ -100,11 +100,11 @@
                         </Label>
                      </children>
                   </StackPane>
-                  <StackPane fx:id="mainActionPane">
+                  <StackPane fx:id="menuPane">
                      <children>  
                         <HBox alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="120.0" prefWidth="386.0" StackPane.alignment="CENTER_RIGHT">
                            <children>
-                              <GridMenu fx:id="actionMenu" styleClass="battle-menu" hgap="10.0" vgap="10.0"/>
+                              <GridMenu alignment="CENTER" fx:id="mainMenu" styleClass="battle-menu" hgap="10.0" vgap="10.0"/>
                            </children>
                            <padding>
                               <Insets bottom="15.0" left="5.0" right="5.0" top="5.0" />
@@ -118,6 +118,19 @@
                               <Insets bottom="5.0" left="50.0" />
                            </StackPane.margin>
                         </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane fx:id="actionPane" visible="false">
+                     <padding>
+                        <Insets bottom="15.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <children>
+                        <GridMenu alignment="CENTER" fx:id="actionMenu" styleClass="battle-menu" hgap="10.0" vgap="10.0"/>
+                        <ArrowTextButton fx:id="actionBackButton" StackPane.alignment="TOP_LEFT">
+                           <StackPane.margin>
+                              <Insets left="29.0" top="25.0" />
+                           </StackPane.margin>
+                        </ArrowTextButton>
                      </children>
                   </StackPane>
                </children>

@@ -16,7 +16,7 @@ public enum PokeElement {
     ROCK,
     GHOST,
     DRAGON;
-
+    
     public AttackResult getAttackResult(PokeElement other)
     {
         if (this == other)
