@@ -32,9 +32,9 @@ public class Growl extends BaseMove {
     }
     
     @Override
-    public AttackData perform(Pokemon attacker, Pokemon defender) {
+    public PokeStats getEffects() {
         PokeStats effects = new PokeStats();
         effects.setAttack(-1);
-        return new AttackData(effects);
+        return effects;
     }
 }

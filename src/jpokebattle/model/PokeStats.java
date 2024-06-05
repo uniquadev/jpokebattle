@@ -49,4 +49,12 @@ public class PokeStats {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+    
+    public void sum(PokeStats other) {
+        this.attack += other.attack;
+        this.defense += other.defense;
+        this.special += other.special;
+        this.speed += other.speed;
+        this.ps += other.ps;
+    }
 }

@@ -1,7 +1,7 @@
 package jpokebattle.utils;
 
 public enum MoveType {
-    PHYSICAL,
-    SPECIAL,
+    MISS,
+    ATTACK,
     STATUS;
 }

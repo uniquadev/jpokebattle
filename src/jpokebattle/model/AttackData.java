@@ -16,12 +16,15 @@ public class AttackData {
         this.moveResult = moveResult;
         this.elemResult = elemResult;
         this.critical = critical;
-        type = MoveType.PHYSICAL;
+        type = MoveType.ATTACK;
     }
     public AttackData(PokeStats effects)
     {
         this.effects = effects;
         type = MoveType.STATUS;
+    }
+    public AttackData() {
+        type = MoveType.MISS;
     }
 
     public MoveType getType() {

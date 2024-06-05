@@ -1,8 +1,6 @@
 package jpokebattle.moves;
 
-import jpokebattle.model.AttackData;
 import jpokebattle.model.PokeStats;
-import jpokebattle.model.Pokemon;
 import jpokebattle.utils.MoveType;
 
 public class TailWhip extends BaseMove {
@@ -32,10 +30,9 @@ public class TailWhip extends BaseMove {
     }
 
     @Override
-    public AttackData perform(Pokemon attacker, Pokemon defender) {
+    public PokeStats getEffects() {
         PokeStats effects = new PokeStats();
         effects.setDefense(-1);
-        return new AttackData(effects);
+        return effects;
     }
-    
 }

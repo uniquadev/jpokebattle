@@ -19,10 +19,12 @@ import jpokebattle.gui.PokeInfoCard;
 import jpokebattle.gui.PokeTeamList;
 import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
+import jpokebattle.model.AttackData;
 import jpokebattle.model.BaseItem;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.service.GameState;
+import jpokebattle.utils.MoveType;
 
 public class BattleController {
 
@@ -221,9 +223,24 @@ public class BattleController {
     private void onActionGridClick(MenuOption option) {
         if (!game.isPlayerTurn())
             return;
-        Pokemon player = game.getPlayer().getCurrentPokemon();
-        PokeMove move = player.getMove(option.getValue());
-        System.out.println("Player used " + move.getName());
+        Pokemon playerPokemon = game.getPlayer().getCurrentPokemon();
+        PokeMove move = playerPokemon.getMove(option.getValue());
+        if (!move.canUse())
+            return;
+        toggleActionView(false);
+        
+        Pokemon botPokemon = game.getAI().getCurrentPokemon();
+        AttackData attack = move.perform(playerPokemon, botPokemon);
+        move.draw(this, playerPokemon, botPokemon);
+        
+        if (attack.getType() == MoveType.MISS) {
+            // playDialogAndWait("Mossa fallita!");
+        } else if (attack.getType() == MoveType.ATTACK) {
+
+        } else if (attack.getType() == MoveType.STATUS) {
+
+        }
+        // playDialogAndWait("Il tuo " + playerPokemon.getName() + " usa " + move.getName());
     }
 
     private void onMainGridClick(MenuOption option) {

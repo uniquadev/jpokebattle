@@ -15,11 +15,21 @@ public class Scratch extends BaseMove {
 
     @Override
     public MoveType getType() {
-        return MoveType.PHYSICAL;
+        return MoveType.ATTACK;
     }
 
     @Override
     public int getAccuracy() {
         return 100;
+    }
+
+    @Override
+    public int getPower() {
+        return 40;
+    }
+
+    @Override
+    public int getMaxUses() {
+        return 35;
     }
 }

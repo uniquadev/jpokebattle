@@ -4,8 +4,10 @@ import java.util.Random;
 
 import jpokebattle.controller.BattleController;
 import jpokebattle.model.AttackData;
+import jpokebattle.model.PokeStats;
 import jpokebattle.model.Pokemon;
 import jpokebattle.utils.AttackResult;
+import jpokebattle.utils.MoveType;
 import jpokebattle.utils.PokeElement;
 
 public abstract class BaseMove implements MoveInterface {
@@ -17,6 +19,19 @@ public abstract class BaseMove implements MoveInterface {
 
     public int getRequiredLevel() {
         return requiredLevel;
+    }
+
+    public PokeStats getEffects() {
+        return new PokeStats();
+    }
+
+    @Override
+    public AttackData perform(Pokemon attacker, Pokemon defender) {
+        if (getType() == MoveType.STATUS) {
+            PokeStats effects = getEffects();
+            return new AttackData(effects);
+        }
+        return calculateDamage(attacker, defender);
     }
 
     public AttackData calculateDamage(Pokemon attacker, Pokemon defender) {
@@ -61,12 +76,5 @@ public abstract class BaseMove implements MoveInterface {
     }
 
     @Override
-    public AttackData perform(Pokemon attacker, Pokemon defender) {
-        return calculateDamage(attacker, defender);
-    }
-
-    @Override
-    public void draw(BattleController bc, Pokemon attacker, Pokemon defender) {
-        
-    }
+    public void draw(BattleController bc, Pokemon attacker, Pokemon defender) {}
 }
