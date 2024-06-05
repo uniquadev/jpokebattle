@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import jpokebattle.utils.PokeEnum;
 import jpokebattle.model.Pokemon;
-import jpokebattle.moves.*;
+import jpokebattle.move.*;
 
 public class MoveService {
     private static MoveService singleton = null;

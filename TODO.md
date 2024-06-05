@@ -1,4 +1,5 @@
 # importanti
+* invece che definire i pokemon come PokeData creare una classe astratta PokemonInfo che detenga tutte le informazioni necessarie che gia' sono presenti in PokeData, sviluppare una cartella pokemon
 * implementare la logica di combattimento
 * implementare le mosse dell'ai
 * implementare la fine (quando si perde o si fa fuga)

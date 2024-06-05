@@ -1,4 +1,4 @@
-package jpokebattle.moves;
+package jpokebattle.move;
 
 import jpokebattle.model.PokeStats;
 import jpokebattle.utils.MoveType;

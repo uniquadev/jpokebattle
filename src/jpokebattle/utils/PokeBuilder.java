@@ -6,7 +6,7 @@ import java.util.Random;
 import jpokebattle.model.PokeData;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
-import jpokebattle.moves.BaseMove;
+import jpokebattle.move.BaseMove;
 import jpokebattle.service.MoveService;
 import jpokebattle.service.PokeService;
 

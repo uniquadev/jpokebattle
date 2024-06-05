@@ -1,4 +1,4 @@
-package jpokebattle.moves;
+package jpokebattle.move;
 
 import java.util.Random;
 

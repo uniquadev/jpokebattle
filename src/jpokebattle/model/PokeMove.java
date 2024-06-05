@@ -1,8 +1,8 @@
 package jpokebattle.model;
 
 import jpokebattle.controller.BattleController;
-import jpokebattle.moves.BaseMove;
-import jpokebattle.moves.MoveInterface;
+import jpokebattle.move.BaseMove;
+import jpokebattle.move.MoveInterface;
 import jpokebattle.utils.MoveType;
 import jpokebattle.utils.PokeElement;
 

@@ -2,7 +2,7 @@ package jpokebattle.model;
 
 import java.util.ArrayList;
 
-import jpokebattle.moves.BaseMove;
+import jpokebattle.move.BaseMove;
 import jpokebattle.utils.PokeElement;
 import jpokebattle.utils.PokeEnum;
 
