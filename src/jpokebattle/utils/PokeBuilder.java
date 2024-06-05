@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import jpokebattle.model.PokeData;
+import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.moves.BaseMove;
 import jpokebattle.service.MoveService;
@@ -69,7 +70,9 @@ public class PokeBuilder {
             return;
         if (moves.size() <= 4) {
             for (int i = 0; i < moves.size(); i++) {
-                pokemon.setMove(i, moves.get(i));
+                pokemon.setMove(i, new PokeMove(
+                    moves.get(i)
+                ));
             }
             return;
         }
@@ -77,7 +80,7 @@ public class PokeBuilder {
         int counter = 0;
         while (counter < 4) {
             BaseMove move = moves.get(random.nextInt(moves.size()));
-            pokemon.setMove(counter, move);
+            pokemon.setMove(counter, new PokeMove(move));
             counter++;
             moves.remove(move);
         }

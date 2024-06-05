@@ -7,7 +7,7 @@ import jpokebattle.utils.PokeElement;
 import jpokebattle.utils.PokeEnum;
 
 public class Pokemon {
-    private BaseMove[] moves = new BaseMove[4];
+    private PokeMove[] moves = new PokeMove[4];
     private int health = 0;
 
     // statistiche personali (iv)
@@ -138,27 +138,27 @@ public class Pokemon {
         this.expToNextLevel = expToNextLevel;
     }
 
-    public ArrayList<BaseMove> getMoves() {
-        ArrayList<BaseMove> result = new ArrayList<>();
-        for (BaseMove move : moves) {
+    public ArrayList<PokeMove> getMoves() {
+        ArrayList<PokeMove> result = new ArrayList<>();
+        for (PokeMove move : moves) {
             if (move != null)
                 result.add(move);
         }
         return result;
     }
-    public void setMoves(BaseMove[] moves) {
+    public void setMoves(PokeMove[] moves) {
         this.moves = moves;
     }
-    public BaseMove getMove(int index) {
+    public PokeMove getMove(int index) {
         return moves[index];
     }
-    public void setMove(int index, BaseMove move) {
+    public void setMove(int index, PokeMove move) {
         this.moves[index] = move;
         move.setSlot(index);
     }
     public int getAvailableMoves() {
         int count = 0;
-        for (BaseMove move : moves) {
+        for (PokeMove move : moves) {
             if (move != null)
                 count++;
         }
@@ -177,7 +177,7 @@ public class Pokemon {
     public void restore() {
         restoreHealth();
         effects.reset();
-        for (BaseMove move : getMoves())
+        for (PokeMove move : getMoves())
             move.resetUses();
     }
 }

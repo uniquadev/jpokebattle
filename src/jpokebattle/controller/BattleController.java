@@ -20,8 +20,8 @@ import jpokebattle.gui.PokeTeamList;
 import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.model.BaseItem;
+import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
-import jpokebattle.moves.BaseMove;
 import jpokebattle.service.GameState;
 
 public class BattleController {
@@ -191,10 +191,10 @@ public class BattleController {
     }
 
     private void updateActionMenu(Pokemon pokemon) {
-        ArrayList<BaseMove> moves = pokemon.getMoves();
+        ArrayList<PokeMove> moves = pokemon.getMoves();
         MenuOption[] options = new MenuOption[moves.size()];
         for (int i = 0; i < moves.size(); i++) {
-            BaseMove move = moves.get(i);
+            PokeMove move = moves.get(i);
             MenuOption option = new MenuOption(move.getName(), true, move.getSlot());
             options[i] = option;
         }
@@ -213,7 +213,7 @@ public class BattleController {
         if (!game.isPlayerTurn())
             return;
         Pokemon pokemon = game.getPlayer().getCurrentPokemon();
-        BaseMove move = pokemon.getMove(option.getValue());
+        PokeMove move = pokemon.getMove(option.getValue());
         moveTypeLabel.setText("TIPO/" + move.getElement().name());
         moveUsesLabel.setText(move.getUsesLeft() + "/" + move.getMaxUses());
     }
@@ -222,7 +222,7 @@ public class BattleController {
         if (!game.isPlayerTurn())
             return;
         Pokemon player = game.getPlayer().getCurrentPokemon();
-        BaseMove move = player.getMove(option.getValue());
+        PokeMove move = player.getMove(option.getValue());
         System.out.println("Player used " + move.getName());
     }
 
