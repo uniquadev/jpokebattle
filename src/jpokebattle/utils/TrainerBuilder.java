@@ -78,6 +78,11 @@ public class TrainerBuilder {
         return this;
     }
 
+    public TrainerBuilder setMinPokeLevel(int minPokeLevel) {
+        pokeBuilder.setMinLevel(minPokeLevel);
+        return this;
+    }
+
     public TrainerBuilder setMaxPokeLevel(int maxPokeLevel) {
         pokeBuilder.setMaxLevel(maxPokeLevel);
         return this;

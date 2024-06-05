@@ -74,7 +74,8 @@ public class GameState {
         AIGenerationSettings settings = new AIGenerationSettings(getCurrentDifficulty());
         TrainerBuilder builder = new TrainerBuilder()
             .setTeamSize(player.getTeamSize() + settings.getTeamDelta())
-            .setMaxPokeLevel(player.getTeamLevel() + settings.getLevelDelta())
+            .setMinPokeLevel(player.getTeamLevel() + settings.getLevelMinDelta())
+            .setMaxPokeLevel(player.getTeamLevel() + settings.getLevelMaxDelta())
             .setMaxEvolution(player.getBestEvolution() + settings.getEvolutionDelta());
         setAI(builder.generate());
         System.out.println("AI generato!");
