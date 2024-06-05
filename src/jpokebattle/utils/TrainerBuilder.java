@@ -42,11 +42,11 @@ public class TrainerBuilder {
         return NAMES[random.nextInt(NAMES.length)];
     }
 
-    private void generateName(Trainer trainer) {
+    private void generateName(TrainerAI trainer) {
         trainer.setName(getRandomName());
     }
 
-    private void generateTeam(Trainer trainer) {
+    private void generateTeam(TrainerAI trainer) {
         ArrayList<PokeData> datas;
         if (useStarters) {
             datas = randomizer.getRandomStarters(teamSize);

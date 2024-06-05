@@ -232,13 +232,13 @@ public class BattleController {
         Pokemon botPokemon = game.getAI().getCurrentPokemon();
         AttackData attack = move.perform(playerPokemon, botPokemon);
         move.draw(this, playerPokemon, botPokemon);
-        
+
         if (attack.getType() == MoveType.MISS) {
             // playDialogAndWait("Mossa fallita!");
         } else if (attack.getType() == MoveType.ATTACK) {
 
         } else if (attack.getType() == MoveType.STATUS) {
-
+            botPokemon.getEffects().sum(attack.getEffects());
         }
         // playDialogAndWait("Il tuo " + playerPokemon.getName() + " usa " + move.getName());
     }

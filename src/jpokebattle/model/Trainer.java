@@ -1,5 +1,7 @@
 package jpokebattle.model;
 
+import java.util.ArrayList;
+
 public class Trainer {
     private Pokemon[] pokemons = new Pokemon[6];
     private BaseItem[] items = new BaseItem[10];
@@ -45,7 +47,17 @@ public class Trainer {
         return false;
     }
 
-    public Pokemon getAvailablePokemon() {
+    public ArrayList<Pokemon> getAvailablePokemons() {
+        ArrayList<Pokemon> available = new ArrayList<Pokemon>();
+        for (int i = 0; i < 6; i++) {
+            if (pokemons[i] == null || pokemons[i].isDead())
+                continue;
+            available.add(pokemons[i]);
+        }
+        return available;
+    }
+
+    public Pokemon getFirstAvailablePokemon() {
         for (int i = 0; i < 6; i++) {
             if (pokemons[i] == null || pokemons[i].isDead())
                 continue;
