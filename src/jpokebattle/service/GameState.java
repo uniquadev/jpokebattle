@@ -32,6 +32,10 @@ public class GameState {
     private int score = 0;
     private Trainer currentTrainerTurn;
 
+    public void increaseScore() {
+        score++;
+    }
+
     public State getState() {
         return state;
     }

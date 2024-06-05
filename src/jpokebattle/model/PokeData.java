@@ -4,6 +4,14 @@ import jpokebattle.utils.PokeElement;
 import jpokebattle.utils.PokeEnum;
 
 public class PokeData {
+
+    public enum LevelGroup {
+        MEDIUM_FAST,
+        MEDIUM_SLOW,
+        FAST,
+        SLOW
+    }
+
     private PokeEnum id;
     private String name;
     private PokeElement element;
@@ -13,6 +21,9 @@ public class PokeData {
     private int defense;
     private int special;
     private int speed;
+    
+    private LevelGroup levelType;
+    private int exp;
 
     private boolean isFemale;
     private boolean isLegendary;
@@ -30,6 +41,7 @@ public class PokeData {
     public PokeData(
         PokeEnum id, String name, PokeElement element, 
         int ps, int attack, int defense, int special, int speed,
+        LevelGroup levelType, int exp,
         int currentEvolution, int maxEvolution,
         boolean isFemale, boolean isLegendary) {
         this.id = id;
@@ -40,10 +52,34 @@ public class PokeData {
         this.defense = defense;
         this.special = special;
         this.speed = speed;
+        this.levelType = levelType;
+        this.exp = exp;
         this.currentEvolution = currentEvolution;
         this.maxEvolution = maxEvolution;
         this.isFemale = isFemale;
         this.isLegendary = isLegendary;
+    }
+
+    public int getLeveRequiredExp(int level) {
+        int result = 0;
+        switch (levelType) {
+            case MEDIUM_FAST:
+                result = (int) Math.pow(level, 3);
+                break;
+            case MEDIUM_SLOW:
+                result = (int) (6/5*Math.pow(level, 3) - 15*Math.pow(level, 2) + 100*level - 140);
+                break;
+            case FAST:
+                result = (int) (4 * Math.pow(level, 3) / 5);
+                break;
+            case SLOW:
+                result = (int) (5 * Math.pow(level, 3) / 5);
+                break;
+        }
+        return Math.max(0, result);
+    }
+    public int getBaseExp() {
+        return exp;
     }
     
     public int getPs() {

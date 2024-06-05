@@ -29,7 +29,7 @@ import jpokebattle.utils.TrainerAI;
 
 public class BattleController {
 
-    GameState game;
+    private GameState game;
     
     @FXML
     StackPane root;
@@ -246,11 +246,23 @@ public class BattleController {
             if (botPokemon.isDead())
             {
                 // TODO: play dead animation
+                ArrayList<Pokemon> playerPokemons = game.getPlayer().getAvailablePokemons();
+                for (Pokemon p : playerPokemons) {
+                    p.gainExp(botPokemon, playerPokemons.size());
+                    if (p.getExp() >= p.getExpToNextLevel()) {
+                        p.levelUp();
+                        updatePokemons();
+                    }
+                }
                 Pokemon newAIPokemon = ai.handlePokemonChange();
-                if (newAIPokemon != null)
-                {
+                if (newAIPokemon != null) {
                     botPokemonView.setId(newAIPokemon.getId());
                     botInfoCard.update(newAIPokemon);
+                }
+                else {
+                    game.increaseScore();
+                    game.generateAI();
+                    updatePokemons();
                 }
             }
                 

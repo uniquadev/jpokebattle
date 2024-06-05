@@ -22,10 +22,13 @@ public class Pokemon {
     
     private int level = 0;
     private int exp = 0;
-    private int expToNextLevel = 0;
 
     // dati base del pokemon
     private PokeData data;
+
+    public int getExp() {
+        return exp;
+    }
 
     public PokeData getData() {
         return data;
@@ -126,20 +129,31 @@ public class Pokemon {
     }
     public void setLevel(int level) {
         this.level = level;
+        this.exp = data.getLeveRequiredExp(level); // imposta l'exp necessaria per il livello attuale
     }
 
-    public int getExp() {
-        return exp;
-    }
     public void setExp(int exp) {
         this.exp = exp;
     }
 
     public int getExpToNextLevel() {
-        return expToNextLevel;
+        return data.getLeveRequiredExp(level + 1) - exp;
     }
-    public void setExpToNextLevel(int expToNextLevel) {
-        this.expToNextLevel = expToNextLevel;
+    public boolean canLevelUp() {
+        return exp >= data.getLeveRequiredExp(level + 1);
+    }
+
+    // s = numero di pokemon che hanno partecipato alla battaglia
+    public void gainExp(Pokemon enemy, int s) {
+        int b = enemy.getData().getBaseExp();
+        int L = enemy.getLevel();
+        double a = 1.5;
+        Double res = (b*L)/7 * 1/s * a;
+        exp += res.intValue();
+    }
+
+    public void levelUp() {
+        level++;
     }
 
     public ArrayList<PokeMove> getMoves() {

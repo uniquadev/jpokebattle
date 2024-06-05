@@ -19,10 +19,12 @@ import jpokebattle.JPokeBattle;
 import jpokebattle.model.Pokemon;
 
 public class HealthBar extends StackPane {
-    Rectangle healthRect;
+    private Rectangle healthRect;
 
     private static final int RECT_HDELTA = 8;
     private static final int RECT_VDELTA = 10;
+
+    private Timeline tweenTimeline;
 
     public HealthBar() {
         super();
@@ -69,7 +71,7 @@ public class HealthBar extends StackPane {
     public void tweenHealth(Pokemon pokemon, EventHandler<ActionEvent> onFinished) {
         int newWidth = calculateHealthWidth(pokemon);
         Duration cycleDuration = Duration.millis(1000);
-        Timeline timeline = new Timeline(
+        tweenTimeline = new Timeline(
             new KeyFrame(
                 cycleDuration,
                 new KeyValue(healthRect.widthProperty(),newWidth,Interpolator.EASE_BOTH)
@@ -77,15 +79,21 @@ public class HealthBar extends StackPane {
         );
         updateColor(pokemon);
 
-        timeline.play();
-        timeline.setOnFinished(event->{
+        tweenTimeline.play();
+        tweenTimeline.setOnFinished(event->{
             healthRect.setWidth(newWidth);
             if (onFinished != null)
                 onFinished.handle(event);
         });
     }
 
+    private void stopAnimation() {
+        if (tweenTimeline != null)
+            tweenTimeline.stop();
+    }
+
     public void updateHealth(Pokemon pokemon) {
+        stopAnimation();
         healthRect.setWidth(calculateHealthWidth(pokemon));
         updateColor(pokemon);
     }

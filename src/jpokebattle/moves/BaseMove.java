@@ -36,7 +36,7 @@ public abstract class BaseMove implements MoveInterface {
 
     public AttackData calculateDamage(Pokemon attacker, Pokemon defender) {
         Random randomGen = new Random();
-        int critical = randomGen.nextInt(1, 2);
+        int critical = randomGen.nextInt(1, 3);
         int power = getPower();
         AttackResult elemResult = attacker.getElement().getAttackResult(defender.getElement());
         AttackResult moveResult = getElement().getAttackResult(defender.getElement());
@@ -53,7 +53,7 @@ public abstract class BaseMove implements MoveInterface {
         }
 
         Double damage = ((((2*level*critical)/5 + 2) * power * (attack/defense)) / 50 + 2) * stab * elemResult.getEffectiveness() * moveResult.getEffectiveness();
-        double random = randomGen.nextInt(217, 255) / 255;
+        double random = randomGen.nextDouble(217, 255) / 255;
         if (damage.intValue() == 1)
             random = 1;
         damage *= random;

@@ -40,7 +40,8 @@ public class MoveService {
     }
 
     public ArrayList<BaseMove> getMoves(PokeEnum id) {
-        return library.get(id);
+        ArrayList<BaseMove> res = library.get(id);
+        return res == null ? new ArrayList<>() : res;
     }
 
     public ArrayList<BaseMove> getSupportedMoves(Pokemon pokemon) {
