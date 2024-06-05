@@ -153,6 +153,7 @@ public class Pokemon {
 
     public void levelUp() {
         level++;
+        restore();
     }
 
     public ArrayList<PokeMove> getMoves() {
