@@ -46,7 +46,7 @@ public class GameState {
         this.player = player;
         currentTrainerTurn = player;
     }
-    public Trainer getAI() {
+    public TrainerAI getAI() {
         return trainer;
     }
     public void setAI(TrainerAI trainer) {

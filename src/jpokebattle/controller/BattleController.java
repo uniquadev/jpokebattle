@@ -25,6 +25,7 @@ import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.service.GameState;
 import jpokebattle.utils.MoveType;
+import jpokebattle.utils.TrainerAI;
 
 public class BattleController {
 
@@ -228,7 +229,7 @@ public class BattleController {
         if (!move.canUse())
             return;
         toggleActionView(false);
-        
+        TrainerAI ai = game.getAI();
         Pokemon botPokemon = game.getAI().getCurrentPokemon();
         AttackData attack = move.perform(playerPokemon, botPokemon);
         move.draw(this, playerPokemon, botPokemon);
@@ -236,7 +237,23 @@ public class BattleController {
         if (attack.getType() == MoveType.MISS) {
             // playDialogAndWait("Mossa fallita!");
         } else if (attack.getType() == MoveType.ATTACK) {
-
+            // apply damage
+            System.out.println("Applying damage: " + attack.getDamage());
+            botPokemon.damage(attack.getDamage());
+            System.out.println("Bot health: " + botPokemon.getHealth());
+            botInfoCard.tweenHealth(null);
+            // check if bot has to change pokemon
+            if (botPokemon.isDead())
+            {
+                // TODO: play dead animation
+                Pokemon newAIPokemon = ai.handlePokemonChange();
+                if (newAIPokemon != null)
+                {
+                    botPokemonView.setId(newAIPokemon.getId());
+                    botInfoCard.update(newAIPokemon);
+                }
+            }
+                
         } else if (attack.getType() == MoveType.STATUS) {
             botPokemon.getEffects().sum(attack.getEffects());
         }

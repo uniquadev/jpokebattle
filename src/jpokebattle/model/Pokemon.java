@@ -11,14 +11,14 @@ public class Pokemon {
     private int health = 0;
 
     // statistiche personali (iv)
-    private PokeStats stats = new PokeStats();
+    private PokeStats iv = new PokeStats();
     private PokeStats effects = new PokeStats();
 
     private int psPA = 0;
-    private int attackPA = 0;
-    private int defensePA = 0;
-    private int specialPA = 0;
-    private int speedPA = 0;
+    private int attackEV = 0;
+    private int defenseEV = 0;
+    private int specialEV = 0;
+    private int speedEV = 0;
     
     private int level = 0;
     private int exp = 0;
@@ -63,54 +63,58 @@ public class Pokemon {
         this.health = Math.min(getTotPS(), this.health);
     }
 
+    private int calculateStat(int base, int iv, int pa) {
+        return (((base + iv) * 2 + pa/4) * level) / 100 + 5;
+    }
+
     public int getPS() {
-        return stats.getPS();
+        return iv.getPs();
     }
     public int getTotPS() {
-        return getPS() + (psPA / 4) + data.getPs();
+        return calculateStat(data.getPs(), iv.getPs(), psPA) + level + 5;
     }
     public void setPS(int ps) {
-        stats.setPS(ps);
+        iv.setPS(ps);
     }
 
     public int getAttack() {
-        return stats.getAttack();
+        return iv.getAttack();
     }
     public int getTotAttack() {
-        return getAttack() + effects.getAttack() + (attackPA / 4) + data.getAttack();
+        return calculateStat(data.getAttack(), iv.getAttack(), attackEV);
     }
     public void setAttack(int attack) {
-        stats.setAttack(attack);
+        iv.setAttack(attack);
     }
 
     public int getDefense() {
-        return stats.getDefense();
+        return iv.getDefense();
     }
     public int getTotDefense() {
-        return getDefense() + effects.getDefense() + (defensePA / 4) + data.getDefense();
+        return calculateStat(data.getDefense(), iv.getDefense(), defenseEV);
     }
     public void setDefense(int defense) {
-        stats.setDefense(defense);
+        iv.setDefense(defense);
     }
 
     public int getSpecial() {
-        return stats.getSpecial();
+        return iv.getSpecial();
     }
     public int getTotSpecial() {
-        return getSpecial() + effects.getSpecial() + (specialPA / 4) + data.getSpecial();
+        return calculateStat(data.getSpecial(), iv.getSpecial(), specialEV);
     }
     public void setSpecial(int special) {
-        stats.setSpecial(special);
+        iv.setSpecial(special);
     }
 
     public int getSpeed() {
-        return stats.getSpeed();
+        return iv.getSpeed();
     }
     public int getTotSpeed() {
-        return getSpeed() + effects.getSpecial() + (speedPA / 4) + data.getSpeed();
+        return calculateStat(data.getSpeed(), iv.getSpeed(), speedEV);
     }
     public void setSpeed(int speed) {
-        stats.setSpeed(speed);
+        iv.setSpeed(speed);
     }
 
     public PokeStats getEffects() {

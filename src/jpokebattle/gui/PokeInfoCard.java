@@ -15,6 +15,8 @@ import javafx.scene.shape.StrokeType;
 import javafx.scene.text.TextAlignment;
 import jpokebattle.JPokeBattle;
 import jpokebattle.model.Pokemon;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 public class PokeInfoCard extends VBox  {
     private Rectangle healthRect;
@@ -64,9 +66,24 @@ public class PokeInfoCard extends VBox  {
 
     public void update(Pokemon pokemon) {
         this.pokemon = pokemon;
+        healthBar.updateHealth(pokemon);
         nameLabel.setText(pokemon.getName());
         hpLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());
         leveLabel.setText(":L" + pokemon.getLevel());
+    }
+
+    public void updateHealthLabel() {
+        hpLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());
+    }
+
+    public void tweenHealth(EventHandler<ActionEvent> onFinished) {
+        healthBar.tweenHealth(pokemon, onFinished);
+        updateHealthLabel();
+    }
+
+    public void updateHealth() {
+        healthBar.updateHealth(pokemon);
+        updateHealthLabel();
     }
 
     public void removeHpLabel() {

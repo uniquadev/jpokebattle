@@ -87,7 +87,7 @@ public class PokeCard extends StackPane {
     public void update(Pokemon pokemon) {
         pokemonView.setId(pokemon.getId());
         pokemonName.setText(pokemon.getName());
-        healthBar.setHealth(pokemon);
+        healthBar.updateHealth(pokemon);
         levelLabel.setText("L" + pokemon.getLevel());
         psLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());
     }

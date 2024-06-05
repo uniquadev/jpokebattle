@@ -15,7 +15,7 @@ public class PokeStats {
         ps = 0;
     }
 
-    public int getPS() {
+    public int getPs() {
         return ps;
     }
     public void setPS(int ps) {
