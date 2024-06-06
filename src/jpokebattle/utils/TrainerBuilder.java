@@ -9,12 +9,13 @@ import jpokebattle.pokemon.PokemonInfo;
 public class TrainerBuilder {
     private PokeBuilder pokeBuilder = new PokeBuilder();
     private PokeRandomizer randomizer = new PokeRandomizer();
+    private Random random = new Random();
     private boolean generateName = true;
     private boolean generateTeam = true;
-    private boolean generateItems = true;
     private boolean useStarters = false;
 
-    private int teamSize = 6;
+    private int minTeamSize = 1;
+    private int maxTeamSize = 1;
 
     private static final String[] NAMES = {
         "Ash", "Misty", "Brock", "Gary", "Jessie",
@@ -31,9 +32,6 @@ public class TrainerBuilder {
         if (generateTeam) {
             generateTeam(trainer);
         }
-        if (generateItems) {
-            generateItems(trainer);
-        }
         return trainer;
     }
 
@@ -48,6 +46,7 @@ public class TrainerBuilder {
 
     private void generateTeam(Trainer trainer) {
         ArrayList<PokemonInfo> infos;
+        int teamSize = random.nextInt(minTeamSize, maxTeamSize+1);
         if (useStarters) {
             infos = randomizer.getRandomStarters(teamSize);
         } else {
@@ -64,17 +63,18 @@ public class TrainerBuilder {
         }
     }
 
-    private void generateItems(Trainer trainer) {
-        // TODO
-    }
-
     public TrainerBuilder setGenerateName(boolean generateName) {
         this.generateName = generateName;
         return this;
     }
 
-    public TrainerBuilder setTeamSize(int teamSize) {
-        this.teamSize = Math.min(6, teamSize);
+    public TrainerBuilder setMinTeamSize(int teamSize) {
+        this.minTeamSize = Math.max(1, teamSize);
+        return this;
+    }
+
+    public TrainerBuilder setMaxTeamSize(int teamSize) {
+        this.maxTeamSize = Math.min(6, teamSize);
         return this;
     }
 
@@ -90,6 +90,11 @@ public class TrainerBuilder {
 
     public TrainerBuilder setMaxEvolution(int maxEvolution) {
         randomizer.setMaxEvolution(maxEvolution);
+        return this;
+    }
+
+    public TrainerBuilder setMinEvolution(int minEvolution) {
+        randomizer.setMinEvolution(minEvolution);
         return this;
     }
 

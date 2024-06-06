@@ -9,16 +9,20 @@ import jpokebattle.service.PokeService;
 public class PokeRandomizer {
     private PokeService service = PokeService.getSingleton();
     private Random random = new Random();
+    private int minEvolution = 0;
     private int maxEvolution = 5;
 
     public void setMaxEvolution(int maxEvolution) {
         this.maxEvolution = maxEvolution;
     }
+    public void setMinEvolution(int minEvolution) {
+        this.minEvolution = minEvolution;
+    }
 
     private ArrayList<PokemonInfo> getAvailablePokemons() {
         ArrayList<PokemonInfo> result = new ArrayList<>();
         for (PokemonInfo info : service.getAvailablePokemons()) {
-            if (info.getCurrentEvolution() <= maxEvolution) {
+            if (info.getCurrentEvolution() <= maxEvolution && info.getCurrentEvolution() >= minEvolution) {
                 result.add(info);
             }
         }

@@ -43,37 +43,30 @@ public class PokeMove implements MoveInterface {
     public String getName() {
         return move.getName();
     }
-
     @Override
     public PokeElement getElement() {
         return move.getElement();
     }
-
     @Override
     public MoveType getType() {
         return move.getType();
     }
-
     @Override
     public int getMaxUses() {
         return move.getMaxUses();
     }
-
     @Override
     public int getPower() {
         return move.getPower();
     }
-
     @Override
     public int getAccuracy() {
         return move.getAccuracy();
     }
-
     @Override
     public AttackData perform(Pokemon attacker, Pokemon defender) {
         return move.perform(attacker, defender);
     }
-
     @Override
     public void draw(BattleController bc, Pokemon attacker, Pokemon defender) {
         move.draw(bc, attacker, defender);

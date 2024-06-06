@@ -1,8 +1,6 @@
 package jpokebattle.model;
 
-import jpokebattle.interfaces.StatsInterface;
-
-public class PokeStats implements StatsInterface {
+public class PokeStats {
     private int attack = 0;
     private int defense = 0;
     private int special = 0;

@@ -52,12 +52,14 @@ public class TurnManager implements CPUInterface {
     }
 
     public void generateNewOpponent() {
-        AIGenerationSettings settings = new AIGenerationSettings(state.getCurrentDifficulty());
+        GenerationSettings settings = new GenerationSettings(state.getCurrentDifficulty());
         TrainerBuilder builder = new TrainerBuilder()
-            .setTeamSize(player.getTeamSize() + settings.getTeamDelta())
-            .setMinPokeLevel(player.getTeamLevel() + settings.getLevelMinDelta())
-            .setMaxPokeLevel(player.getTeamLevel() + settings.getLevelMaxDelta())
-            .setMaxEvolution(player.getBestEvolution() + settings.getEvolutionDelta());
+            .setMinTeamSize(settings.getMinTeamSize())
+            .setMaxTeamSize(settings.getMaxTeamSize())
+            .setMinPokeLevel(player.getTeamLevel() + settings.getMinLevelOffset())
+            .setMaxPokeLevel(player.getTeamLevel() + settings.getMaxLevelOffset())
+            .setMinEvolution(player.getBestEvolution() + settings.getMinEvolutionOffset())
+            .setMaxEvolution(player.getBestEvolution() + settings.getMaxEvolutionOffset());
         start(player, builder.generate());
         setupCPU();
         System.out.println("CPU generata!");
@@ -79,7 +81,7 @@ public class TurnManager implements CPUInterface {
         if (chance == 1)
             return null;
         var pokemons = opponent.getAllPokemons();
-        Pokemon pokemon = pokemons.size() == 1 ? pokemons.get(0) : pokemons.get(random.nextInt(0, pokemons.size() - 1));
+        Pokemon pokemon = pokemons.get(random.nextInt(0, pokemons.size()));
         pokemon.restore();
         return pokemon;
     }

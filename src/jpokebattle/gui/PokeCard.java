@@ -5,12 +5,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import jpokebattle.JPokeBattle;
 import jpokebattle.model.Pokemon;
 
@@ -85,8 +82,8 @@ public class PokeCard extends StackPane {
     }
 
     public void update(Pokemon pokemon) {
-        pokemonView.setId(pokemon.getId());
-        pokemonName.setText(pokemon.getName());
+        pokemonView.setPokemon(pokemon);
+        pokemonName.setText(pokemon.getInfo().getName());
         healthBar.updateHealth(pokemon);
         levelLabel.setText("L" + pokemon.getLevel());
         psLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());

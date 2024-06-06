@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import jpokebattle.JPokeBattle;
 import jpokebattle.enums.PokeEnum;
+import jpokebattle.model.Pokemon;
 
 public class PokemonView extends ImageView {
     private PokeEnum id = PokeEnum.BULBASAUR;
@@ -29,8 +30,8 @@ public class PokemonView extends ImageView {
         setImage(image);
     }
 
-    public void setId(PokeEnum id) {
-        this.id = id;
+    public void setPokemon(Pokemon pokemon) {
+        this.id = pokemon.getInfo().getId();
         updateImage();
     }
 

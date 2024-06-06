@@ -2,24 +2,14 @@ package jpokebattle.gui;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeType;
 import javafx.scene.text.TextAlignment;
-import jpokebattle.JPokeBattle;
 import jpokebattle.model.Pokemon;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class PokeInfoCard extends VBox  {
-    private Rectangle healthRect;
     private Label nameLabel;
     private Label hpLabel;
     private Label leveLabel;
@@ -67,7 +57,7 @@ public class PokeInfoCard extends VBox  {
     public void update(Pokemon pokemon) {
         this.pokemon = pokemon;
         healthBar.updateHealth(pokemon);
-        nameLabel.setText(pokemon.getName());
+        nameLabel.setText(pokemon.getInfo().getName());
         hpLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());
         leveLabel.setText(":L" + pokemon.getLevel());
     }

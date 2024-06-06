@@ -1,9 +1,7 @@
 package jpokebattle.move;
 
 import jpokebattle.enums.MoveType;
-import jpokebattle.model.AttackData;
 import jpokebattle.model.PokeStats;
-import jpokebattle.model.Pokemon;
 
 public class Growl extends BaseMove {
 

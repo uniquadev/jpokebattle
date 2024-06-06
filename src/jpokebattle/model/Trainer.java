@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Trainer {
     private Pokemon[] pokemons = new Pokemon[6];
-    private BaseItem[] items = new BaseItem[10];
     private String name = "Trainer";
 
     private int currentPokemon = 0;

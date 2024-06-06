@@ -23,7 +23,6 @@ import jpokebattle.gui.PokeTeamList;
 import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.model.AttackData;
-import jpokebattle.model.BaseItem;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
@@ -194,11 +193,11 @@ public class BattleController {
         Pokemon botPokemon = opponent.getCurrentPokemon();
         botPokeballs.update(opponent);
         if (playerPokemon != null) {
-            playerPokemonView.setId(playerPokemon.getId());
+            playerPokemonView.setPokemon(playerPokemon);
             playerInfoCard.update(playerPokemon);
         }
         if (botPokemon != null) {
-            botPokemonView.setId(botPokemon.getId());
+            botPokemonView.setPokemon(botPokemon);
             botInfoCard.update(botPokemon);
         }
     }
@@ -289,7 +288,7 @@ public class BattleController {
             updatePokemons();
             Pokemon newBotPokemon = turnManager.handlePokemonChange();
             if (newBotPokemon != null) {
-                botPokemonView.setId(newBotPokemon.getId());
+                botPokemonView.setPokemon(newBotPokemon);
                 botInfoCard.update(newBotPokemon);
             }
             else {

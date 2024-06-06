@@ -13,29 +13,27 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
         return LevelUpGroup.MEDIUM_SLOW;
     }
 
-    @Override
+    public int getDropExp() {
+        return 0;
+    }
+
     public int getPS() {
         return baseStats.getPS();
     }
-
-    @Override
     public int getAttack() {
         return baseStats.getAttack();
     }
-
-    @Override
     public int getDefense() {
         return baseStats.getDefense();
     }
-
-    @Override
     public int getSpecial() {
         return baseStats.getSpecial();
     }
-
-    @Override
     public int getSpeed() {
         return baseStats.getSpeed();
+    }
+    public boolean canEvolve() {
+        return getCurrentEvolution() < getMaxEvolution();
     }
 
     public int getLeveRequiredExp(int level) {
@@ -56,10 +54,4 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
         }
         return Math.max(0, result);
     }
-
-    @Override
-    public boolean canEvolve() {
-        return getCurrentEvolution() < getMaxEvolution();
-    }
-
 }
