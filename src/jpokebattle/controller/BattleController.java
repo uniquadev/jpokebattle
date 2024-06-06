@@ -29,72 +29,75 @@ import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
+import jpokebattle.service.SoundService;
 import jpokebattle.utils.TurnManager;
 
 public class BattleController {
 
     private GameState game;
     private TurnManager turnManager;
+    private SoundService sound;
     
     @FXML
-    Label scoreLabel;
+    private Label scoreLabel;
     @FXML
-    StackPane root;
+    private StackPane root;
     @FXML
-    VBox pokemonBox;
+    private VBox pokemonBox;
     @FXML
-    ArrowTextButton pokemonBackButton;
+    private ArrowTextButton pokemonBackButton;
     @FXML
-    ArrowTextButton actionBackButton;
+    private ArrowTextButton actionBackButton;
     @FXML
-    VBox battleBox;
+    private VBox battleBox;
     @FXML
-    StackPane battlePane;
+    private StackPane battlePane;
     @FXML
-    StackPane bottomStackPane;
+    private StackPane bottomStackPane;
     @FXML
-    StackPane menuPane;
+    private StackPane menuPane;
     @FXML
-    StackPane pokemonActionPane;
+    private StackPane pokemonActionPane;
     @FXML
-    PokeTeamList pokeTeamList;
+    private PokeTeamList pokeTeamList;
     @FXML
-    Label battleLabel;
+    private Label battleLabel;
     @FXML
-    GridMenu mainMenu;
+    private GridMenu mainMenu;
     @FXML
-    ImageView pokeBox;
+    private ImageView pokeBox;
 
     @FXML
-    StackPane moveInfoPane;
+    private StackPane moveInfoPane;
     @FXML
-    Label moveTypeLabel;
+    private Label moveTypeLabel;
     @FXML
-    Label moveUsesLabel;
+    private Label moveUsesLabel;
 
     @FXML
-    StackPane actionPane;
+    private StackPane actionPane;
     @FXML
-    GridMenu actionMenu;
+    private GridMenu actionMenu;
 
     @FXML
-    PokemonView playerPokemonView;
+    private PokemonView playerPokemonView;
     @FXML
-    PokeInfoCard playerInfoCard;
+    private PokeInfoCard playerInfoCard;
     @FXML
-    ImageView arrowToLeft;
+    private ImageView arrowToLeft;
     @FXML
-    HPokeBalls botPokeballs;
+    private HPokeBalls botPokeballs;
 
     @FXML
-    PokeInfoCard botInfoCard;
+    private PokeInfoCard botInfoCard;
     @FXML
-    ImageView arrowToRight;
+    private ImageView arrowToRight;
     @FXML
-    PokemonView botPokemonView;
+    private PokemonView botPokemonView;
 
     public BattleController() {
         game = GameState.getSingleton();
+        sound = SoundService.getSingleton();
     }
 
     public void initialize() {
