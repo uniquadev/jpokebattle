@@ -28,6 +28,7 @@ public class SoundService {
 
     private AudioClip battleMusic;
     private AudioClip titleMusic;
+    private AudioClip victoryMusic;
     private AudioClip purchaseSound;
     private AudioClip pressSound;
 
@@ -38,6 +39,7 @@ public class SoundService {
         battleMusic.setCycleCount(AudioClip.INDEFINITE);
         titleMusic = loadAudio("title-screen-music.wav", SoundType.MUSIC);
         titleMusic.setCycleCount(AudioClip.INDEFINITE);
+        victoryMusic = loadAudio("victory.mp3", SoundType.MUSIC);
         // effects
         purchaseSound = loadAudio("SFX_PURCHASE.wav", SoundType.EFFECT);
         pressSound = loadAudio("SFX_PRESS_AB.wav", SoundType.EFFECT);
@@ -72,5 +74,8 @@ public class SoundService {
     }
     public AudioClip getBattleMusic() {
         return battleMusic;
+    }
+    public AudioClip getVictoryMusic() {
+        return victoryMusic;
     }
 }

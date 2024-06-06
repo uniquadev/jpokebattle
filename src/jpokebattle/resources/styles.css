@@ -76,3 +76,41 @@
 .finish-label {
     -fx-font-size: 25px;
 }
+
+.leaderboard {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.leaderboard .table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}
+.leaderboard .table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+.leaderboard .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-border-style: solid;
+}
+
+.leaderboard .table-view .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+}
+
+.leaderboard .table-view .table-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.leaderboard .table-view:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}

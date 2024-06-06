@@ -2,6 +2,7 @@ package jpokebattle.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.media.AudioClip;
 import jpokebattle.JPokeBattle;
 import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.LeaderboardGUI;
@@ -20,9 +21,14 @@ public class FinishController {
 
     private GameState state;
     private Trainer player;
+    private AudioClip victoryMusic;
 
     public void initialize() {
-        SoundService.getSingleton().getBattleMusic().stop();
+        SoundService sound = SoundService.getSingleton();
+        sound.getBattleMusic().stop();
+        victoryMusic = sound.getVictoryMusic();
+        victoryMusic.play();
+
         state = GameState.getSingleton();
         player = state.getPlayer();
 
@@ -32,6 +38,7 @@ public class FinishController {
         finishLabel.setText("Hai totalizzato " + state.getScore() + " punti!");
     
         backButton.getButton().setOnAction(e -> {
+            victoryMusic.stop();
             JPokeBattle.getInstance().setView("menu");
         });
     }

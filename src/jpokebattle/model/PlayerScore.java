@@ -1,16 +1,16 @@
 package jpokebattle.model;
 
 public class PlayerScore {
-    private final String nickname;
+    private final String name;
     private final int score;
 
-    public PlayerScore(String nickname, int score) {
-        this.nickname = nickname;
+    public PlayerScore(String name, int score) {
+        this.name = name;
         this.score = score;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getName() {
+        return name;
     }
 
     public Integer getScore() {
