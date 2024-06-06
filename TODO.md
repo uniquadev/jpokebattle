@@ -1,4 +1,5 @@
 # importanti
+* aggiornare teamsize nella generazione di un team
 * implementare la logica di combattimento
     - implementare il sistema EVs
 * implementare le mosse dell'ai
