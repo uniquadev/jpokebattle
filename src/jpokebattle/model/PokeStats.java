@@ -28,36 +28,46 @@ public class PokeStats implements StatsInterface {
     public int getPS() {
         return ps;
     }
+
+    private int sanitizeValue(int value) {
+        int res = value;
+        if (value < -maxValue)
+            res = -maxValue;
+        else if (value > maxValue)
+            res = maxValue;
+        return res;
+    }
+
     public void setPS(int ps) {
-        this.ps = Math.min(maxValue, ps);
+        this.ps = sanitizeValue(ps);
     }
 
     public int getAttack() {
         return attack;
     }
     public void setAttack(int attack) {
-        this.attack = Math.min(maxValue, attack);
+        this.attack = sanitizeValue(attack);
     }
 
     public int getDefense() {
         return defense;
     }
     public void setDefense(int defense) {
-        this.defense = Math.min(maxValue, defense);
+        this.defense = sanitizeValue(defense);
     }
 
     public int getSpecial() {
         return special;
     }
     public void setSpecial(int special) {
-        this.special = Math.min(maxValue, special);
+        this.special = sanitizeValue(special);
     }
 
     public int getSpeed() {
         return speed;
     }
     public void setSpeed(int speed) {
-        this.speed = Math.min(maxValue, speed);
+        this.speed = sanitizeValue(speed);
     }
     
     public void sum(PokeStats other) {
