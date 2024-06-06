@@ -10,12 +10,12 @@ import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
 import jpokebattle.service.SoundService;
-import jpokebattle.utils.TrainerBuilder;;
+import jpokebattle.utils.TrainerFactory;;
 
 public class SetupController {
     private final int MAX_NAME_LEN = 16;
     ChangeListener<Boolean> focusListener;
-    private String defaultName = TrainerBuilder.getRandomName();
+    private String defaultName = TrainerFactory.getRandomName();
 
     @FXML
     ArrowTextButton backButton;
@@ -77,7 +77,7 @@ public class SetupController {
 
     private void submit() {
         GameState game = GameState.getSingleton();
-        Trainer player = new TrainerBuilder()
+        Trainer player = new TrainerFactory()
             .setMaxTeamSize(1)
             .setMaxPokeLevel(5)
             .useStarters(true)

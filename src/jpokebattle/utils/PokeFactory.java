@@ -12,9 +12,9 @@ import jpokebattle.service.MoveService;
 import jpokebattle.service.PokeService;
 
 /**
- * The PokeBuilder class is responsible for generating Pokemon objects with customizable attributes.
+ * The PokeFactory class is responsible for generating Pokemon objects with customizable attributes.
  */
-public class PokeBuilder {
+public class PokeFactory {
     private Random random = new Random();
     private int minLevel = 1;
     private int maxLevel = 1;
@@ -30,14 +30,14 @@ public class PokeBuilder {
      * Constructs a PokeBuilder object with the specified Pokemon ID.
      * @param id The ID of the Pokemon to generate.
      */
-    public PokeBuilder(PokeEnum id) {
+    public PokeFactory(PokeEnum id) {
         this.id = id;
     }
 
     /**
      * Constructs a PokeBuilder object with the default Pokemon ID (Bulbasaur).
      */
-    public PokeBuilder() {
+    public PokeFactory() {
         this(PokeEnum.BULBASAUR);
     }
 

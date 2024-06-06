@@ -7,10 +7,10 @@ import jpokebattle.model.Trainer;
 import jpokebattle.pokemon.PokemonInfo;
 
 /**
- * The TrainerBuilder class is responsible for generating Trainer objects with random names and teams of Pokemon.
+ * The TrainerFactory class is responsible for generating Trainer objects with random names and teams of Pokemon.
  */
-public class TrainerBuilder {
-    private PokeBuilder pokeBuilder = new PokeBuilder();
+public class TrainerFactory {
+    private PokeFactory pokeBuilder = new PokeFactory();
     private PokeRandomizer randomizer = new PokeRandomizer();
     private Random random = new Random();
     private boolean generateName = true;
@@ -92,7 +92,7 @@ public class TrainerBuilder {
      * @param generateName True to generate a random name, false otherwise.
      * @return The TrainerBuilder object.
      */
-    public TrainerBuilder setGenerateName(boolean generateName) {
+    public TrainerFactory setGenerateName(boolean generateName) {
         this.generateName = generateName;
         return this;
     }
@@ -103,7 +103,7 @@ public class TrainerBuilder {
      * @param teamSize The minimum team size.
      * @return The TrainerBuilder object.
      */
-    public TrainerBuilder setMinTeamSize(int teamSize) {
+    public TrainerFactory setMinTeamSize(int teamSize) {
         this.minTeamSize = Math.max(1, teamSize);
         return this;
     }
@@ -114,7 +114,7 @@ public class TrainerBuilder {
      * @param teamSize The maximum team size.
      * @return The TrainerBuilder object.
      */
-    public TrainerBuilder setMaxTeamSize(int teamSize) {
+    public TrainerFactory setMaxTeamSize(int teamSize) {
         this.maxTeamSize = Math.min(6, teamSize);
         return this;
     }
@@ -125,7 +125,7 @@ public class TrainerBuilder {
      * @param minPokeLevel The minimum level.
      * @return The TrainerBuilder object.
      */
-    public TrainerBuilder setMinPokeLevel(int minPokeLevel) {
+    public TrainerFactory setMinPokeLevel(int minPokeLevel) {
         pokeBuilder.setMinLevel(minPokeLevel);
         return this;
     }
@@ -136,7 +136,7 @@ public class TrainerBuilder {
      * @param maxPokeLevel The maximum level.
      * @return The TrainerBuilder object.
      */
-    public TrainerBuilder setMaxPokeLevel(int maxPokeLevel) {
+    public TrainerFactory setMaxPokeLevel(int maxPokeLevel) {
         pokeBuilder.setMaxLevel(maxPokeLevel);
         return this;
     }
@@ -147,7 +147,7 @@ public class TrainerBuilder {
      * @param maxEvolution The maximum evolution stage.
      * @return The TrainerBuilder object.
      */
-    public TrainerBuilder setMaxEvolution(int maxEvolution) {
+    public TrainerFactory setMaxEvolution(int maxEvolution) {
         randomizer.setMaxEvolution(maxEvolution);
         return this;
     }
@@ -158,7 +158,7 @@ public class TrainerBuilder {
      * @param minEvolution The minimum evolution stage.
      * @return The TrainerBuilder object.
      */
-    public TrainerBuilder setMinEvolution(int minEvolution) {
+    public TrainerFactory setMinEvolution(int minEvolution) {
         randomizer.setMinEvolution(minEvolution);
         return this;
     }
@@ -169,7 +169,7 @@ public class TrainerBuilder {
      * @param useStarters True to use starter Pokemon, false otherwise.
      * @return The TrainerBuilder object.
      */
-    public TrainerBuilder useStarters(boolean useStarters) {
+    public TrainerFactory useStarters(boolean useStarters) {
         this.useStarters = useStarters;
         return this;
     }

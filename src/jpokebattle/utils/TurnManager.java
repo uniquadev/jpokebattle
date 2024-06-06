@@ -83,7 +83,7 @@ public class TurnManager implements CPUInterface {
      */
     public void generateNewOpponent() {
         GenerationSettings settings = new GenerationSettings(state.getCurrentDifficulty());
-        TrainerBuilder builder = new TrainerBuilder()
+        TrainerFactory builder = new TrainerFactory()
             .setMinTeamSize(settings.getMinTeamSize())
             .setMaxTeamSize(settings.getMaxTeamSize())
             .setMinPokeLevel(player.getTeamLevel() + settings.getMinLevelOffset())
