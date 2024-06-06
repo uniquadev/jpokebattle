@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 import jpokebattle.model.PlayerScore;
 
-public class LeaderboardService {
-    private static LeaderboardService singleton = null;
-    public static LeaderboardService getSingleton() {
-        synchronized (LeaderboardService.class) {
+public class Leaderboard {
+    private static Leaderboard singleton = null;
+    public static Leaderboard getSingleton() {
+        synchronized (Leaderboard.class) {
             if (singleton == null) {
-                singleton = new LeaderboardService();
+                singleton = new Leaderboard();
             }
         }
         return singleton;
     }
 
-    ArrayList<PlayerScore> scores = new ArrayList<>();
+    private ArrayList<PlayerScore> scores = new ArrayList<>();
 
-    private LeaderboardService() {
+    private Leaderboard() {
     }
 
     public int getMinScore() {
@@ -26,19 +26,23 @@ public class LeaderboardService {
         return scores.get(scores.size() - 1).getScore();
     }
 
+    public ArrayList<PlayerScore> getScores() {
+        return scores;
+    }
+
     public void addScore(String name, int score) {
-        scores.add(new PlayerScore(name, score));
+        addScore(new PlayerScore(name, score));
     }
 
     public Integer addScore(PlayerScore score) {
         int minScore = getMinScore();
-        if (score.getScore() < minScore)
+        if (score.getScore() <= minScore && scores.size() >= 10)
             return null;
         if (scores.size() >= 10) {
             scores.remove(scores.size() - 1);
         }
         int index = 0;
-        while (index < scores.size() && score.getScore() < scores.get(index).getScore()) {
+        while (index < scores.size() && score.getScore() <= scores.get(index).getScore()) {
             index++;
         }
         scores.add(index, score);

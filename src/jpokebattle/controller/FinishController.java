@@ -8,6 +8,7 @@ import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.LeaderboardGUI;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
+import jpokebattle.service.Leaderboard;
 import jpokebattle.service.SoundService;
 
 public class FinishController {
@@ -22,6 +23,7 @@ public class FinishController {
     private GameState state;
     private Trainer player;
     private AudioClip victoryMusic;
+    private Leaderboard leaderboard;
 
     public void initialize() {
         SoundService sound = SoundService.getSingleton();
@@ -29,9 +31,13 @@ public class FinishController {
         victoryMusic = sound.getVictoryMusic();
         victoryMusic.play();
 
+        leaderboard = Leaderboard.getSingleton();
         state = GameState.getSingleton();
         player = state.getPlayer();
 
+        leaderView.update(leaderboard.getScores());
+
+        leaderboard.addScore(player.getName(), state.getScore());
         backButton.setText("< Menu");
         backButton.removeArrow();
 

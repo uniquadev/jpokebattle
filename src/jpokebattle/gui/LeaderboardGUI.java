@@ -1,5 +1,7 @@
 package jpokebattle.gui;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -9,6 +11,9 @@ import javafx.scene.layout.VBox;
 import jpokebattle.model.PlayerScore;
 
 public class LeaderboardGUI extends VBox {
+
+    private TableView<PlayerScore> tableView;
+
     public LeaderboardGUI() {
         super();
         setMaxSize(USE_PREF_SIZE, USE_PREF_SIZE);
@@ -20,10 +25,11 @@ public class LeaderboardGUI extends VBox {
         scoreLabel.setId("scoreLabel");
 
         // score table TODO: make it a custom class
-        TableView<PlayerScore> tableView = new TableView<>();
+        tableView = new TableView<>();
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
         tableView.setSelectionModel(null);
         tableView.setFocusTraversable(false);
+        tableView.setPlaceholder(new Label("Nessun punteggio ;("));
 
          // Define columns
         TableColumn<PlayerScore, String> nickNameCol = new TableColumn<>("Allenatori");
@@ -45,5 +51,10 @@ public class LeaderboardGUI extends VBox {
 
         getChildren().addAll(scoreLabel, tableView);
         getStyleClass().add("leaderboard");
+    }
+
+    public void update(ArrayList<PlayerScore> scores) {
+        tableView.getItems().clear();
+        tableView.getItems().addAll(scores);
     }
 }
