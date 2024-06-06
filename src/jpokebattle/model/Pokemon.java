@@ -2,10 +2,14 @@ package jpokebattle.model;
 
 import java.util.ArrayList;
 
+import jpokebattle.interfaces.PokemonInterface;
+import jpokebattle.interfaces.StatsInterface;
+import jpokebattle.pokemon.PokemonInfo;
+import jpokebattle.utils.LevelUpGroup;
 import jpokebattle.utils.PokeElement;
 import jpokebattle.utils.PokeEnum;
 
-public class Pokemon {
+public class Pokemon implements PokemonInterface, StatsInterface {
     private PokeMove[] moves = new PokeMove[4];
     private int health = 0;
 
@@ -13,7 +17,7 @@ public class Pokemon {
     private PokeStats iv = new PokeStats(15);
     private PokeStats effects = new PokeStats(6);
 
-    private int psPA = 0;
+    private int psEV = 0;
     private int attackEV = 0;
     private int defenseEV = 0;
     private int specialEV = 0;
@@ -23,24 +27,26 @@ public class Pokemon {
     private int exp = 0;
 
     // dati base del pokemon
-    private PokeData data;
+    private PokemonInfo info;
+
+    public Pokemon(PokemonInfo info) {
+        this.info = info;
+        setLevel(1);
+    }
 
     public int getExp() {
         return exp;
     }
 
-    public PokeData getData() {
-        return data;
+    public PokemonInfo getInfo() {
+        return info;
     }
     public PokeEnum getId() {
-        return data.getId();
-    }
-    public void setData(PokeData data) {
-        this.data = data;
+        return info.getId();
     }
 
     public String getName() {
-        return data.getName();
+        return info.getName();
     }
 
     public int getHealth() {
@@ -69,54 +75,92 @@ public class Pokemon {
         return (((base + iv) * 2 + pa/4) * level) / 100 + 5;
     }
 
-    public int getPS() {
-        return iv.getPs();
-    }
     public int getTotPS() {
-        return calculateStat(data.getPs(), iv.getPs(), psPA) + level + 5;
+        return calculateStat(info.getPS(), iv.getPS(), psEV) + level + 5;
     }
     public void setPS(int ps) {
         iv.setPS(ps);
     }
 
-    public int getAttack() {
-        return iv.getAttack();
-    }
     public int getTotAttack() {
-        return calculateStat(data.getAttack(), iv.getAttack(), attackEV);
+        return calculateStat(info.getAttack(), iv.getAttack(), attackEV);
     }
     public void setAttack(int attack) {
         iv.setAttack(attack);
     }
 
-    public int getDefense() {
-        return iv.getDefense();
-    }
     public int getTotDefense() {
-        return calculateStat(data.getDefense(), iv.getDefense(), defenseEV);
+        return calculateStat(info.getDefense(), iv.getDefense(), defenseEV);
     }
     public void setDefense(int defense) {
         iv.setDefense(defense);
     }
 
-    public int getSpecial() {
-        return iv.getSpecial();
-    }
     public int getTotSpecial() {
-        return calculateStat(data.getSpecial(), iv.getSpecial(), specialEV);
+        return calculateStat(info.getSpecial(), iv.getSpecial(), specialEV);
     }
     public void setSpecial(int special) {
         iv.setSpecial(special);
     }
 
-    public int getSpeed() {
-        return iv.getSpeed();
-    }
     public int getTotSpeed() {
-        return calculateStat(data.getSpeed(), iv.getSpeed(), speedEV);
+        return calculateStat(info.getSpeed(), iv.getSpeed(), speedEV);
     }
     public void setSpeed(int speed) {
         iv.setSpeed(speed);
+    }
+
+    // StatsInterface with iv
+    @Override
+    public int getPS() {
+        return iv.getPS();
+    }
+    @Override
+    public int getAttack() {
+        return iv.getAttack();
+    }
+    @Override
+    public int getDefense() {
+        return iv.getDefense();
+    }
+    @Override
+    public int getSpecial() {
+        return iv.getSpecial();
+    }
+    @Override
+    public int getSpeed() {
+        return iv.getSpeed();
+    }
+
+    // PokemonInterface
+    @Override
+    public PokeElement getElement() {
+        return info.getElement();
+    }
+    
+    @Override
+    public boolean canEvolve() {
+        return info.getCurrentEvolution() < info.getMaxEvolution();
+    }
+
+    @Override
+    public LevelUpGroup getLevelType() {
+        return info.getLevelType();
+    }
+
+    @Override
+    public int getCurrentEvolution() {
+        return info.getCurrentEvolution();
+    }
+
+    @Override
+    public int getMaxEvolution() {
+        return info.getMaxEvolution();
+    }
+
+    @Override
+    public int getDropExp() {
+        return info.getDropExp();
     }
 
     public PokeStats getEffects() {
@@ -128,7 +172,7 @@ public class Pokemon {
     }
     public void setLevel(int level) {
         this.level = level;
-        this.exp = data.getLeveRequiredExp(level); // imposta l'exp necessaria per il livello attuale
+        this.exp = info.getLeveRequiredExp(level); // imposta l'exp necessaria per il livello attuale
     }
 
     public void setExp(int exp) {
@@ -136,15 +180,15 @@ public class Pokemon {
     }
 
     public int getExpToNextLevel() {
-        return data.getLeveRequiredExp(level + 1) - exp;
+        return info.getLeveRequiredExp(level + 1) - exp;
     }
     public boolean canLevelUp() {
-        return exp >= data.getLeveRequiredExp(level + 1);
+        return exp >= info.getLeveRequiredExp(level + 1);
     }
 
     // s = numero di pokemon che hanno partecipato alla battaglia
     public void gainExp(Pokemon enemy, int s) {
-        int b = enemy.getData().getBaseExp();
+        int b = enemy.getDropExp();
         int L = enemy.getLevel();
         double a = 1.5;
         Double res = (b*L)/7 * 1/s * a;
@@ -181,15 +225,6 @@ public class Pokemon {
                 count++;
         }
         return count;
-    }
-
-
-    public PokeElement getElement() {
-        return data.getElement();
-    }
-
-    public boolean hasEvolution() {
-        return data.getCurrentEvolution() < data.getMaxEvolution();
     }
 
     public void restore() {

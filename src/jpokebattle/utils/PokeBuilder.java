@@ -3,10 +3,10 @@ package jpokebattle.utils;
 import java.util.ArrayList;
 import java.util.Random;
 
-import jpokebattle.model.PokeData;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.move.BaseMove;
+import jpokebattle.pokemon.PokemonInfo;
 import jpokebattle.service.MoveService;
 import jpokebattle.service.PokeService;
 
@@ -43,12 +43,11 @@ public class PokeBuilder {
 
     public Pokemon generate()
     {
-        PokeData data = PokeService.getDataStatic(id);
-        if (data == null)
+        PokemonInfo info = PokeService.getDataStatic(id);
+        if (info == null)
             throw new RuntimeException("Pokemon not found: " + id);
         
-        Pokemon pokemon = new Pokemon();
-        pokemon.setData(data);
+        Pokemon pokemon = new Pokemon(info);
 
         pokemon.setPS(random.nextInt(maxPS));
         pokemon.setAttack(random.nextInt(maxAttack));

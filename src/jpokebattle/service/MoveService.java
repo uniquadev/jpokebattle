@@ -45,7 +45,7 @@ public class MoveService {
     }
 
     public ArrayList<BaseMove> getSupportedMoves(Pokemon pokemon) {
-        ArrayList<BaseMove> moves = getMoves(pokemon.getData().getId());
+        ArrayList<BaseMove> moves = getMoves(pokemon.getId());
         ArrayList<BaseMove> result = new ArrayList<>();
 
         for (BaseMove move : moves) {

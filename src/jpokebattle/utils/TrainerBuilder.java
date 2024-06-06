@@ -3,8 +3,8 @@ package jpokebattle.utils;
 import java.util.ArrayList;
 import java.util.Random;
 
-import jpokebattle.model.PokeData;
 import jpokebattle.model.Trainer;
+import jpokebattle.pokemon.PokemonInfo;
 
 public class TrainerBuilder {
     private PokeBuilder pokeBuilder = new PokeBuilder();
@@ -47,16 +47,16 @@ public class TrainerBuilder {
     }
 
     private void generateTeam(TrainerAI trainer) {
-        ArrayList<PokeData> datas;
+        ArrayList<PokemonInfo> infos;
         if (useStarters) {
-            datas = randomizer.getRandomStarters(teamSize);
+            infos = randomizer.getRandomStarters(teamSize);
         } else {
-            datas = randomizer.getRandomUniqueData(teamSize);
+            infos = randomizer.getRandomUniqueData(teamSize);
         }
         
-        for (int i = 0; i < Math.min(datas.size(), teamSize); i++) {
-            PokeData data = datas.get(i);
-            pokeBuilder.setId(data.getId());
+        for (int i = 0; i < Math.min(infos.size(), teamSize); i++) {
+            PokemonInfo info = infos.get(i);
+            pokeBuilder.setId(info.getId());
             trainer.setPokemon(i, pokeBuilder.generate());
         }
         if (teamSize > 0) {

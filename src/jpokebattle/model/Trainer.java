@@ -90,7 +90,7 @@ public class Trainer {
         for (int i = 0; i < 6; i++) {
             if (pokemons[i] == null)
                 continue;
-            max = Math.max(max, pokemons[i].getData().getCurrentEvolution());
+            max = Math.max(max, pokemons[i].getInfo().getCurrentEvolution());
         }
         return max;
     }
