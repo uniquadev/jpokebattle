@@ -1,5 +1,8 @@
 package jpokebattle.utils;
 
+/**
+ * The SplashText class provides a collection of splash texts that can be randomly retrieved.
+ */
 public class SplashText {
     private static final String[] texts = {
         "90% bug free!",
@@ -16,6 +19,11 @@ public class SplashText {
         "NAH, I'D WIN."
     };
 
+    /**
+     * Returns a random splash text from the collection.
+     *
+     * @return a random splash text
+     */
     public static String getText() {
         return texts[(int) (Math.random() * (texts.length - 1))];
     }

@@ -5,9 +5,18 @@ import java.util.ArrayList;
 import javafx.scene.media.AudioClip;
 import jpokebattle.JPokeBattle;
 
+/**
+ * The SoundService class is responsible for managing and playing audio clips in the game.
+ */
 public class SoundService {
 
     static private SoundService singleton;
+
+    /**
+     * Returns the singleton instance of the SoundService class.
+     *
+     * @return The singleton instance of the SoundService class.
+     */
     static public SoundService getSingleton() {
         synchronized (SoundService.class) {
             if (singleton == null) {
@@ -17,6 +26,9 @@ public class SoundService {
         return singleton;
     }
 
+    /**
+     * Represents the type of sound.
+     */
     public static enum SoundType {
         NONE,
         EFFECT,
@@ -32,7 +44,9 @@ public class SoundService {
     private AudioClip purchaseSound;
     private AudioClip pressSound;
 
-    // Costruttore carica i suoni
+    /**
+     * Constructs a SoundService object and loads the audio clips.
+     */
     private SoundService() {
         // musics
         battleMusic = loadAudio("trainer-battle-music.wav", SoundType.MUSIC);
@@ -45,8 +59,15 @@ public class SoundService {
         pressSound = loadAudio("SFX_PRESS_AB.wav", SoundType.EFFECT);
     }
 
-    private AudioClip loadAudio(String name, SoundType type) throws NullPointerException
-    {
+    /**
+     * Loads an audio clip and adds it to the appropriate list based on the sound type.
+     *
+     * @param name The name of the audio file.
+     * @param type The type of sound.
+     * @return The loaded AudioClip object.
+     * @throws NullPointerException If the audio file is not found.
+     */
+    private AudioClip loadAudio(String name, SoundType type) throws NullPointerException {
         AudioClip audioClip = new AudioClip(JPokeBattle.class.getResource("resources/sounds/" + name).toExternalForm());
         audioClip.setVolume(0.06);
         switch (type) {
@@ -62,19 +83,43 @@ public class SoundService {
         return audioClip;
     }
 
-    // Metodi per riprodurre i suoni
+    /**
+     * Plays the purchase sound.
+     */
     public void playPurchase() {
         purchaseSound.play();
     }
+
+    /**
+     * Plays the press sound.
+     */
     public void playPress() {
         pressSound.play();
     }
+
+    /**
+     * Returns the title music audio clip.
+     *
+     * @return The title music audio clip.
+     */
     public AudioClip getTitleMusic() {
         return titleMusic;
     }
+
+    /**
+     * Returns the battle music audio clip.
+     *
+     * @return The battle music audio clip.
+     */
     public AudioClip getBattleMusic() {
         return battleMusic;
     }
+
+    /**
+     * Returns the victory music audio clip.
+     *
+     * @return The victory music audio clip.
+     */
     public AudioClip getVictoryMusic() {
         return victoryMusic;
     }

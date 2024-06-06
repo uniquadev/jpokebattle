@@ -45,5 +45,6 @@ public class FinishController {
             victoryMusic.stop();
             JPokeBattle.getInstance().setView("menu");
         });
+        leaderboard.save();
     }
 }

@@ -10,21 +10,43 @@ import jpokebattle.model.AttackData;
 import jpokebattle.model.PokeStats;
 import jpokebattle.model.Pokemon;
 
+/**
+ * The BaseMove class is an abstract class that represents a basic move in a Pokemon battle.
+ * It implements the MoveInterface interface and provides common functionality for all moves.
+ */
 public abstract class BaseMove implements MoveInterface {
     private int requiredLevel = 1;
 
+    /**
+     * Constructs a BaseMove object with the specified required level.
+     * @param requiredLevel the level required to use this move
+     */
     public BaseMove(int requiredLevel) {
         this.requiredLevel = requiredLevel;
     }
 
+    /**
+     * Gets the required level to use this move.
+     * @return the required level
+     */
     public int getRequiredLevel() {
         return requiredLevel;
     }
 
+    /**
+     * Gets the effects of this move.
+     * @return the effects of this move as a PokeStats object
+     */
     public PokeStats getEffects() {
         return new PokeStats();
     }
 
+    /**
+     * Performs the move by calculating the damage or applying the status effects.
+     * @param attacker the attacking Pokemon
+     * @param defender the defending Pokemon
+     * @return an AttackData object representing the result of the move
+     */
     @Override
     public AttackData perform(Pokemon attacker, Pokemon defender) {
         if (getType() == MoveType.STATUS) {
@@ -34,6 +56,12 @@ public abstract class BaseMove implements MoveInterface {
         return calculateDamage(attacker, defender);
     }
 
+    /**
+     * Calculates the damage of the move based on the attacker's and defender's stats.
+     * @param attacker the attacking Pokemon
+     * @param defender the defending Pokemon
+     * @return an AttackData object representing the damage and other information of the move
+     */
     public AttackData calculateDamage(Pokemon attacker, Pokemon defender) {
         Random randomGen = new Random();
         int critical = randomGen.nextInt(1, 3);
@@ -70,21 +98,39 @@ public abstract class BaseMove implements MoveInterface {
         );
     }
 
+    /**
+     * Gets the power of the move.
+     * @return the power of the move
+     */
     @Override
     public int getPower() {
         return 0;
     }
 
+    /**
+     * Gets the element type of the move.
+     * @return the element type of the move
+     */
     @Override
     public PokeElement getElement() {
         return PokeElement.NORMAL;
     }
 
+    /**
+     * Gets the maximum number of uses for the move.
+     * @return the maximum number of uses
+     */
     @Override
     public int getMaxUses() {
         return 10;
     }
 
+    /**
+     * Draws the move on the battle controller.
+     * @param bc the battle controller
+     * @param attacker the attacking Pokemon
+     * @param defender the defending Pokemon
+     */
     @Override
     public void draw(BattleController bc, Pokemon attacker, Pokemon defender) {}
 }

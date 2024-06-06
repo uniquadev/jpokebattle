@@ -10,6 +10,10 @@ import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
 
+/**
+ * The TurnManager class handles the turn-based logic of the game.
+ * It determines which trainer's turn it is and provides methods for handling the CPU's actions.
+ */
 public class TurnManager implements CPUInterface {
     private GameState state;
     private Trainer player;
@@ -17,25 +21,48 @@ public class TurnManager implements CPUInterface {
     private Trainer currentTrainerTurn;
     private CPUHandler cpuHandler;
 
+    /**
+     * Constructs a TurnManager object with the specified game state and player.
+     * @param state The game state.
+     * @param player The player trainer.
+     */
     public TurnManager(GameState state, Trainer player) {
         this.state = state;
         this.player = player;
         generateNewOpponent();
     }
 
+    /**
+     * Starts the battle between the player and the opponent.
+     * @param player The player trainer.
+     * @param opponent The opponent trainer.
+     */
     public void start(Trainer player, Trainer opponent) {
         this.player = player;
         this.opponent = opponent;
         currentTrainerTurn = player;
     }
 
+    /**
+     * Checks if it is currently the player's turn.
+     * @return true if it is the player's turn, false otherwise.
+     */
     public boolean isPlayerTurn() {
         return currentTrainerTurn == player;
     }
+
+    /**
+     * Checks if it is currently the AI's turn.
+     * @return true if it is the AI's turn, false otherwise.
+     */
     public boolean isAITurn() {
         return currentTrainerTurn != player;
     }
 
+    /**
+     * Gets the opponent trainer.
+     * @return The opponent trainer.
+     */
     public Trainer getOpponent() {
         return opponent;
     }
@@ -51,6 +78,9 @@ public class TurnManager implements CPUInterface {
         }
     }
 
+    /**
+     * Generates a new opponent trainer based on the current game state.
+     */
     public void generateNewOpponent() {
         GenerationSettings settings = new GenerationSettings(state.getCurrentDifficulty());
         TrainerBuilder builder = new TrainerBuilder()
@@ -75,6 +105,10 @@ public class TurnManager implements CPUInterface {
         return cpuHandler.handleTurn();
     }
 
+    /**
+     * Simulates the player catching the opponent Pokemon.
+     * @return The caught Pokemon, or null if the catch attempt fails.
+     */
     public Pokemon playerCatchPokemon() {
         Random random = new Random();
         int chance = random.nextInt(1, 3);

@@ -1,6 +1,6 @@
 package jpokebattle.model;
 
-public class PlayerScore {
+public class PlayerScore implements Comparable<PlayerScore> {
     private final String name;
     private final int score;
 
@@ -15,5 +15,10 @@ public class PlayerScore {
 
     public Integer getScore() {
         return score;
+    }
+
+    @Override
+    public int compareTo(PlayerScore o) {
+        return Integer.compare(o.score, score);
     }
 }

@@ -11,6 +11,9 @@ import jpokebattle.pokemon.PokemonInfo;
 import jpokebattle.service.MoveService;
 import jpokebattle.service.PokeService;
 
+/**
+ * The PokeBuilder class is responsible for generating Pokemon objects with customizable attributes.
+ */
 public class PokeBuilder {
     private Random random = new Random();
     private int minLevel = 1;
@@ -23,28 +26,52 @@ public class PokeBuilder {
     
     private PokeEnum id = PokeEnum.NONE;
 
+    /**
+     * Constructs a PokeBuilder object with the specified Pokemon ID.
+     * @param id The ID of the Pokemon to generate.
+     */
     public PokeBuilder(PokeEnum id) {
         this.id = id;
     }
 
-    public PokeBuilder()
-    {
+    /**
+     * Constructs a PokeBuilder object with the default Pokemon ID (Bulbasaur).
+     */
+    public PokeBuilder() {
         this(PokeEnum.BULBASAUR);
     }
 
+    /**
+     * Sets the ID of the Pokemon to generate.
+     * @param id The ID of the Pokemon.
+     */
     public void setId(PokeEnum id) {
         this.id = id;
     }
+
+    /**
+     * Sets the minimum level of the generated Pokemon.
+     * @param minLevel The minimum level.
+     */
     public void setMinLevel(int minLevel) {
         this.minLevel = minLevel;
     }
+
+    /**
+     * Sets the maximum level of the generated Pokemon.
+     * @param maxLevel The maximum level.
+     */
     public void setMaxLevel(int maxLevel) {
         this.maxLevel = maxLevel;
     }
 
-    public Pokemon generate()
-    {
-        PokemonInfo info = PokeService.getDataStatic(id);
+    /**
+     * Generates a Pokemon with the specified attributes.
+     * @return The generated Pokemon.
+     * @throws RuntimeException if the Pokemon with the specified ID is not found.
+     */
+    public Pokemon generate() {
+        PokemonInfo info = PokeService.getInfoStatic(id);
         if (info == null)
             throw new RuntimeException("Pokemon not found: " + id);
         
@@ -56,7 +83,7 @@ public class PokeBuilder {
         pokemon.setSpecial(random.nextInt(maxSpecial + 1));
         pokemon.setSpeed(random.nextInt(maxSpeed + 1));
 
-        pokemon.setLevel(Math.max(1, nextInt(minLevel, maxLevel)));
+        pokemon.setLevel(Math.max(1, random.nextInt(minLevel, maxLevel+1)));
         pokemon.restoreHealth();
 
         generateMoves(pokemon);
@@ -76,7 +103,6 @@ public class PokeBuilder {
             }
             return;
         }
-        // seleziona mosse casuali
         int counter = 0;
         while (counter < 4) {
             BaseMove move = moves.get(random.nextInt(moves.size()));
@@ -85,13 +111,5 @@ public class PokeBuilder {
             moves.remove(move);
         }
         return;
-    }
-    
-    
-    private int nextInt(int min, int max)
-    {
-        if (min >= max)
-            return min;
-        return random.nextInt(max - min + 1) + min;
     }
 }

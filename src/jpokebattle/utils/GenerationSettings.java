@@ -2,6 +2,10 @@ package jpokebattle.utils;
 
 import jpokebattle.enums.Difficulty;
 
+/**
+ * The GenerationSettings class represents the settings for cpu trainers generation.
+ * It defines the minimum and maximum evolution, level, and team size values based on the difficulty level.
+ */
 public class GenerationSettings {
     private int maxEvolution = 0;
     private int minEvolution = 0;
@@ -10,6 +14,11 @@ public class GenerationSettings {
     private int maxTeamSize = 1;
     private int minTeamSize = 1;
 
+    /**
+     * Constructs a new GenerationSettings object with the specified difficulty level.
+     *
+     * @param difficulty the difficulty level of the generation
+     */
     public GenerationSettings(Difficulty difficulty) {
         switch (difficulty) {
             case EASY:
@@ -51,21 +60,56 @@ public class GenerationSettings {
         }
     }
 
+    /**
+     * Returns the maximum evolution offset.
+     *
+     * @return the maximum evolution offset
+     */
     public int getMaxEvolutionOffset() {
         return maxEvolution;
     }
+
+    /**
+     * Returns the minimum evolution offset.
+     *
+     * @return the minimum evolution offset
+     */
     public int getMinEvolutionOffset() {
         return minEvolution;
     }
+
+    /**
+     * Returns the maximum level offset.
+     *
+     * @return the maximum level offset
+     */
     public int getMaxLevelOffset() {
         return maxLevel;
     }
+
+    /**
+     * Returns the minimum level offset.
+     *
+     * @return the minimum level offset
+     */
     public int getMinLevelOffset() {
         return minLevel;
     }
+
+    /**
+     * Returns the maximum team size.
+     *
+     * @return the maximum team size
+     */
     public int getMaxTeamSize() {
         return maxTeamSize;
     }
+
+    /**
+     * Returns the minimum team size.
+     *
+     * @return the minimum team size
+     */
     public int getMinTeamSize() {
         return minTeamSize;
     }
