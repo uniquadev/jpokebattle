@@ -29,6 +29,14 @@ public class Trainer {
         assert index >= 0 && index < 6;
         pokemons[index] = pokemon;
     }
+    public void addPokemon(Pokemon pokemon) {
+        for (int i = 0; i < 6; i++) {
+            if (pokemons[i] == null) {
+                pokemons[i] = pokemon;
+                return;
+            }
+        }
+    }
 
     public Pokemon getCurrentPokemon() {
         return pokemons[currentPokemon];
@@ -55,6 +63,15 @@ public class Trainer {
             available.add(pokemons[i]);
         }
         return available;
+    }
+    public ArrayList<Pokemon> getAllPokemons() {
+        ArrayList<Pokemon> all = new ArrayList<Pokemon>();
+        for (int i = 0; i < 6; i++) {
+            if (pokemons[i] == null)
+                continue;
+            all.add(pokemons[i]);
+        }
+        return all;
     }
 
     public Pokemon getFirstAvailablePokemon() {

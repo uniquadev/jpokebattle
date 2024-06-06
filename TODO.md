@@ -1,4 +1,5 @@
 # importanti
+* mettere un testo meme nel title screen stile minecraft
 * implementare la logica di combattimento
     - implementare il sistema EVs
 * implementare le mosse dell'ai

@@ -1,6 +1,6 @@
 package jpokebattle.enums;
 
-public enum AIActionType {
+public enum CPUActionType {
     ATTACK,
     ITEM,
     POKEMON

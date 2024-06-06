@@ -110,6 +110,16 @@ public class Pokemon implements PokemonInterface, StatsInterface {
         iv.setSpeed(speed);
     }
 
+    public PokeStats getTotStats() {
+        PokeStats res = new PokeStats();
+        res.setPS(getTotPS());
+        res.setAttack(getTotAttack());
+        res.setDefense(getTotDefense());
+        res.setSpecial(getTotSpecial());
+        res.setSpeed(getTotSpeed());
+        return res;
+    }
+
     // StatsInterface with iv
     @Override
     public int getPS() {

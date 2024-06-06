@@ -3,6 +3,7 @@ package jpokebattle.controller;
 import java.util.ArrayList;
 
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -17,6 +18,7 @@ import jpokebattle.enums.GameModeState;
 import jpokebattle.enums.MoveType;
 import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.GridMenu;
+import jpokebattle.gui.HPokeBalls;
 import jpokebattle.gui.PokeInfoCard;
 import jpokebattle.gui.PokeTeamList;
 import jpokebattle.gui.PokemonView;
@@ -34,6 +36,8 @@ public class BattleController {
     private GameState game;
     private TurnManager turnManager;
     
+    @FXML
+    Label scoreLabel;
     @FXML
     StackPane root;
     @FXML
@@ -79,6 +83,8 @@ public class BattleController {
     PokeInfoCard playerInfoCard;
     @FXML
     ImageView arrowToLeft;
+    @FXML
+    HPokeBalls botPokeballs;
 
     @FXML
     PokeInfoCard botInfoCard;
@@ -95,12 +101,7 @@ public class BattleController {
         playerPokemonView.setRenderBack(true);
         bottomStackPane.setPrefHeight(JPokeBattle.HEIGHT * 0.3);
         battleLabel.setPrefWidth(JPokeBattle.WIDTH * 0.4);
-        mainMenu.Initialize(new MenuOption[]{
-            new GridMenu.MenuOption("Azioni", true),
-            new GridMenu.MenuOption("Pokemon", true),
-            new GridMenu.MenuOption("Oggetti", true),
-            new GridMenu.MenuOption("Fuggi", false)
-        }, 2);
+        updateMainMenu();
         mainMenu.setClickCallback(this::onMainGridClick);
         mainMenu.setArrowSize(25, 25);
         actionMenu.setClickCallback(this::onActionGridClick);
@@ -142,6 +143,15 @@ public class BattleController {
         initializeBattle();
     }
 
+    private void updateMainMenu() {
+        mainMenu.Initialize(new MenuOption[]{
+            new GridMenu.MenuOption("Azioni", true),
+            new GridMenu.MenuOption("Pokemon", true),
+            new GridMenu.MenuOption("Oggetti", false),
+            new GridMenu.MenuOption("Fuggi", game.getScore() > 0)
+        }, 2);
+    }
+
     private void initializeBattle() {
         game.setState(GameModeState.BATTLE);
         turnManager = new TurnManager(game, game.getPlayer());
@@ -155,6 +165,7 @@ public class BattleController {
         botInfoCard.setVisible(flag);
         arrowToLeft.setVisible(flag);
         arrowToRight.setVisible(flag);
+        botPokeballs.setVisible(flag);
     }
 
     private void startIntroAnimation() {
@@ -174,22 +185,24 @@ public class BattleController {
     }
 
     private void updatePokemons() {
-        var player = game.getPlayer();
-        var ai = turnManager.getOpponent();
+        Trainer player = game.getPlayer();
+        Trainer opponent = turnManager.getOpponent();
         Pokemon playerPokemon = player.getCurrentPokemon();
-        Pokemon aiPokemon = ai.getCurrentPokemon();
+        Pokemon botPokemon = opponent.getCurrentPokemon();
+        botPokeballs.update(opponent);
         if (playerPokemon != null) {
             playerPokemonView.setId(playerPokemon.getId());
             playerInfoCard.update(playerPokemon);
         }
-        if (aiPokemon != null) {
-            botPokemonView.setId(aiPokemon.getId());
-            botInfoCard.update(aiPokemon);
+        if (botPokemon != null) {
+            botPokemonView.setId(botPokemon.getId());
+            botInfoCard.update(botPokemon);
         }
     }
 
     private void togglePokemonView(boolean flag) {
         battlePane.setVisible(!flag);
+        scoreLabel.setVisible(!flag);
         menuPane.setVisible(!flag);
         pokeTeamList.update(game.getPlayer());
         pokemonBox.setVisible(flag);
@@ -232,47 +245,66 @@ public class BattleController {
         if (!move.canUse())
             return;
         toggleActionView(false);
+        menuPane.setDisable(true);
+
         Trainer opponent = turnManager.getOpponent();
         Pokemon botPokemon = opponent.getCurrentPokemon();
         AttackData attack = move.perform(playerPokemon, botPokemon);
+        move.consumeUse();
         move.draw(this, playerPokemon, botPokemon);
 
         if (attack.getType() == MoveType.MISS) {
             // playDialogAndWait("Mossa fallita!");
         } else if (attack.getType() == MoveType.ATTACK) {
-            // apply damage
+            // applica danno
             System.out.println("Applying damage: " + attack.getDamage());
             botPokemon.damage(attack.getDamage());
             System.out.println("Bot health: " + botPokemon.getHealth());
-            botInfoCard.tweenHealth(null);
-            // check if bot has to change pokemon
-            if (botPokemon.isDead())
-            {
-                // TODO: play dead animation
-                ArrayList<Pokemon> playerPokemons = game.getPlayer().getAvailablePokemons();
-                for (Pokemon p : playerPokemons) {
-                    p.gainExp(botPokemon, playerPokemons.size());
-                    if (p.getExp() >= p.getExpToNextLevel()) {
-                        p.levelUp();
-                        updatePokemons();
-                    }
-                }
-                Pokemon newAIPokemon = turnManager.handlePokemonChange();
-                if (newAIPokemon != null) {
-                    botPokemonView.setId(newAIPokemon.getId());
-                    botInfoCard.update(newAIPokemon);
-                }
-                else {
-                    game.increaseScore();
-                    turnManager.generateNewOpponent();
-                    updatePokemons();
-                }
-            }
+            botInfoCard.tweenHealth(this::onBotHealthTweenFinished);
                 
         } else if (attack.getType() == MoveType.STATUS) {
             botPokemon.getEffects().sum(attack.getEffects());
+            menuPane.setDisable(false);
         }
         // playDialogAndWait("Il tuo " + playerPokemon.getName() + " usa " + move.getName());
+    }
+
+    private void onBotHealthTweenFinished(ActionEvent e) {
+        menuPane.setDisable(false);
+        Pokemon botPokemon = turnManager.getOpponent().getCurrentPokemon();
+        // controlla se il pokemon e' morto
+        if (botPokemon.isDead())
+        {
+            // TODO: play dead animation
+            // distribuisci exp
+            ArrayList<Pokemon> playerPokemons = game.getPlayer().getAvailablePokemons();
+            for (Pokemon p : playerPokemons) {
+                p.gainExp(botPokemon, playerPokemons.size());
+                if (p.getExp() >= p.getExpToNextLevel()) {
+                    p.levelUp();
+                }
+            }
+            updatePokemons();
+            Pokemon newBotPokemon = turnManager.handlePokemonChange();
+            if (newBotPokemon != null) {
+                botPokemonView.setId(newBotPokemon.getId());
+                botInfoCard.update(newBotPokemon);
+            }
+            else {
+                // il bot non ha piu' pokemon o si arrende
+                game.increaseScore();
+                scoreLabel.setText("punteggio: " + game.getScore());
+                Pokemon captured = turnManager.playerCatchPokemon();
+                if (captured != null) {
+                    if (game.getPlayer().getTeamSize() < 6) {
+                        game.getPlayer().addPokemon(captured);
+                        togglePokemonView(true);
+                    }
+                }
+                turnManager.generateNewOpponent();
+                updatePokemons();
+            }
+        }
     }
 
     private void onMainGridClick(MenuOption option) {

@@ -53,6 +53,8 @@ public abstract class BaseMove implements MoveInterface {
         }
 
         Double damage = ((((2*level*critical)/5 + 2) * power * (attack/defense)) / 50 + 2) * stab * elemResult.getEffectiveness() * moveResult.getEffectiveness();
+        damage = Math.ceil(damage);
+        
         double random = randomGen.nextDouble(217, 255) / 255;
         if (damage.intValue() == 1)
             random = 1;

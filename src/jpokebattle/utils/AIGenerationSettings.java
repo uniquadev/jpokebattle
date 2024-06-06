@@ -13,7 +13,7 @@ public class AIGenerationSettings {
             case EASY:
                 evolutionDelta = 0;
                 levelMinDelta = -3;
-                levelMaxDelta = -1;
+                levelMaxDelta = -2;
                 teamDelta = 0;
                 break;
             case MEDIUM:

@@ -18,10 +18,16 @@
 <?import jpokebattle.gui.PokeInfoCard?>
 <?import jpokebattle.gui.ArrowTextButton?>
 <?import jpokebattle.gui.PokeTeamList?>
+<?import jpokebattle.gui.HPokeBalls?>
 
 
 <StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jpokebattle.controller.BattleController">
    <children>
+      <Label fx:id="scoreLabel" styleClass="score-label" text="punteggio: 0" StackPane.alignment="TOP_LEFT">
+         <StackPane.margin>
+            <Insets left="5.0" top="5.0" />
+         </StackPane.margin>
+      </Label>
       <VBox fx:id="battleBox" prefHeight="400.0" prefWidth="600.0" >
          <children>
             <StackPane fx:id="battlePane" prefHeight="689.0" prefWidth="600.0">
@@ -73,6 +79,11 @@
                         <Insets left="65.0" top="53.0" />
                      </StackPane.margin>
                   </ImageView>
+                  <HPokeBalls visible="false" fx:id="botPokeballs" translateY="98.0" StackPane.alignment="TOP_RIGHT">
+                     <StackPane.margin>
+                        <Insets left="65.0" top="53.0" />
+                     </StackPane.margin>
+                  </HPokeBalls>
                   <PokemonView fx:id="botPokemonView" fitHeight="165.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
                      <StackPane.margin>
                         <Insets right="114.0" top="20.0" />

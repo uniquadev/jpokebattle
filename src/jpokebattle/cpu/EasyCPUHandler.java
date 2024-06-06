@@ -2,7 +2,7 @@ package jpokebattle.cpu;
 
 import java.util.ArrayList;
 
-import jpokebattle.model.AIAction;
+import jpokebattle.model.CPUAction;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 
@@ -32,7 +32,7 @@ public class EasyCPUHandler extends CPUHandler {
     }
     
     @Override
-    public AIAction handleTurn() {
+    public CPUAction handleTurn() {
         return null;
     }
     

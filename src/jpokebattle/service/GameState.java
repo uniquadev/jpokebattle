@@ -20,6 +20,12 @@ public class GameState {
     public void increaseScore() {
         score++;
     }
+    public int getScore() {
+        return score;
+    }
+    public void resetScore() {
+        score = 0;
+    }
 
     public GameModeState getState() {
         return state;

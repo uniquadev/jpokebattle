@@ -66,3 +66,9 @@
 .move-info-card .label {
     -fx-font-size: 23px;
 }
+
+
+.splash-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
