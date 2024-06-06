@@ -50,11 +50,11 @@ public class PokeBuilder {
         
         Pokemon pokemon = new Pokemon(info);
 
-        pokemon.setPS(random.nextInt(maxPS));
-        pokemon.setAttack(random.nextInt(maxAttack));
-        pokemon.setDefense(random.nextInt(maxDefense));
-        pokemon.setSpecial(random.nextInt(maxSpecial));
-        pokemon.setSpeed(random.nextInt(maxSpeed));
+        pokemon.setPS(random.nextInt(maxPS + 1));
+        pokemon.setAttack(random.nextInt(maxAttack + 1));
+        pokemon.setDefense(random.nextInt(maxDefense + 1));
+        pokemon.setSpecial(random.nextInt(maxSpecial + 1));
+        pokemon.setSpeed(random.nextInt(maxSpeed + 1));
 
         pokemon.setLevel(Math.max(1, nextInt(minLevel, maxLevel)));
         pokemon.restoreHealth();
