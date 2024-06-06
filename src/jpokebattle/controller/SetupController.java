@@ -88,6 +88,6 @@ public class SetupController {
 
         titleMusic.stop();
         battleMusic.play();
-        JPokeBattle.getInstance().setView("battle");
+        JPokeBattle.getInstance().setView("finish");
     }
 }

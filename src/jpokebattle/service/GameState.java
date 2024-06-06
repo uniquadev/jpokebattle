@@ -7,8 +7,10 @@ import jpokebattle.model.Trainer;
 public class GameState {
     private static GameState singleton;
     public static GameState getSingleton() {
-        if (singleton == null) {
-            singleton = new GameState();
+        synchronized (GameState.class) {
+            if (singleton == null) {
+                singleton = new GameState();
+            }
         }
         return singleton;
     }

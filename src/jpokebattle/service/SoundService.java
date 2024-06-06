@@ -7,6 +7,16 @@ import jpokebattle.JPokeBattle;
 
 public class SoundService {
 
+    static private SoundService singleton;
+    static public SoundService getSingleton() {
+        synchronized (SoundService.class) {
+            if (singleton == null) {
+                singleton = new SoundService();
+            }
+        }
+        return singleton;
+    }
+
     public static enum SoundType {
         NONE,
         EFFECT,
@@ -15,15 +25,6 @@ public class SoundService {
 
     ArrayList<AudioClip> effects = new ArrayList<>();
     ArrayList<AudioClip> musics = new ArrayList<>();
-
-    // Singleton pattern
-    static private SoundService singleton;
-    static public SoundService getSingleton() {
-        if (singleton == null) {
-            singleton = new SoundService();
-        }
-        return singleton;
-    }
 
     private AudioClip battleMusic;
     private AudioClip titleMusic;

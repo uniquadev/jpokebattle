@@ -303,6 +303,7 @@ public class BattleController {
                 }
                 turnManager.generateNewOpponent();
                 updatePokemons();
+                updateMainMenu();
             }
         }
     }

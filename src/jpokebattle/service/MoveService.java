@@ -10,8 +10,10 @@ import jpokebattle.move.*;
 public class MoveService {
     private static MoveService singleton = null;
     public static MoveService getSingleton() {
-        if (singleton == null) {
-            singleton = new MoveService();
+        synchronized (MoveService.class) {
+            if (singleton == null) {
+                singleton = new MoveService();
+            }
         }
         return singleton;
     }

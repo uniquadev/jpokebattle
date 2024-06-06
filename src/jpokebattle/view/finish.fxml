@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<?import jpokebattle.gui.ArrowTextButton?>
+<?import jpokebattle.gui.LeaderboardGUI?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jpokebattle.controller.FinishController">
+   <children>
+      <VBox spacing="60.0" alignment="TOP_CENTER" >
+         <children>
+            <ImageView fitHeight="150" fitWidth="400" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="jpokebattle/resources/logo-transparent.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="finishLabel" styleClass="finish-label" text="HAI_VINTO_UN_PANETTONE" StackPane.alignment="TOP_CENTER"/>
+            <LeaderboardGUI fx:id="leaderView" prefHeight="200.0" prefWidth="400.0" StackPane.alignment="TOP_CENTER"/>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+        <ArrowTextButton fx:id="backButton" StackPane.alignment="TOP_LEFT">
+            <padding>
+                <Insets left="5.0" />
+                <Insets top="5.0" />
+            </padding>
+        </ArrowTextButton>
+   </children>
+</StackPane>

@@ -9,8 +9,10 @@ import jpokebattle.pokemon.*;
 public class PokeService {
     static private PokeService singleton = null;
     public static PokeService getSingleton() {
-        if (singleton == null) {
-            singleton = new PokeService();
+        synchronized (PokeService.class) {
+            if (singleton == null) {
+                singleton = new PokeService();
+            }
         }
         return singleton;
     }
