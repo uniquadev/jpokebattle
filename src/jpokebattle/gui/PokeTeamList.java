@@ -52,4 +52,8 @@ public class PokeTeamList extends VBox {
         if (currentCard != null)
             currentCard.toggleArrow(visible);
     }
+
+    public void setCallback(ClickCallback callback) {
+        this.callback = callback;
+    }
 }

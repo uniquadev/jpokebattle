@@ -141,6 +141,8 @@ public class BattleController {
                 null
             ))
         );
+
+        pokeTeamList.setCallback(this::onSwitchPokemon);
         
         initializeBattle();
     }
@@ -335,13 +337,22 @@ public class BattleController {
         }
     }
 
-    private void useItem(BaseItem item)
-    {
-        // TODO:
+    private void handleCPUTurn() {
+        menuPane.setDisable(true);
+        menuPane.setDisable(false);
     }
 
-    private void switchPokemon(Pokemon pokemon)
-    {
-        
+    private void onSwitchPokemon(int slot, Pokemon pokemon) {
+        if (!turnManager.isPlayerTurn())
+            return;
+        Trainer player = game.getPlayer();
+        if (pokemon == player.getCurrentPokemon()) {
+            togglePokemonView(false);
+            return;
+        }
+        game.getPlayer().setCurrentPokemon(pokemon);
+        updatePokemons();
+        togglePokemonView(false);
+        handleCPUTurn();
     }
 }
