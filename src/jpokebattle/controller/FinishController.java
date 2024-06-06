@@ -26,18 +26,16 @@ public class FinishController {
     private Leaderboard leaderboard;
 
     public void initialize() {
-        SoundService sound = SoundService.getSingleton();
-        sound.getBattleMusic().stop();
-        victoryMusic = sound.getVictoryMusic();
+        victoryMusic = SoundService.getSingleton().getVictoryMusic();
         victoryMusic.play();
 
-        leaderboard = Leaderboard.getSingleton();
         state = GameState.getSingleton();
         player = state.getPlayer();
-
-        leaderView.update(leaderboard.getScores());
+        leaderboard = Leaderboard.getSingleton();
 
         leaderboard.addScore(player.getName(), state.getScore());
+        leaderView.update(leaderboard.getScores());
+
         backButton.setText("< Menu");
         backButton.removeArrow();
 

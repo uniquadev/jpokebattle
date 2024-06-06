@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
-import jpokebattle.enums.GameModeState;
 import jpokebattle.enums.MoveType;
 import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.GridMenu;
@@ -151,12 +150,11 @@ public class BattleController {
             new GridMenu.MenuOption("Azioni", true),
             new GridMenu.MenuOption("Pokemon", true),
             new GridMenu.MenuOption("Oggetti", false),
-            new GridMenu.MenuOption("Fuggi", game.getScore() > 0)
+            new GridMenu.MenuOption("Fuggi", true)
         }, 2);
     }
 
     private void initializeBattle() {
-        game.setState(GameModeState.BATTLE);
         turnManager = new TurnManager(game, game.getPlayer());
         updatePokemons();
         startIntroAnimation();
@@ -260,9 +258,8 @@ public class BattleController {
             // playDialogAndWait("Mossa fallita!");
         } else if (attack.getType() == MoveType.ATTACK) {
             // applica danno
-            System.out.println("Applying damage: " + attack.getDamage());
+            System.out.println("Applicando danno: " + attack.getDamage());
             botPokemon.damage(attack.getDamage());
-            System.out.println("Bot health: " + botPokemon.getHealth());
             botInfoCard.tweenHealth(this::onBotHealthTweenFinished);
                 
         } else if (attack.getType() == MoveType.STATUS) {
@@ -314,6 +311,7 @@ public class BattleController {
     private void onMainGridClick(MenuOption option) {
         switch (option.getText()) {
             case "Fuggi":
+                runAway();
                 break;
             case "Pokemon":
                 togglePokemonView(true);
@@ -328,6 +326,15 @@ public class BattleController {
         }
     }
 
+    public void runAway() {
+        SoundService.getSingleton().getBattleMusic().stop();
+        if (game.getScore() > 0) {
+            JPokeBattle.getInstance().setView("finish");
+        } else {
+            JPokeBattle.getInstance().setView("menu");
+        }
+    }
+
     private void useItem(BaseItem item)
     {
         // TODO:
@@ -336,9 +343,5 @@ public class BattleController {
     private void switchPokemon(Pokemon pokemon)
     {
         
-    }
-
-    private void runAway()
-    {
     }
 }

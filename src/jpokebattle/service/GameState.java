@@ -1,7 +1,6 @@
 package jpokebattle.service;
 
 import jpokebattle.enums.Difficulty;
-import jpokebattle.enums.GameModeState;
 import jpokebattle.model.Trainer;
 
 public class GameState {
@@ -15,7 +14,6 @@ public class GameState {
         return singleton;
     }
     
-    private GameModeState state = GameModeState.MENU;
     private Trainer player;
     private int score = 0;
 
@@ -27,13 +25,6 @@ public class GameState {
     }
     public void resetScore() {
         score = 0;
-    }
-
-    public GameModeState getState() {
-        return state;
-    }
-    public void setState(GameModeState state) {
-        this.state = state;
     }
     
     public void setPlayer(Trainer player) {

@@ -84,10 +84,11 @@ public class SetupController {
             .generate();
         player.setName(getSanitizedName());
         game.setPlayer(player);
+        game.resetScore();
         System.out.println("Giocatore generato!");
 
         titleMusic.stop();
         battleMusic.play();
-        JPokeBattle.getInstance().setView("finish");
+        JPokeBattle.getInstance().setView("battle");
     }
 }
