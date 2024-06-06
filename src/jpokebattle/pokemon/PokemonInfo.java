@@ -1,9 +1,9 @@
 package jpokebattle.pokemon;
 
+import jpokebattle.enums.LevelUpGroup;
 import jpokebattle.interfaces.PokemonInterface;
 import jpokebattle.interfaces.StatsInterface;
 import jpokebattle.model.PokeStats;
-import jpokebattle.utils.LevelUpGroup;
 
 public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
 

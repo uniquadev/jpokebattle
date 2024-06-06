@@ -1,6 +1,6 @@
 package jpokebattle.move;
 
-import jpokebattle.utils.MoveType;
+import jpokebattle.enums.MoveType;
 
 public class Scratch extends BaseMove {
 

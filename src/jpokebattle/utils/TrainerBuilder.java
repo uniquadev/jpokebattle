@@ -23,8 +23,8 @@ public class TrainerBuilder {
         "Sophocles", "Goh", "Sterbini" // OMG
     };
     
-    public TrainerAI generate() {
-        TrainerAI trainer = new TrainerAI();
+    public Trainer generate() {
+        Trainer trainer = new Trainer();
         if (generateName) {
             generateName(trainer);
         }
@@ -42,11 +42,11 @@ public class TrainerBuilder {
         return NAMES[random.nextInt(NAMES.length)];
     }
 
-    private void generateName(TrainerAI trainer) {
+    private void generateName(Trainer trainer) {
         trainer.setName(getRandomName());
     }
 
-    private void generateTeam(TrainerAI trainer) {
+    private void generateTeam(Trainer trainer) {
         ArrayList<PokemonInfo> infos;
         if (useStarters) {
             infos = randomizer.getRandomStarters(teamSize);

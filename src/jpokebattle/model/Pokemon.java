@@ -2,12 +2,12 @@ package jpokebattle.model;
 
 import java.util.ArrayList;
 
+import jpokebattle.enums.LevelUpGroup;
+import jpokebattle.enums.PokeElement;
+import jpokebattle.enums.PokeEnum;
 import jpokebattle.interfaces.PokemonInterface;
 import jpokebattle.interfaces.StatsInterface;
 import jpokebattle.pokemon.PokemonInfo;
-import jpokebattle.utils.LevelUpGroup;
-import jpokebattle.utils.PokeElement;
-import jpokebattle.utils.PokeEnum;
 
 public class Pokemon implements PokemonInterface, StatsInterface {
     private PokeMove[] moves = new PokeMove[4];
@@ -197,6 +197,8 @@ public class Pokemon implements PokemonInterface, StatsInterface {
 
     public void levelUp() {
         level++;
+        // siccome non ci si puo' curare durante la battaglia, il pokemon viene 
+        // curato automaticamente quando sale di livello
         restore();
     }
 

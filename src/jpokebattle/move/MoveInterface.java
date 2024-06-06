@@ -1,10 +1,10 @@
 package jpokebattle.move;
 
 import jpokebattle.controller.BattleController;
+import jpokebattle.enums.MoveType;
+import jpokebattle.enums.PokeElement;
 import jpokebattle.model.AttackData;
 import jpokebattle.model.Pokemon;
-import jpokebattle.utils.MoveType;
-import jpokebattle.utils.PokeElement;
 
 public interface MoveInterface {
     public String getName();

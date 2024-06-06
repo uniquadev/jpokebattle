@@ -3,6 +3,7 @@ package jpokebattle.utils;
 import java.util.ArrayList;
 import java.util.Random;
 
+import jpokebattle.enums.PokeEnum;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.move.BaseMove;

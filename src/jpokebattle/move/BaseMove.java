@@ -3,12 +3,12 @@ package jpokebattle.move;
 import java.util.Random;
 
 import jpokebattle.controller.BattleController;
+import jpokebattle.enums.AttackResult;
+import jpokebattle.enums.MoveType;
+import jpokebattle.enums.PokeElement;
 import jpokebattle.model.AttackData;
 import jpokebattle.model.PokeStats;
 import jpokebattle.model.Pokemon;
-import jpokebattle.utils.AttackResult;
-import jpokebattle.utils.MoveType;
-import jpokebattle.utils.PokeElement;
 
 public abstract class BaseMove implements MoveInterface {
     private int requiredLevel = 1;

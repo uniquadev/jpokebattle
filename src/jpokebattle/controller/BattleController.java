@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
+import jpokebattle.enums.GameModeState;
+import jpokebattle.enums.MoveType;
 import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.GridMenu;
 import jpokebattle.gui.PokeInfoCard;
@@ -23,13 +25,14 @@ import jpokebattle.model.AttackData;
 import jpokebattle.model.BaseItem;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
+import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
-import jpokebattle.utils.MoveType;
-import jpokebattle.utils.TrainerAI;
+import jpokebattle.utils.TurnManager;
 
 public class BattleController {
 
     private GameState game;
+    private TurnManager turnManager;
     
     @FXML
     StackPane root;
@@ -136,12 +139,12 @@ public class BattleController {
             ))
         );
         
-        startBattle();
+        initializeBattle();
     }
 
-    private void startBattle() {
-        game.setState(GameState.State.BATTLE);
-        game.generateAI();
+    private void initializeBattle() {
+        game.setState(GameModeState.BATTLE);
+        turnManager = new TurnManager(game, game.getPlayer());
         updatePokemons();
         startIntroAnimation();
     }
@@ -172,7 +175,7 @@ public class BattleController {
 
     private void updatePokemons() {
         var player = game.getPlayer();
-        var ai = game.getAI();
+        var ai = turnManager.getOpponent();
         Pokemon playerPokemon = player.getCurrentPokemon();
         Pokemon aiPokemon = ai.getCurrentPokemon();
         if (playerPokemon != null) {
@@ -213,7 +216,7 @@ public class BattleController {
     }
 
     private void onActionSelect(MenuOption option) {
-        if (!game.isPlayerTurn())
+        if (!turnManager.isPlayerTurn())
             return;
         Pokemon pokemon = game.getPlayer().getCurrentPokemon();
         PokeMove move = pokemon.getMove(option.getValue());
@@ -222,15 +225,15 @@ public class BattleController {
     }
 
     private void onActionGridClick(MenuOption option) {
-        if (!game.isPlayerTurn())
+        if (!turnManager.isPlayerTurn())
             return;
         Pokemon playerPokemon = game.getPlayer().getCurrentPokemon();
         PokeMove move = playerPokemon.getMove(option.getValue());
         if (!move.canUse())
             return;
         toggleActionView(false);
-        TrainerAI ai = game.getAI();
-        Pokemon botPokemon = game.getAI().getCurrentPokemon();
+        Trainer opponent = turnManager.getOpponent();
+        Pokemon botPokemon = opponent.getCurrentPokemon();
         AttackData attack = move.perform(playerPokemon, botPokemon);
         move.draw(this, playerPokemon, botPokemon);
 
@@ -254,14 +257,14 @@ public class BattleController {
                         updatePokemons();
                     }
                 }
-                Pokemon newAIPokemon = ai.handlePokemonChange();
+                Pokemon newAIPokemon = turnManager.handlePokemonChange();
                 if (newAIPokemon != null) {
                     botPokemonView.setId(newAIPokemon.getId());
                     botInfoCard.update(newAIPokemon);
                 }
                 else {
                     game.increaseScore();
-                    game.generateAI();
+                    turnManager.generateNewOpponent();
                     updatePokemons();
                 }
             }

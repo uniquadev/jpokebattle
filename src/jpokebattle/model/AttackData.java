@@ -1,7 +1,7 @@
 package jpokebattle.model;
 
-import jpokebattle.utils.AttackResult;
-import jpokebattle.utils.MoveType;
+import jpokebattle.enums.AttackResult;
+import jpokebattle.enums.MoveType;
 
 public class AttackData {
     private int damage;

@@ -1,4 +1,4 @@
-package jpokebattle.utils;
+package jpokebattle.enums;
 
 public enum PokeElement {
     NORMAL,

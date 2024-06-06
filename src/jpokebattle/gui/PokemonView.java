@@ -3,7 +3,7 @@ package jpokebattle.gui;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import jpokebattle.JPokeBattle;
-import jpokebattle.utils.PokeEnum;
+import jpokebattle.enums.PokeEnum;
 
 public class PokemonView extends ImageView {
     private PokeEnum id = PokeEnum.BULBASAUR;

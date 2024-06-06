@@ -1,7 +1,7 @@
 package jpokebattle.move;
 
+import jpokebattle.enums.MoveType;
 import jpokebattle.model.PokeStats;
-import jpokebattle.utils.MoveType;
 
 public class TailWhip extends BaseMove {
 

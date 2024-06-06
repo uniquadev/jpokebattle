@@ -1,8 +1,8 @@
 package jpokebattle.interfaces;
 
-import jpokebattle.utils.LevelUpGroup;
-import jpokebattle.utils.PokeElement;
-import jpokebattle.utils.PokeEnum;
+import jpokebattle.enums.LevelUpGroup;
+import jpokebattle.enums.PokeElement;
+import jpokebattle.enums.PokeEnum;
 
 public interface PokemonInterface {
     public String getName();

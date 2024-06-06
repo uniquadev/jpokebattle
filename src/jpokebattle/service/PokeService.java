@@ -3,7 +3,7 @@ package jpokebattle.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import jpokebattle.utils.PokeEnum;
+import jpokebattle.enums.PokeEnum;
 import jpokebattle.pokemon.*;
 
 public class PokeService {

@@ -1,7 +1,7 @@
 package jpokebattle.pokemon;
 
-import jpokebattle.utils.PokeElement;
-import jpokebattle.utils.PokeEnum;
+import jpokebattle.enums.PokeElement;
+import jpokebattle.enums.PokeEnum;
 
 public class Ivysaur extends PokemonInfo {
     

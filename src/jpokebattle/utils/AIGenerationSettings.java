@@ -1,6 +1,6 @@
 package jpokebattle.utils;
 
-import jpokebattle.service.GameState.Difficulty;
+import jpokebattle.enums.Difficulty;
 
 public class AIGenerationSettings {
     private int evolutionDelta = 0;
@@ -19,20 +19,26 @@ public class AIGenerationSettings {
             case MEDIUM:
                 evolutionDelta = 1;
                 levelMinDelta = -1;
-                levelMaxDelta = 4;
+                levelMaxDelta = 2;
                 teamDelta = 1;
                 break;
             case HARD:
                 evolutionDelta = 2;
                 levelMinDelta = 1;
-                levelMaxDelta = 9;
+                levelMaxDelta = 3;
                 teamDelta = 2;
                 break;
             case IMPOSSIBLE:
                 evolutionDelta = 3;
                 levelMinDelta = 3;
-                levelMaxDelta = 18;
-                teamDelta = 3;
+                levelMaxDelta = 9;
+                teamDelta = 4;
+                break;
+            case HAHAHAHAHA:
+                evolutionDelta = 3;
+                levelMinDelta = 5;
+                levelMaxDelta = 25;
+                teamDelta = 4;
                 break;
         }
     }

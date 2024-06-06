@@ -1,10 +1,10 @@
 package jpokebattle.model;
 
 import jpokebattle.controller.BattleController;
+import jpokebattle.enums.MoveType;
+import jpokebattle.enums.PokeElement;
 import jpokebattle.move.BaseMove;
 import jpokebattle.move.MoveInterface;
-import jpokebattle.utils.MoveType;
-import jpokebattle.utils.PokeElement;
 
 public class PokeMove implements MoveInterface {
     private BaseMove move;
