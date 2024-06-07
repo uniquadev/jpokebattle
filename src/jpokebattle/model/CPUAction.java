@@ -7,10 +7,14 @@ public class CPUAction {
     private Pokemon pokemon;
     private PokeMove move;
 
-    public CPUAction(CPUActionType type, Pokemon pokemon, PokeMove move) {
-        this.type = type;
-        this.pokemon = pokemon;
+    public CPUAction(PokeMove move) {
         this.move = move;
+        this.type = CPUActionType.ATTACK;
+    }
+
+    public CPUAction(Pokemon pokemon) {
+        this.pokemon = pokemon;
+        this.type = CPUActionType.POKEMON_SWITCH;
     }
 
     public CPUAction() {

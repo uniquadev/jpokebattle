@@ -301,13 +301,13 @@ public class Pokemon {
     }
 
     /**
-     * Gets the list of moves that the Pokemon knows.
+     * Gets the list of moves that the Pokemon knows and can use.
      * @return The list of moves.
      */
     public ArrayList<PokeMove> getMoves() {
         ArrayList<PokeMove> result = new ArrayList<>();
         for (PokeMove move : moves) {
-            if (move != null)
+            if (move != null && move.getUsesLeft() > 0)
                 result.add(move);
         }
         return result;
@@ -338,19 +338,6 @@ public class Pokemon {
     public void setMove(int index, PokeMove move) {
         this.moves[index] = move;
         move.setSlot(index);
-    }
-
-    /**
-     * Gets the number of available moves that the Pokemon knows.
-     * @return The number of available moves.
-     */
-    public int getAvailableMoves() {
-        int count = 0;
-        for (PokeMove move : moves) {
-            if (move != null)
-                count++;
-        }
-        return count;
     }
 
     /**

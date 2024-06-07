@@ -73,10 +73,10 @@ public class TurnManager implements CPUInterface {
     private void setupCPU() {
         switch (state.getCurrentDifficulty()) {
             case EASY:
-                cpuHandler = new EasyCPUHandler(opponent);
+                cpuHandler = new EasyCPUHandler(opponent, player);
                 break;
             default:
-                cpuHandler = new EasyCPUHandler(opponent);
+                cpuHandler = new EasyCPUHandler(opponent, player);
                 break;
         }
     }
@@ -142,8 +142,8 @@ public class TurnManager implements CPUInterface {
             action = new CPUAction();
         }
         else if (action.getType() == CPUActionType.ATTACK) {
-            Pokemon defender = action.getPokemon();
             Pokemon attacker = opponent.getActivePokemon();
+            Pokemon defender = player.getActivePokemon();
             PokeMove move = action.getMove();
             performAttack(attacker, defender, move);
         }

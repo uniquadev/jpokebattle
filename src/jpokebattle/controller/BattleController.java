@@ -361,6 +361,7 @@ public class BattleController {
             Pokemon defender = action.getPokemon();
             Pokemon attacker = turnManager.getOpponent().getActivePokemon();
             PokeMove move = action.getMove();
+            System.out.println("CPU move: " + move.getName());
             move.draw(this, attacker, defender);
             if (move.getType() == MoveType.PHYSICAL) 
                 playerInfoCard.tweenHealth(this::onPlayerHealthTweenFinished);
