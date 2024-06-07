@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
-import jpokebattle.enums.CPUActionType;
+import jpokebattle.enums.BattleActionType;
 import jpokebattle.enums.MoveType;
 import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.GridMenu;
@@ -30,12 +30,12 @@ import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
 import jpokebattle.service.SoundService;
-import jpokebattle.utils.TurnManager;
+import jpokebattle.utils.OldTurnManager;
 
 public class BattleController {
 
     private GameState game;
-    private TurnManager turnManager;
+    private OldTurnManager turnManager;
     private SoundService sound;
 
     private Trainer player;
@@ -167,7 +167,7 @@ public class BattleController {
     }
 
     private void initializeBattle() {
-        turnManager = new TurnManager(game, game.getPlayer());
+        turnManager = new OldTurnManager(game, game.getPlayer());
         updatePokemons();
         startIntroAnimation();
     }
@@ -359,7 +359,7 @@ public class BattleController {
     private void handleCPUTurn() {
         menuPane.setDisable(true);
         BattleAction action = turnManager.handleTurn();
-        if (action.getType() == CPUActionType.ATTACK) {
+        if (action.getType() == BattleActionType.ATTACK) {
             Pokemon defender = action.getPokemon();
             Pokemon attacker = turnManager.getOpponent().getActivePokemon();
             PokeMove move = action.getMove();
@@ -370,7 +370,7 @@ public class BattleController {
             else
                 menuPane.setDisable(false);
         } else {
-            if (action.getType() == CPUActionType.POKEMON_SWITCH)
+            if (action.getType() == BattleActionType.POKEMON_SWITCH)
                 updatePokemons();
             menuPane.setDisable(false);
         }

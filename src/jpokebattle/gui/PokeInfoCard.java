@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
-import jpokebattle.interfaces.AnimationFinishCallback;
+import jpokebattle.interfaces.PokeCallback;
 import jpokebattle.model.Pokemon;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -67,7 +67,7 @@ public class PokeInfoCard extends VBox  {
         hpLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());
     }
 
-    public void tweenHealth(AnimationFinishCallback onFinished) {
+    public void tweenHealth(PokeCallback onFinished) {
         healthBar.tweenHealth(pokemon, onFinished);
         updateHealthLabel();
     }

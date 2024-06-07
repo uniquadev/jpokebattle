@@ -1,6 +1,6 @@
 package jpokebattle.enums;
 
-public enum CPUActionType {
+public enum BattleActionType {
     SKIP,
     ATTACK,
     POKEMON_SWITCH,

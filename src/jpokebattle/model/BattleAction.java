@@ -1,33 +1,59 @@
 package jpokebattle.model;
 
-import jpokebattle.enums.CPUActionType;
+import jpokebattle.enums.BattleActionType;
 
-public class BattleAction {
-    private CPUActionType type;
+public class BattleAction implements Comparable<BattleAction> {
+    private BattleActionType type;
+    private Trainer trainer;
+    private Trainer opponent;
     private Pokemon pokemon;
     private PokeMove move;
 
-    public BattleAction(PokeMove move) {
-        this.move = move;
-        this.type = CPUActionType.ATTACK;
+    private BattleAction(Trainer trainer, Trainer opponent) {
+        this.trainer = trainer;
+        this.opponent = opponent;
     }
 
-    public BattleAction(Pokemon pokemon) {
+    public BattleAction(Trainer trainer, Trainer opponent, PokeMove move) {
+        this(trainer, opponent);
+        this.move = move;
+        this.type = BattleActionType.ATTACK;
+    }
+
+    public BattleAction(Trainer trainer, Trainer opponent,Pokemon pokemon) {
+        this(trainer, opponent);
         this.pokemon = pokemon;
-        this.type = CPUActionType.POKEMON_SWITCH;
+        this.type = BattleActionType.POKEMON_SWITCH;
     }
 
     public BattleAction() {
-        type = CPUActionType.SKIP;
+        type = BattleActionType.SKIP;
     }
 
-    public CPUActionType getType() {
+    public BattleActionType getType() {
         return type;
+    }
+    public Trainer getTrainer() {
+        return trainer;
+    }
+    public Trainer getOpponent() {
+        return opponent;
     }
     public Pokemon getPokemon() {
         return pokemon;
     }
     public PokeMove getMove() {
         return move;
+    }
+
+    @Override
+    public int compareTo(BattleAction o) {
+        if (type == BattleActionType.POKEMON_SWITCH) return Integer.MAX_VALUE;
+        if (type == BattleActionType.ATTACK) return trainer.getActivePokemon().getTotSpeed();
+        return 0;
+    }
+
+    public void perform() {
+
     }
 }

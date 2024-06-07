@@ -38,18 +38,18 @@ public class EasyCPUHandler extends CPUHandler {
             for (var move : moves) {
                 if (move.getType() == MoveType.STATUS)
                     continue;
-                return new BattleAction(move);
+                return makeAction(move);
             }
         }
         else {
             for (var move : moves) {
                 if (move.getType() == MoveType.PHYSICAL)
                     continue;
-                return new BattleAction(move);
+                return makeAction(move);
             }
         }
         // just use the first move if no move is found for the decision
-        return new BattleAction(moves.get(0));
+        return makeAction(moves.get(0));
     }
     
 }

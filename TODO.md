@@ -1,4 +1,5 @@
 # importanti
+* change arraylist to list on api returns where possible 
 * realizzare un nuovo BattleHandler che gestisca i turni e le mosse come su pokemon
     - realizzare l'interfaccia BattleInterface
     - realizzare la classe BattleHandler

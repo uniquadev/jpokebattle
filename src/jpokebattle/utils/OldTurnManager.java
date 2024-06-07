@@ -4,7 +4,7 @@ import java.util.Random;
 
 import jpokebattle.cpu.CPUHandler;
 import jpokebattle.cpu.EasyCPUHandler;
-import jpokebattle.enums.CPUActionType;
+import jpokebattle.enums.BattleActionType;
 import jpokebattle.interfaces.CPUInterface;
 import jpokebattle.model.AttackData;
 import jpokebattle.model.BattleAction;
@@ -17,7 +17,7 @@ import jpokebattle.service.GameState;
  * The TurnManager class handles the turn-based logic of the game.
  * It determines which trainer's turn it is and provides methods for handling the CPU's actions.
  */
-public class TurnManager implements CPUInterface {
+public class OldTurnManager implements CPUInterface {
     private GameState state;
     private Trainer player;
     private Trainer opponent;
@@ -29,7 +29,7 @@ public class TurnManager implements CPUInterface {
      * @param state The game state.
      * @param player The player trainer.
      */
-    public TurnManager(GameState state, Trainer player) {
+    public OldTurnManager(GameState state, Trainer player) {
         this.state = state;
         this.player = player;
         generateNewOpponent();
@@ -141,13 +141,13 @@ public class TurnManager implements CPUInterface {
         if (action == null) {
             action = new BattleAction();
         }
-        else if (action.getType() == CPUActionType.ATTACK) {
+        else if (action.getType() == BattleActionType.ATTACK) {
             Pokemon attacker = opponent.getActivePokemon();
             Pokemon defender = player.getActivePokemon();
             PokeMove move = action.getMove();
             performAttack(attacker, defender, move);
         }
-        else if (action.getType() == CPUActionType.POKEMON_SWITCH) {
+        else if (action.getType() == BattleActionType.POKEMON_SWITCH) {
             Pokemon pokemon = action.getPokemon();
             opponent.setActivePokemon(pokemon);
         }
