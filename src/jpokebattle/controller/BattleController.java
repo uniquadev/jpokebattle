@@ -256,20 +256,13 @@ public class BattleController {
         AttackData attack = move.perform(playerPokemon, botPokemon);
         move.consumeUse();
         move.draw(this, playerPokemon, botPokemon);
+        turnManager.applyAttack(botPokemon, attack);
 
-        if (attack.getType() == MoveType.MISS) {
-            // playDialogAndWait("Mossa fallita!");
-        } else if (attack.getType() == MoveType.PHYSICAL) {
-            // applica danno
-            System.out.println("Applicando danno: " + attack.getDamage());
-            botPokemon.damage(attack.getDamage());
+        if (attack.getType() == MoveType.PHYSICAL) {
             botInfoCard.tweenHealth(this::onBotHealthTweenFinished);
-                
-        } else if (attack.getType() == MoveType.STATUS) {
-            botPokemon.getEffects().sum(attack.getEffects());
-            menuPane.setDisable(false);
+        } else {
+            handleCPUTurn();
         }
-        // playDialogAndWait("Il tuo " + playerPokemon.getName() + " usa " + move.getName());
     }
 
     private void onBotHealthTweenFinished() {
@@ -318,6 +311,7 @@ public class BattleController {
                 updateMainMenu();
             }
         }
+        handleCPUTurn();
     }
 
     private void onMainGridClick(MenuOption option) {

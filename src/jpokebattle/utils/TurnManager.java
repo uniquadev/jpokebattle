@@ -5,6 +5,7 @@ import java.util.Random;
 import jpokebattle.cpu.CPUHandler;
 import jpokebattle.cpu.EasyCPUHandler;
 import jpokebattle.interfaces.CPUInterface;
+import jpokebattle.model.AttackData;
 import jpokebattle.model.CPUAction;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
@@ -74,6 +75,19 @@ public class TurnManager implements CPUInterface {
                 break;
             default:
                 cpuHandler = new EasyCPUHandler(opponent);
+                break;
+        }
+    }
+
+    public void applyAttack(Pokemon defender, AttackData attack) {
+        switch (attack.getType()) {
+            case PHYSICAL:
+            case SPECIAL:
+                defender.damage(attack.getDamage());
+                break;
+            case STATUS:
+                defender.getEffects().sum(attack.getEffects());
+            default:
                 break;
         }
     }
