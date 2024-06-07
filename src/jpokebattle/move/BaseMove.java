@@ -72,6 +72,10 @@ public abstract class BaseMove implements MoveInterface {
         float stab = attacker.getElement() == defender.getElement() ? 1.5f : 1.0f;
         int level = attacker.getLevel();
         int attack, defense;
+        double hitChance = getAccuracy() * 2;
+
+        if (randomGen.nextInt(256) > hitChance)
+            return new AttackData();
 
         if (getType() == MoveType.PHYSICAL) {
             attack = attacker.getTotAttack();

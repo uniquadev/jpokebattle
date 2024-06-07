@@ -2,22 +2,22 @@ package jpokebattle.model;
 
 import jpokebattle.enums.CPUActionType;
 
-public class CPUAction {
+public class BattleAction {
     private CPUActionType type;
     private Pokemon pokemon;
     private PokeMove move;
 
-    public CPUAction(PokeMove move) {
+    public BattleAction(PokeMove move) {
         this.move = move;
         this.type = CPUActionType.ATTACK;
     }
 
-    public CPUAction(Pokemon pokemon) {
+    public BattleAction(Pokemon pokemon) {
         this.pokemon = pokemon;
         this.type = CPUActionType.POKEMON_SWITCH;
     }
 
-    public CPUAction() {
+    public BattleAction() {
         type = CPUActionType.SKIP;
     }
 

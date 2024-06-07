@@ -3,7 +3,7 @@ package jpokebattle.cpu;
 import java.util.ArrayList;
 
 import jpokebattle.enums.MoveType;
-import jpokebattle.model.CPUAction;
+import jpokebattle.model.BattleAction;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 
@@ -28,7 +28,7 @@ public class EasyCPUHandler extends CPUHandler {
     }
     
     @Override
-    public CPUAction handleTurn() {
+    public BattleAction handleTurn() {
         int attDecision = random.nextInt(3); // 66 chance of using status move
         var moves = trainer.getActivePokemon().getMoves();
         if (moves.size() == 0) {
@@ -38,18 +38,18 @@ public class EasyCPUHandler extends CPUHandler {
             for (var move : moves) {
                 if (move.getType() == MoveType.PHYSICAL)
                     continue;
-                return new CPUAction(move);
+                return new BattleAction(move);
             }
         }
         else {
             for (var move : moves) {
                 if (move.getType() == MoveType.STATUS)
                     continue;
-                return new CPUAction(move);
+                return new BattleAction(move);
             }
         }
         // just use the first move if no move is found for the decision
-        return new CPUAction(moves.get(0));
+        return new BattleAction(moves.get(0));
     }
     
 }

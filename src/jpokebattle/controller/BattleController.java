@@ -24,7 +24,7 @@ import jpokebattle.gui.PokeTeamList;
 import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.model.AttackData;
-import jpokebattle.model.CPUAction;
+import jpokebattle.model.BattleAction;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
@@ -38,6 +38,7 @@ public class BattleController {
     private TurnManager turnManager;
     private SoundService sound;
 
+    private Trainer player;
     private Pokemon catchingPokemon;
     private PokeMove learningMove;
     private boolean justWin = false;
@@ -104,6 +105,7 @@ public class BattleController {
     public BattleController() {
         game = GameState.getSingleton();
         sound = SoundService.getSingleton();
+        player = game.getPlayer();
     }
 
     public void initialize() {
@@ -356,7 +358,7 @@ public class BattleController {
 
     private void handleCPUTurn() {
         menuPane.setDisable(true);
-        CPUAction action = turnManager.handleTurn();
+        BattleAction action = turnManager.handleTurn();
         if (action.getType() == CPUActionType.ATTACK) {
             Pokemon defender = action.getPokemon();
             Pokemon attacker = turnManager.getOpponent().getActivePokemon();
@@ -376,6 +378,13 @@ public class BattleController {
 
     private void onPlayerHealthTweenFinished() {
         menuPane.setDisable(false);
+        
+        if (player.getActivePokemon().isDead()) {
+            if (player.getAvailablePokemons().size() == 0)
+                runAway();
+            else
+                togglePokemonView(true);
+        }
     }
 
     private void onSwitchPokemon(int slot, Pokemon pokemon) {

@@ -1,9 +1,9 @@
 package jpokebattle.interfaces;
 
-import jpokebattle.model.CPUAction;
+import jpokebattle.model.BattleAction;
 import jpokebattle.model.Pokemon;
 
 public interface CPUInterface {
     public Pokemon handlePokemonChange();
-    public CPUAction handleTurn();
+    public BattleAction handleTurn();
 }

@@ -7,7 +7,7 @@ import jpokebattle.cpu.EasyCPUHandler;
 import jpokebattle.enums.CPUActionType;
 import jpokebattle.interfaces.CPUInterface;
 import jpokebattle.model.AttackData;
-import jpokebattle.model.CPUAction;
+import jpokebattle.model.BattleAction;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
@@ -135,11 +135,11 @@ public class TurnManager implements CPUInterface {
      * @return The CPU action performed during the turn.
      */
     @Override
-    public CPUAction handleTurn() {
+    public BattleAction handleTurn() {
         currentTrainerTurn = opponent;
-        CPUAction action = cpuHandler.handleTurn();
+        BattleAction action = cpuHandler.handleTurn();
         if (action == null) {
-            action = new CPUAction();
+            action = new BattleAction();
         }
         else if (action.getType() == CPUActionType.ATTACK) {
             Pokemon attacker = opponent.getActivePokemon();
