@@ -29,21 +29,21 @@ public class EasyCPUHandler extends CPUHandler {
     
     @Override
     public BattleAction handleTurn() {
-        int attDecision = random.nextInt(3); // 66 chance of using status move
+        int attDecision = random.nextInt(5); // chance of using status move
         var moves = trainer.getActivePokemon().getMoves();
         if (moves.size() == 0) {
             return null;
         }
-        if (attDecision < 1) {
+        if (attDecision == 0) {
             for (var move : moves) {
-                if (move.getType() == MoveType.PHYSICAL)
+                if (move.getType() == MoveType.STATUS)
                     continue;
                 return new BattleAction(move);
             }
         }
         else {
             for (var move : moves) {
-                if (move.getType() == MoveType.STATUS)
+                if (move.getType() == MoveType.PHYSICAL)
                     continue;
                 return new BattleAction(move);
             }
