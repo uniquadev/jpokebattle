@@ -30,16 +30,16 @@ public class GenerationSettings {
                 maxLevel = 2;
                 minEvolution = -1;
                 maxEvolution = 0;
-                minTeamSize = 2;
-                maxTeamSize = 3;
+                minTeamSize = 1;
+                maxTeamSize = 2;
                 break;
             case HARD:
                 minLevel = 0;
                 maxLevel = 5;
                 minEvolution = 0;
                 maxEvolution = 1;
-                minTeamSize = 3;
-                maxTeamSize = 4;
+                minTeamSize = 2;
+                maxTeamSize = 3;
                 break;
             case IMPOSSIBLE:
                 minLevel = 4;

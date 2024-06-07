@@ -3,6 +3,7 @@ package jpokebattle.model;
 import java.util.ArrayList;
 
 import jpokebattle.enums.PokeElement;
+import jpokebattle.enums.PokeEnum;
 import jpokebattle.move.BaseMove;
 import jpokebattle.pokemon.PokemonInfo;
 import jpokebattle.service.MoveService;
@@ -47,6 +48,22 @@ public class Pokemon {
      */
     public PokemonInfo getInfo() {
         return info;
+    }
+
+    /**
+     * Gets the ID of the Pokemon.
+     * @return The ID.
+     */
+    public PokeEnum getId() {
+        return info.getId();
+    }
+
+    /**
+     * Gets the name of the Pokemon.
+     * @return The name.
+     */
+    public String getName() {
+        return info.getName();
     }
 
     /**
@@ -342,7 +359,7 @@ public class Pokemon {
      * @return A PokeMove object representing the move that the Pokemon can learn, or null if it cannot learn any move.
      */
     public PokeMove canLearnMove() {
-        BaseMove move = MoveService.getSingleton().getMoveAtLevel(getInfo().getId(), getLevel());
+        BaseMove move = MoveService.getSingleton().getMoveAtLevel(getId(), getLevel());
         if (move == null)
             return null;
         return new PokeMove(move);

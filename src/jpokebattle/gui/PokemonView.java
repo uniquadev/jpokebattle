@@ -31,7 +31,7 @@ public class PokemonView extends ImageView {
     }
 
     public void setPokemon(Pokemon pokemon) {
-        this.id = pokemon.getInfo().getId();
+        this.id = pokemon.getId();
         updateImage();
     }
 

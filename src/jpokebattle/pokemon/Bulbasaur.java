@@ -42,4 +42,9 @@ public class Bulbasaur extends PokemonInfo {
     public int getDropExp() {
         return 64;
     }
+
+    @Override
+    public int evolveAtLevel() {
+        return 16;
+    }
 }

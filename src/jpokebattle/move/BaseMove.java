@@ -67,8 +67,8 @@ public abstract class BaseMove implements MoveInterface {
         Random randomGen = new Random();
         int critical = randomGen.nextInt(1, 3);
         int power = getPower();
-        AttackResult elemResult = attacker.getElement().getAttackResult(defender.getElement());
-        AttackResult moveResult = getElement().getAttackResult(defender.getElement());
+        AttackResult elemResult = attacker.getElement().getAttackResultTo(defender.getElement());
+        AttackResult moveResult = getElement().getAttackResultTo(defender.getElement());
         float stab = attacker.getElement() == defender.getElement() ? 1.5f : 1.0f;
         int level = attacker.getLevel();
         int attack, defense;

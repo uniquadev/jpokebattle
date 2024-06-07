@@ -104,7 +104,7 @@
                   </ImageView>
                   <StackPane fx:id="pokemonActionPane" visible="false" alignment="CENTER_LEFT">
                      <children>
-                        <Label styleClass="battle-label" prefHeight="149.0" text="Quale Pokemon vuoi usare?" StackPane.alignment="CENTER_LEFT">
+                        <Label fx:id="pokemonLabel" styleClass="battle-label" prefHeight="149.0" text="Quale Pokemon vuoi usare?" StackPane.alignment="CENTER_LEFT">
                            <StackPane.margin>
                               <Insets bottom="5.0" left="50.0" />
                            </StackPane.margin>

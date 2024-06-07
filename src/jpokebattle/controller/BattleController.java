@@ -37,7 +37,10 @@ public class BattleController {
     private GameState game;
     private TurnManager turnManager;
     private SoundService sound;
-    private Pokemon catchedPokemon;
+
+    private Pokemon catchingPokemon;
+    private PokeMove learningMove;
+    private boolean justWin = false;
     
     @FXML
     private Label scoreLabel;
@@ -67,6 +70,8 @@ public class BattleController {
     private GridMenu mainMenu;
     @FXML
     private ImageView pokeBox;
+    @FXML
+    private Label pokemonLabel;
 
     @FXML
     private StackPane moveInfoPane;
@@ -120,7 +125,7 @@ public class BattleController {
         pokemonBackButton.setText("< Indietro");
         pokemonBackButton.removeArrow();
         pokemonBackButton.getButton().setOnAction(e -> {
-            catchedPokemon = null;
+            catchingPokemon = null;
             togglePokemonView(false);
         });
 
@@ -213,6 +218,13 @@ public class BattleController {
         pokeTeamList.update(game.getPlayer());
         pokemonBox.setVisible(flag);
         pokemonActionPane.setVisible(flag);
+        if (flag) {
+            if (catchingPokemon != null) {
+                pokemonLabel.setText("Vuoi catturare " + catchingPokemon.getName() + " L" + catchingPokemon.getLevel() + " ?");
+            } else {
+                pokemonLabel.setText("Quale Pokemon vuoi mandare in campo?");
+            }
+        }
     }
 
     private void updateActionMenu(Pokemon pokemon) {
@@ -329,10 +341,11 @@ public class BattleController {
                         game.getPlayer().addPokemon(captured);
                     }
                     else {
-                        catchedPokemon = captured;
+                        catchingPokemon = captured;
                     }
                     togglePokemonView(true);
                 }
+                justWin = true;
                 turnManager.generateNewOpponent();
                 updatePokemons();
                 updateMainMenu();
@@ -367,6 +380,13 @@ public class BattleController {
     private void onSwitchPokemon(int slot, Pokemon pokemon) {
         if (!turnManager.isPlayerTurn())
             return;
+        if (catchingPokemon != null) {
+            game.getPlayer().setPokemon(slot, catchingPokemon);
+            catchingPokemon = null;
+            updatePokemons();
+            togglePokemonView(false);
+            return;
+        }
         Trainer player = game.getPlayer();
         if (pokemon == player.getActivePokemon()) {
             togglePokemonView(false);
@@ -375,6 +395,8 @@ public class BattleController {
         game.getPlayer().setActivePokemon(pokemon);
         updatePokemons();
         togglePokemonView(false);
-        handleCPUTurn();
+        if (!justWin)
+            handleCPUTurn();
+        justWin = false;
     }
 }

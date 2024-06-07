@@ -63,5 +63,13 @@ public interface PokemonInterface {
      *
      * @return true if the Pokemon can evolve, false otherwise
      */
-    public boolean canEvolve();
+    public boolean hasEvolution();
+
+    
+    /**
+     * Returns the level at which the Pokemon evolves.
+     *
+     * @return the level at which the Pokemon evolves
+     */
+    public int evolveAtLevel();
 }

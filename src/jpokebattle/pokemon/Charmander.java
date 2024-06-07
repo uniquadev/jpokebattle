@@ -42,4 +42,9 @@ public class Charmander extends PokemonInfo {
     public int getDropExp() {
         return 62;
     }
+
+    @Override
+    public int evolveAtLevel() {
+        return 16;
+    }
 }

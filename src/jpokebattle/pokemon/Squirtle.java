@@ -42,4 +42,9 @@ public class Squirtle extends PokemonInfo {
     public int getDropExp() {
         return 63;
     }
+
+    @Override
+    public int evolveAtLevel() {
+        return 16;
+    }
 }

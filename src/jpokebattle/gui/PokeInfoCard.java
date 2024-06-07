@@ -58,7 +58,7 @@ public class PokeInfoCard extends VBox  {
     public void update(Pokemon pokemon) {
         this.pokemon = pokemon;
         healthBar.updateHealth(pokemon);
-        nameLabel.setText(pokemon.getInfo().getName());
+        nameLabel.setText(pokemon.getName());
         hpLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());
         leveLabel.setText(":L" + pokemon.getLevel());
     }

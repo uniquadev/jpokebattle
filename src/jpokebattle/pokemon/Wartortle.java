@@ -42,4 +42,9 @@ public class Wartortle extends PokemonInfo {
     public int getDropExp() {
         return 142;
     }
+
+    @Override
+    public int evolveAtLevel() {
+        return 36;
+    }
 }

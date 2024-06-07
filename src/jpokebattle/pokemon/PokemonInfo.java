@@ -17,6 +17,7 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
      * Returns the level up group of the Pokemon.
      * @return The level up group of the Pokemon.
      */
+    @Override
     public LevelUpGroup getLevelType() {
         return LevelUpGroup.MEDIUM_SLOW;
     }
@@ -25,6 +26,7 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
      * Returns the amount of experience points dropped by the Pokemon when defeated.
      * @return The amount of experience points dropped by the Pokemon.
      */
+    @Override
     public int getDropExp() {
         return 0;
     }
@@ -33,6 +35,7 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
      * Returns the current health points of the Pokemon.
      * @return The current health points of the Pokemon.
      */
+    @Override
     public int getPS() {
         return baseStats.getPS();
     }
@@ -41,6 +44,7 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
      * Returns the attack stat of the Pokemon.
      * @return The attack stat of the Pokemon.
      */
+    @Override
     public int getAttack() {
         return baseStats.getAttack();
     }
@@ -49,6 +53,7 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
      * Returns the defense stat of the Pokemon.
      * @return The defense stat of the Pokemon.
      */
+    @Override
     public int getDefense() {
         return baseStats.getDefense();
     }
@@ -57,6 +62,7 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
      * Returns the special stat of the Pokemon.
      * @return The special stat of the Pokemon.
      */
+    @Override
     public int getSpecial() {
         return baseStats.getSpecial();
     }
@@ -65,6 +71,7 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
      * Returns the speed stat of the Pokemon.
      * @return The speed stat of the Pokemon.
      */
+    @Override
     public int getSpeed() {
         return baseStats.getSpeed();
     }
@@ -73,8 +80,18 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
      * Checks if the Pokemon can evolve.
      * @return true if the Pokemon can evolve, false otherwise.
      */
-    public boolean canEvolve() {
+    @Override
+    public boolean hasEvolution() {
         return getCurrentEvolution() < getMaxEvolution();
+    }
+
+    /**
+     * Returns the level at which the Pokemon evolves.
+     * @return The level at which the Pokemon evolves.
+     */
+    @Override
+    public int evolveAtLevel() {
+        return 0;
     }
 
     /**

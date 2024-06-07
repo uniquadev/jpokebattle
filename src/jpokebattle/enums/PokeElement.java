@@ -17,7 +17,7 @@ public enum PokeElement {
     GHOST,
     DRAGON;
     
-    public AttackResult getAttackResult(PokeElement other)
+    public AttackResult getAttackResultTo(PokeElement other)
     {
         if (this == other)
             return AttackResult.NOT_EFFECTIVE;

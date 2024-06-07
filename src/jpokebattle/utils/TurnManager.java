@@ -119,7 +119,6 @@ public class TurnManager implements CPUInterface {
             .setMaxEvolution(player.getBestEvolution() + settings.getMaxEvolutionOffset());
         start(player, builder.generate());
         setupCPU();
-        System.out.println("CPU generata!");
     }
 
     @Override

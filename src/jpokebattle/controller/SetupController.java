@@ -85,7 +85,6 @@ public class SetupController {
         player.setName(getSanitizedName());
         game.setPlayer(player);
         game.resetScore();
-        System.out.println("Giocatore generato!");
 
         titleMusic.stop();
         battleMusic.play();
