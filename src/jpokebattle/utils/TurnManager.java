@@ -4,9 +4,11 @@ import java.util.Random;
 
 import jpokebattle.cpu.CPUHandler;
 import jpokebattle.cpu.EasyCPUHandler;
+import jpokebattle.enums.CPUActionType;
 import jpokebattle.interfaces.CPUInterface;
 import jpokebattle.model.AttackData;
 import jpokebattle.model.CPUAction;
+import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
@@ -57,7 +59,7 @@ public class TurnManager implements CPUInterface {
      * @return true if it is the AI's turn, false otherwise.
      */
     public boolean isAITurn() {
-        return currentTrainerTurn != player;
+        return currentTrainerTurn != player && currentTrainerTurn != null;
     }
 
     /**
@@ -79,7 +81,16 @@ public class TurnManager implements CPUInterface {
         }
     }
 
-    public void applyAttack(Pokemon defender, AttackData attack) {
+    /**
+     * Performs an attack by an attacker Pokemon on a defender Pokemon using the given move.
+     * 
+     * @param attacker the Pokemon performing the attack
+     * @param defender the Pokemon being attacked
+     * @param move the move being used for the attack
+     * @return the AttackData object representing the attack result
+     */
+    public AttackData performAttack(Pokemon attacker, Pokemon defender, PokeMove move) {
+        AttackData attack = move.perform(defender, defender);
         switch (attack.getType()) {
             case PHYSICAL:
             case SPECIAL:
@@ -90,6 +101,8 @@ public class TurnManager implements CPUInterface {
             default:
                 break;
         }
+        move.consumeUse();
+        return attack;
     }
 
     /**
@@ -114,9 +127,33 @@ public class TurnManager implements CPUInterface {
         return cpuHandler.handlePokemonChange();
     }
 
+    /**
+     * Handles the turn for the CPU player.
+     * This method determines the action to be taken by the CPU player and performs the necessary operations.
+     * If the action type is ATTACK, the CPU player's active Pokemon attacks the opponent's Pokemon with the specified move.
+     * If the action type is POKEMON_SWITCH, the CPU player switches its active Pokemon to the specified Pokemon.
+     * 
+     * @return The CPU action performed during the turn.
+     */
     @Override
     public CPUAction handleTurn() {
-        return cpuHandler.handleTurn();
+        currentTrainerTurn = opponent;
+        CPUAction action = cpuHandler.handleTurn();
+        if (action == null) {
+            action = new CPUAction();
+        }
+        else if (action.getType() == CPUActionType.ATTACK) {
+            Pokemon defender = action.getPokemon();
+            Pokemon attacker = opponent.getActivePokemon();
+            PokeMove move = action.getMove();
+            performAttack(attacker, defender, move);
+        }
+        else if (action.getType() == CPUActionType.POKEMON_SWITCH) {
+            Pokemon pokemon = action.getPokemon();
+            opponent.setActivePokemon(pokemon);
+        }
+        currentTrainerTurn = player;
+        return action;
     }
 
     /**

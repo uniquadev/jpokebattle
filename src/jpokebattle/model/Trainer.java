@@ -37,14 +37,14 @@ public class Trainer {
         }
     }
 
-    public Pokemon getCurrentPokemon() {
+    public Pokemon getActivePokemon() {
         return pokemons[currentPokemon];
     }
     public void setCurrentPokemon(int index) {
         assert index >= 0 && index < 6;
         currentPokemon = index;
     }
-    public boolean setCurrentPokemon(Pokemon pokemon) {
+    public boolean setActivePokemon(Pokemon pokemon) {
         for (int i = 0; i < 6; i++) {
             if (pokemons[i] == pokemon) {
                 currentPokemon = i;

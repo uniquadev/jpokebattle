@@ -1,7 +1,8 @@
 package jpokebattle.enums;
 
 public enum CPUActionType {
+    SKIP,
     ATTACK,
-    ITEM,
-    POKEMON
+    POKEMON_SWITCH,
+    ITEM;
 }

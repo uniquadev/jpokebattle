@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
+import jpokebattle.enums.CPUActionType;
 import jpokebattle.enums.MoveType;
 import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.GridMenu;
@@ -23,6 +24,7 @@ import jpokebattle.gui.PokeTeamList;
 import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.model.AttackData;
+import jpokebattle.model.CPUAction;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
@@ -191,8 +193,8 @@ public class BattleController {
     private void updatePokemons() {
         Trainer player = game.getPlayer();
         Trainer opponent = turnManager.getOpponent();
-        Pokemon playerPokemon = player.getCurrentPokemon();
-        Pokemon botPokemon = opponent.getCurrentPokemon();
+        Pokemon playerPokemon = player.getActivePokemon();
+        Pokemon botPokemon = opponent.getActivePokemon();
         botPokeballs.update(opponent);
         if (playerPokemon != null) {
             playerPokemonView.setPokemon(playerPokemon);
@@ -226,16 +228,43 @@ public class BattleController {
 
     private void toggleActionView(boolean flag) {
         if (flag)
-            updateActionMenu(game.getPlayer().getCurrentPokemon());
+            updateActionMenu(game.getPlayer().getActivePokemon());
         menuPane.setVisible(!flag);
         actionPane.setVisible(flag);
         moveInfoPane.setVisible(flag);
     }
 
+    private void onMainGridClick(MenuOption option) {
+        switch (option.getText()) {
+            case "Fuggi":
+                runAway();
+                break;
+            case "Pokemon":
+                togglePokemonView(true);
+                break;
+            case "Oggetti":
+                break;
+            case "Azioni":
+                toggleActionView(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void runAway() {
+        SoundService.getSingleton().getBattleMusic().stop();
+        if (game.getScore() > 0) {
+            JPokeBattle.getInstance().setView("finish");
+        } else {
+            JPokeBattle.getInstance().setView("menu");
+        }
+    }
+
     private void onActionSelect(MenuOption option) {
         if (!turnManager.isPlayerTurn())
             return;
-        Pokemon pokemon = game.getPlayer().getCurrentPokemon();
+        Pokemon pokemon = game.getPlayer().getActivePokemon();
         PokeMove move = pokemon.getMove(option.getValue());
         moveTypeLabel.setText("TIPO/" + move.getElement().name());
         moveUsesLabel.setText(move.getUsesLeft() + "/" + move.getMaxUses());
@@ -244,7 +273,7 @@ public class BattleController {
     private void onActionGridClick(MenuOption option) {
         if (!turnManager.isPlayerTurn())
             return;
-        Pokemon playerPokemon = game.getPlayer().getCurrentPokemon();
+        Pokemon playerPokemon = game.getPlayer().getActivePokemon();
         PokeMove move = playerPokemon.getMove(option.getValue());
         if (!move.canUse())
             return;
@@ -252,11 +281,9 @@ public class BattleController {
         menuPane.setDisable(true);
 
         Trainer opponent = turnManager.getOpponent();
-        Pokemon botPokemon = opponent.getCurrentPokemon();
-        AttackData attack = move.perform(playerPokemon, botPokemon);
-        move.consumeUse();
+        Pokemon botPokemon = opponent.getActivePokemon();
+        AttackData attack = turnManager.performAttack(playerPokemon, botPokemon, move);
         move.draw(this, playerPokemon, botPokemon);
-        turnManager.applyAttack(botPokemon, attack);
 
         if (attack.getType() == MoveType.PHYSICAL) {
             botInfoCard.tweenHealth(this::onBotHealthTweenFinished);
@@ -267,7 +294,7 @@ public class BattleController {
 
     private void onBotHealthTweenFinished() {
         menuPane.setDisable(false);
-        Pokemon botPokemon = turnManager.getOpponent().getCurrentPokemon();
+        Pokemon botPokemon = turnManager.getOpponent().getActivePokemon();
         // controlla se il pokemon e' morto
         if (botPokemon.isDead())
         {
@@ -314,35 +341,26 @@ public class BattleController {
         handleCPUTurn();
     }
 
-    private void onMainGridClick(MenuOption option) {
-        switch (option.getText()) {
-            case "Fuggi":
-                runAway();
-                break;
-            case "Pokemon":
-                togglePokemonView(true);
-                break;
-            case "Oggetti":
-                break;
-            case "Azioni":
-                toggleActionView(true);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void runAway() {
-        SoundService.getSingleton().getBattleMusic().stop();
-        if (game.getScore() > 0) {
-            JPokeBattle.getInstance().setView("finish");
-        } else {
-            JPokeBattle.getInstance().setView("menu");
-        }
-    }
-
     private void handleCPUTurn() {
         menuPane.setDisable(true);
+        CPUAction action = turnManager.handleTurn();
+        if (action.getType() == CPUActionType.ATTACK) {
+            Pokemon defender = action.getPokemon();
+            Pokemon attacker = turnManager.getOpponent().getActivePokemon();
+            PokeMove move = action.getMove();
+            move.draw(this, attacker, defender);
+            if (move.getType() == MoveType.PHYSICAL) 
+                playerInfoCard.tweenHealth(this::onPlayerHealthTweenFinished);
+            else
+                menuPane.setDisable(false);
+        } else {
+            if (action.getType() == CPUActionType.POKEMON_SWITCH)
+                updatePokemons();
+            menuPane.setDisable(false);
+        }
+    }
+
+    private void onPlayerHealthTweenFinished() {
         menuPane.setDisable(false);
     }
 
@@ -350,11 +368,11 @@ public class BattleController {
         if (!turnManager.isPlayerTurn())
             return;
         Trainer player = game.getPlayer();
-        if (pokemon == player.getCurrentPokemon()) {
+        if (pokemon == player.getActivePokemon()) {
             togglePokemonView(false);
             return;
         }
-        game.getPlayer().setCurrentPokemon(pokemon);
+        game.getPlayer().setActivePokemon(pokemon);
         updatePokemons();
         togglePokemonView(false);
         handleCPUTurn();

@@ -27,12 +27,13 @@ public class EasyCPUHandler extends CPUHandler {
             selected = available.get(0);
         }
         if (selected != null)
-            trainer.setCurrentPokemon(selected);
+            trainer.setActivePokemon(selected);
         return selected;
     }
     
     @Override
     public CPUAction handleTurn() {
+        
         return null;
     }
     

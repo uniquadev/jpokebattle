@@ -13,6 +13,10 @@ public class CPUAction {
         this.move = move;
     }
 
+    public CPUAction() {
+        type = CPUActionType.SKIP;
+    }
+
     public CPUActionType getType() {
         return type;
     }
