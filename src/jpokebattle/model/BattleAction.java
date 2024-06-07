@@ -20,8 +20,8 @@ public class BattleAction implements Comparable<BattleAction> {
         this.type = BattleActionType.ATTACK;
     }
 
-    public BattleAction(Trainer trainer, Trainer opponent,Pokemon pokemon) {
-        this(trainer, opponent);
+    public BattleAction(Trainer trainer, Pokemon pokemon) {
+        this.trainer = trainer;
         this.pokemon = pokemon;
         this.type = BattleActionType.POKEMON_SWITCH;
     }
@@ -53,7 +53,37 @@ public class BattleAction implements Comparable<BattleAction> {
         return 0;
     }
 
-    public void perform() {
+    private void applyAttack(AttackResult attack) {
+        Pokemon defender = opponent.getActivePokemon();
+        switch (attack.getType()) {
+            case PHYSICAL:
+            case SPECIAL:
+                defender.damage(attack.getDamage());
+                break;
+            case STATUS:
+                defender.getEffects().sum(attack.getEffects());
+            default:
+                break;
+        }
+        move.consumeUse();
+    }
 
+    public AttackResult performAction() {
+        Pokemon attacker = trainer.getActivePokemon();
+        AttackResult result = null;
+        switch (type) {
+            case ATTACK:
+                result = move.perform(attacker, opponent.getActivePokemon());
+                break;
+            case POKEMON_SWITCH:
+                trainer.setActivePokemon(pokemon);
+                break;
+            default:
+                break;
+        }
+        if (result != null) {
+            applyAttack(result);
+        }
+        return result;
     }
 }

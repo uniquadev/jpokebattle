@@ -81,4 +81,8 @@ public class PokeInfoCard extends VBox  {
         getChildren().remove(hpLabel);
         nameLabel.setTranslateX(-20);
     }
+
+    public HealthBar getHealthBar() {
+        return healthBar;
+    }
 }

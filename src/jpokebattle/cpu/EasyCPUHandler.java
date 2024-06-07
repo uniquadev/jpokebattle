@@ -15,7 +15,7 @@ public class EasyCPUHandler extends CPUHandler {
 
     @Override
     public Pokemon handlePokemonChange() {
-        ArrayList<Pokemon> available = trainer.getAvailablePokemons();
+        ArrayList<Pokemon> available = cpu.getAvailablePokemons();
         Pokemon selected = null;
         if (available.size() == 0) {
             return null;
@@ -23,14 +23,14 @@ public class EasyCPUHandler extends CPUHandler {
         else {
             selected = available.get(0);
         }
-        trainer.setActivePokemon(selected);
+        cpu.setActivePokemon(selected);
         return selected;
     }
     
     @Override
     public BattleAction handleTurn() {
         int attDecision = random.nextInt(5); // chance of using status move
-        var moves = trainer.getActivePokemon().getMoves();
+        var moves = cpu.getActivePokemon().getMoves();
         if (moves.size() == 0) {
             return null;
         }

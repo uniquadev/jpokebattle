@@ -3,11 +3,11 @@ package jpokebattle.move;
 import java.util.Random;
 
 import jpokebattle.controller.BattleController;
-import jpokebattle.enums.AttackResult;
+import jpokebattle.enums.AttackEffectiveness;
 import jpokebattle.enums.MoveType;
 import jpokebattle.enums.PokeElement;
 import jpokebattle.interfaces.MoveInterface;
-import jpokebattle.model.AttackData;
+import jpokebattle.model.AttackResult;
 import jpokebattle.model.PokeStats;
 import jpokebattle.model.Pokemon;
 
@@ -49,10 +49,10 @@ public abstract class BaseMove implements MoveInterface {
      * @return an AttackData object representing the result of the move
      */
     @Override
-    public AttackData perform(Pokemon attacker, Pokemon defender) {
+    public AttackResult perform(Pokemon attacker, Pokemon defender) {
         if (getType() == MoveType.STATUS) {
             PokeStats effects = getEffects();
-            return new AttackData(effects);
+            return new AttackResult(effects);
         }
         return calculateDamage(attacker, defender);
     }
@@ -63,19 +63,19 @@ public abstract class BaseMove implements MoveInterface {
      * @param defender the defending Pokemon
      * @return an AttackData object representing the damage and other information of the move
      */
-    public AttackData calculateDamage(Pokemon attacker, Pokemon defender) {
+    public AttackResult calculateDamage(Pokemon attacker, Pokemon defender) {
         Random randomGen = new Random();
         int critical = randomGen.nextInt(1, 3);
         int power = getPower();
-        AttackResult elemResult = attacker.getElement().getAttackResultTo(defender.getElement());
-        AttackResult moveResult = getElement().getAttackResultTo(defender.getElement());
+        AttackEffectiveness elemResult = attacker.getElement().getAttackResultTo(defender.getElement());
+        AttackEffectiveness moveResult = getElement().getAttackResultTo(defender.getElement());
         float stab = attacker.getElement() == defender.getElement() ? 1.5f : 1.0f;
         int level = attacker.getLevel();
         int attack, defense;
         double hitChance = getAccuracy() * 2;
 
         if (randomGen.nextInt(256) > hitChance)
-            return new AttackData();
+            return new AttackResult();
 
         if (getType() == MoveType.PHYSICAL) {
             attack = attacker.getTotAttack();
@@ -94,9 +94,9 @@ public abstract class BaseMove implements MoveInterface {
         damage *= random;
 
         if (damage == 0)
-            return new AttackData();
+            return new AttackResult();
 
-        return new AttackData(damage.intValue(),
+        return new AttackResult(damage.intValue(),
             critical == 2,
             moveResult,
             elemResult

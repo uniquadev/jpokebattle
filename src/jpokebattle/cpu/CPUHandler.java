@@ -9,23 +9,23 @@ import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 
 public abstract class CPUHandler implements CPUInterface {
-    protected Trainer trainer;
+    protected Trainer cpu;
     protected Trainer opponent;
     protected Random random = new Random();
-    public CPUHandler(Trainer trainer, Trainer opponent) {
-        this.trainer = trainer;
+    public CPUHandler(Trainer cpu, Trainer opponent) {
+        this.cpu = cpu;
+        this.opponent = opponent;
     }
 
     public BattleAction makeAction(Pokemon pokemon) {
         return new BattleAction(
-            trainer,
-            opponent,
+            cpu,
             pokemon
         );
     }
     public BattleAction makeAction(PokeMove move) {
         return new BattleAction(
-            trainer,
+            cpu,
             opponent,
             move
         );

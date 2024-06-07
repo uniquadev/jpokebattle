@@ -6,7 +6,7 @@ import jpokebattle.cpu.CPUHandler;
 import jpokebattle.cpu.EasyCPUHandler;
 import jpokebattle.enums.BattleActionType;
 import jpokebattle.interfaces.CPUInterface;
-import jpokebattle.model.AttackData;
+import jpokebattle.model.AttackResult;
 import jpokebattle.model.BattleAction;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
@@ -89,8 +89,8 @@ public class OldTurnManager implements CPUInterface {
      * @param move the move being used for the attack
      * @return the AttackData object representing the attack result
      */
-    public AttackData performAttack(Pokemon attacker, Pokemon defender, PokeMove move) {
-        AttackData attack = move.perform(defender, defender);
+    public AttackResult performAttack(Pokemon attacker, Pokemon defender, PokeMove move) {
+        AttackResult attack = move.perform(defender, defender);
         switch (attack.getType()) {
             case PHYSICAL:
             case SPECIAL:

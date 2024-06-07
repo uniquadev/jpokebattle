@@ -1,30 +1,32 @@
 package jpokebattle.model;
 
-import jpokebattle.enums.AttackResult;
+import jpokebattle.enums.AttackEffectiveness;
 import jpokebattle.enums.MoveType;
 
-public class AttackData {
+public class AttackResult {
     private int damage;
-    private AttackResult moveResult;
-    private AttackResult elemResult;
+    private AttackEffectiveness moveResult;
+    private AttackEffectiveness elemResult;
     private boolean critical;
     private PokeStats effects;
     private MoveType type;
 
-    public AttackData(int damage, boolean critical, AttackResult moveResult, AttackResult elemResult) {
+    public AttackResult(int damage, boolean critical, AttackEffectiveness moveResult, AttackEffectiveness elemResult) {
         this.damage = damage;
         this.moveResult = moveResult;
         this.elemResult = elemResult;
         this.critical = critical;
         type = MoveType.PHYSICAL;
     }
-    public AttackData(PokeStats effects)
+    public AttackResult(PokeStats effects)
     {
         this.effects = effects;
         type = MoveType.STATUS;
     }
-    public AttackData() {
+    public AttackResult() {
         type = MoveType.MISS;
+        moveResult = AttackEffectiveness.MISS;
+        elemResult = AttackEffectiveness.MISS;
     }
 
     public MoveType getType() {
@@ -36,10 +38,10 @@ public class AttackData {
     public int getDamage() {
         return damage;
     }
-    public AttackResult getMoveResult() {
+    public AttackEffectiveness getMoveResult() {
         return moveResult;
     }
-    public AttackResult getElemResult() {
+    public AttackEffectiveness getElemResult() {
         return elemResult;
     }
     public boolean isCritical() {

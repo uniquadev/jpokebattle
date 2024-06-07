@@ -3,7 +3,7 @@ package jpokebattle.interfaces;
 import jpokebattle.controller.BattleController;
 import jpokebattle.enums.MoveType;
 import jpokebattle.enums.PokeElement;
-import jpokebattle.model.AttackData;
+import jpokebattle.model.AttackResult;
 import jpokebattle.model.Pokemon;
 
 public interface MoveInterface {
@@ -15,6 +15,6 @@ public interface MoveInterface {
     public int getAccuracy();
     public int getRequiredLevel();
     
-    public AttackData perform(Pokemon attacker, Pokemon defender);
+    public AttackResult perform(Pokemon attacker, Pokemon defender);
     public void draw(BattleController bc, Pokemon attacker, Pokemon defender);
 }

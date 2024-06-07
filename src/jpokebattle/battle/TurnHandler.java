@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.ArrayList;
 
 public abstract class TurnHandler {
-    protected Trainer player;
-    protected Trainer cpu;
+    protected Trainer player1;
+    protected Trainer player2;
 
     private BattleAction playerAction;
     private BattleAction cpuAction;
@@ -29,10 +29,6 @@ public abstract class TurnHandler {
         actions.add(playerAction);
         actions.add(cpuAction);
         Collections.sort(actions);
-
-        for (int i = 0; i < actions.size(); i++) {
-            System.out.println("Action " + i + ": " + actions.get(i).getTrainer().getName());
-        }
 
         return actions;
     }

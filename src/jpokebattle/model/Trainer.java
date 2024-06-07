@@ -45,6 +45,7 @@ public class Trainer {
         currentPokemon = index;
     }
     public boolean setActivePokemon(Pokemon pokemon) {
+        if (pokemon == null) return false;
         for (int i = 0; i < 6; i++) {
             if (pokemons[i] == pokemon) {
                 currentPokemon = i;

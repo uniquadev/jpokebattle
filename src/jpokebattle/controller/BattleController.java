@@ -1,6 +1,8 @@
 package jpokebattle.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -14,34 +16,40 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
+import jpokebattle.battle.BattleHandler;
 import jpokebattle.enums.BattleActionType;
 import jpokebattle.enums.MoveType;
 import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.GridMenu;
 import jpokebattle.gui.HPokeBalls;
+import jpokebattle.gui.HealthBar;
 import jpokebattle.gui.PokeInfoCard;
 import jpokebattle.gui.PokeTeamList;
 import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
-import jpokebattle.model.AttackData;
+import jpokebattle.model.AttackResult;
 import jpokebattle.model.BattleAction;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
 import jpokebattle.service.SoundService;
-import jpokebattle.utils.OldTurnManager;
+//import jpokebattle.utils.OldTurnManager;
 
 public class BattleController {
 
     private GameState game;
-    private OldTurnManager turnManager;
+    private BattleHandler battleHandler;
+    private Queue<BattleAction> actions;
+    private BattleAction lastAction;
+    private boolean freeSwitch = false;
+
+    //private OldTurnManager turnManager;
     private SoundService sound;
 
     private Trainer player;
     private Pokemon catchingPokemon;
     private PokeMove learningMove;
-    private boolean justWin = false;
     
     @FXML
     private Label scoreLabel;
@@ -105,6 +113,7 @@ public class BattleController {
     public BattleController() {
         game = GameState.getSingleton();
         sound = SoundService.getSingleton();
+        battleHandler = new BattleHandler(game);
         player = game.getPlayer();
     }
 
@@ -154,7 +163,8 @@ public class BattleController {
 
         pokeTeamList.setCallback(this::onSwitchPokemon);
         
-        initializeBattle();
+        updatePokemons();
+        startIntroAnimation();
     }
 
     private void updateMainMenu() {
@@ -164,12 +174,6 @@ public class BattleController {
             new GridMenu.MenuOption("Oggetti", false),
             new GridMenu.MenuOption("Fuggi", true)
         }, 2);
-    }
-
-    private void initializeBattle() {
-        turnManager = new OldTurnManager(game, game.getPlayer());
-        updatePokemons();
-        startIntroAnimation();
     }
 
     private void toggleInfoCards(boolean flag)
@@ -199,7 +203,7 @@ public class BattleController {
 
     private void updatePokemons() {
         Trainer player = game.getPlayer();
-        Trainer opponent = turnManager.getOpponent();
+        Trainer opponent = battleHandler.getCPU();
         Pokemon playerPokemon = player.getActivePokemon();
         Pokemon botPokemon = opponent.getActivePokemon();
         botPokeballs.update(opponent);
@@ -276,17 +280,21 @@ public class BattleController {
     }
 
     private void onActionSelect(MenuOption option) {
-        if (!turnManager.isPlayerTurn())
-            return;
         Pokemon pokemon = game.getPlayer().getActivePokemon();
         PokeMove move = pokemon.getMove(option.getValue());
         moveTypeLabel.setText("TIPO/" + move.getElement().name());
         moveUsesLabel.setText(move.getUsesLeft() + "/" + move.getMaxUses());
     }
 
+    public HealthBar getHealthBar(Trainer trainer) {
+        if (trainer == player) {
+            return playerInfoCard.getHealthBar();
+        } else {
+            return botInfoCard.getHealthBar();
+        }
+    }
+
     private void onActionGridClick(MenuOption option) {
-        if (!turnManager.isPlayerTurn())
-            return;
         Pokemon playerPokemon = game.getPlayer().getActivePokemon();
         PokeMove move = playerPokemon.getMove(option.getValue());
         if (!move.canUse())
@@ -294,29 +302,75 @@ public class BattleController {
         toggleActionView(false);
         menuPane.setDisable(true);
 
-        Trainer opponent = turnManager.getOpponent();
-        Pokemon botPokemon = opponent.getActivePokemon();
-        AttackData attack = turnManager.performAttack(playerPokemon, botPokemon, move);
-        move.draw(this, playerPokemon, botPokemon);
-
-        if (attack.getType() == MoveType.PHYSICAL) {
-            botInfoCard.tweenHealth(this::onBotHealthTweenFinished);
-        } else {
-            handleCPUTurn();
-        }
+        BattleAction action = new BattleAction(game.getPlayer(), battleHandler.getCPU(), move);
+        startTurn(action);
     }
 
-    private void onBotHealthTweenFinished() {
-        menuPane.setDisable(false);
-        Pokemon botPokemon = turnManager.getOpponent().getActivePokemon();
-        // controlla se il pokemon e' morto
-        if (botPokemon.isDead())
-        {
-            // TODO: play dead animation
-            // distribuisci exp
-            ArrayList<Pokemon> playerPokemons = game.getPlayer().getAvailablePokemons();
-            for (Pokemon p : playerPokemons) {
-                p.gainExp(botPokemon, playerPokemons.size());
+    private void startTurn(BattleAction playerAction) {
+        battleHandler.setPlayerAction(playerAction);
+        actions =  battleHandler.startTurn();
+        menuPane.setDisable(true);
+        
+        handleAction(actions.poll());
+    }
+
+    private void handleAction(BattleAction action) {
+        if (action == null) {
+            menuPane.setDisable(false);
+            return;
+        }
+        System.out.print(action.getTrainer().getName() + ": ");
+        lastAction = action;
+
+        AttackResult attack = action.performAction();
+        HealthBar healthBar = getHealthBar(action.getOpponent());
+        Trainer trainer = action.getTrainer();
+        Trainer opponent = action.getOpponent();
+        Pokemon attacker = trainer.getActivePokemon();
+        PokeMove move = action.getMove();
+        
+        if (attack != null) {
+            Pokemon defender = opponent.getActivePokemon();
+            move.draw(this, attacker, defender);
+            
+            String attackText = attacker.getName() + " ha usato " + move.getName();
+            if (attack.getMoveResult() != null) {
+                attackText += " " + attack.getMoveResult().getText();
+            }
+            System.out.println(attackText);
+
+            if (attack.getType() == MoveType.PHYSICAL) {
+                healthBar.tweenHealth(defender, this::onHealthTweenFinished);
+            } else {
+                handleAction(actions.poll());
+            }
+        }
+        else {
+            if (action.getType() == BattleActionType.POKEMON_SWITCH) {
+                System.out.println(action.getTrainer().getName() + " ha messo in campo " + action.getPokemon().getName());
+                updatePokemons();
+            }
+            handleAction(actions.poll());
+        }
+
+        
+    }
+
+    private void onHealthTweenFinished() {
+        boolean wasCPU = lastAction.getTrainer() == battleHandler.getCPU();
+        Trainer trainer = wasCPU ? battleHandler.getCPU() : player;
+        Trainer opponent = wasCPU ? player : battleHandler.getCPU();
+        Pokemon damanged = opponent.getActivePokemon();
+
+        if (!damanged.isDead()) {
+            handleAction(actions.poll());
+            return;
+        }
+            
+        if (!wasCPU) {
+            ArrayList<Pokemon> attackers = trainer.getAvailablePokemons();
+            for (Pokemon p : attackers) {
+                p.gainExp(damanged, attackers.size());
                 if (p.getExp() >= p.getExpToNextLevel()) {
                     p.levelUp();
                     PokeMove newMove = p.canLearnMove();
@@ -328,85 +382,76 @@ public class BattleController {
                 }
             }
             updatePokemons();
-            Pokemon newBotPokemon = turnManager.handlePokemonChange();
-            if (newBotPokemon != null) {
-                botPokemonView.setPokemon(newBotPokemon);
-                botInfoCard.update(newBotPokemon);
+
+            Pokemon newPokemon = battleHandler.handlePokemonChange();
+            if (newPokemon != null) {
+                botPokemonView.setPokemon(newPokemon);
+                botInfoCard.update(newPokemon);
             }
             else {
-                // il bot non ha piu' pokemon o si arrende
+                // il giocatore ha vinto
                 game.increaseScore();
                 scoreLabel.setText("punteggio: " + game.getScore());
-                Pokemon captured = turnManager.playerCatchPokemon();
+                Pokemon captured = battleHandler.playerCatchPokemon();
                 if (captured != null) {
                     if (game.getPlayer().getTeamSize() < 6) {
                         game.getPlayer().addPokemon(captured);
+                        System.out.println("Hai catturato " + captured.getName());
                     }
                     else {
                         catchingPokemon = captured;
                     }
+                }
+                if (player.getAvailablePokemons().size() > 1) {
+                    freeSwitch = true;
                     togglePokemonView(true);
                 }
-                justWin = true;
-                turnManager.generateNewOpponent();
+                battleHandler.generateNewOpponent();
                 updatePokemons();
-                updateMainMenu();
+            }
+        } else {
+            // la cpu ha ucciso il pokemon del giocatore
+            var pokemons = player.getAvailablePokemons();
+            if (pokemons.size() == 0) {
+                // il giocatore ha perso
+                runAway();
+            } else {
+                pokemonBackButton.setVisible(false);
+                togglePokemonView(true);
             }
         }
-        handleCPUTurn();
-    }
-
-    private void handleCPUTurn() {
-        menuPane.setDisable(true);
-        BattleAction action = turnManager.handleTurn();
-        if (action.getType() == BattleActionType.ATTACK) {
-            Pokemon defender = action.getPokemon();
-            Pokemon attacker = turnManager.getOpponent().getActivePokemon();
-            PokeMove move = action.getMove();
-            System.out.println("CPU move: " + move.getName());
-            move.draw(this, attacker, defender);
-            if (move.getType() == MoveType.PHYSICAL) 
-                playerInfoCard.tweenHealth(this::onPlayerHealthTweenFinished);
-            else
-                menuPane.setDisable(false);
-        } else {
-            if (action.getType() == BattleActionType.POKEMON_SWITCH)
-                updatePokemons();
-            menuPane.setDisable(false);
-        }
-    }
-
-    private void onPlayerHealthTweenFinished() {
-        menuPane.setDisable(false);
         
-        if (player.getActivePokemon().isDead()) {
-            if (player.getAvailablePokemons().size() == 0)
-                runAway();
-            else
-                togglePokemonView(true);
-        }
+        menuPane.setDisable(false);
     }
 
     private void onSwitchPokemon(int slot, Pokemon pokemon) {
-        if (!turnManager.isPlayerTurn())
-            return;
+        // select caught pokemon
         if (catchingPokemon != null) {
             game.getPlayer().setPokemon(slot, catchingPokemon);
             catchingPokemon = null;
             updatePokemons();
-            togglePokemonView(false);
+            togglePokemonView(true);
             return;
         }
+        // ignore dead pokemons
+        if (pokemon.isDead()) return;
+        // ignore if the selected pokemon is already active
         Trainer player = game.getPlayer();
         if (pokemon == player.getActivePokemon()) {
             togglePokemonView(false);
+            freeSwitch = false;
             return;
         }
-        game.getPlayer().setActivePokemon(pokemon);
-        updatePokemons();
-        togglePokemonView(false);
-        if (!justWin)
-            handleCPUTurn();
-        justWin = false;
+        // allow player to change pokemon before the battle start
+        if (!freeSwitch) {
+            togglePokemonView(false);
+            BattleAction action = new BattleAction(player, pokemon);
+            startTurn(action);
+        } else {
+            player.setActivePokemon(pokemon);
+            updatePokemons();
+            togglePokemonView(false);
+            freeSwitch = false;
+        }
     }
 }

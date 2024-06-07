@@ -64,7 +64,7 @@ public class PokeMove implements MoveInterface {
         return move.getAccuracy();
     }
     @Override
-    public AttackData perform(Pokemon attacker, Pokemon defender) {
+    public AttackResult perform(Pokemon attacker, Pokemon defender) {
         return move.perform(attacker, defender);
     }
     @Override
