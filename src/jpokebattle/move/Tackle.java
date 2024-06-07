@@ -30,6 +30,6 @@ public class Tackle extends BaseMove {
 
     @Override
     public MoveType getType() {
-        return MoveType.ATTACK;
+        return MoveType.PHYSICAL;
     }
 }

@@ -79,7 +79,7 @@ public class SetupController {
         GameState game = GameState.getSingleton();
         Trainer player = new TrainerFactory()
             .setMaxTeamSize(1)
-            .setMaxPokeLevel(5)
+            .setMaxPokeLevel(2)
             .useStarters(true)
             .generate();
         player.setName(getSanitizedName());

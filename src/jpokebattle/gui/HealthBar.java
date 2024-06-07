@@ -4,18 +4,15 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
+import jpokebattle.interfaces.AnimationFinishCallback;
 import jpokebattle.model.Pokemon;
 
 public class HealthBar extends StackPane {
@@ -68,7 +65,7 @@ public class HealthBar extends StackPane {
         healthRect.setFill(getColorFromHealth(pokemon));
     }
 
-    public void tweenHealth(Pokemon pokemon, EventHandler<ActionEvent> onFinished) {
+    public void tweenHealth(Pokemon pokemon, AnimationFinishCallback onFinished) {
         int newWidth = calculateHealthWidth(pokemon);
         Duration cycleDuration = Duration.millis(1000);
         tweenTimeline = new Timeline(
@@ -83,7 +80,7 @@ public class HealthBar extends StackPane {
         tweenTimeline.setOnFinished(event->{
             healthRect.setWidth(newWidth);
             if (onFinished != null)
-                onFinished.handle(event);
+                onFinished.onAnimationFinish();
         });
     }
 

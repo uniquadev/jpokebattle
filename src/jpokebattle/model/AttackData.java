@@ -16,7 +16,7 @@ public class AttackData {
         this.moveResult = moveResult;
         this.elemResult = elemResult;
         this.critical = critical;
-        type = MoveType.ATTACK;
+        type = MoveType.PHYSICAL;
     }
     public AttackData(PokeStats effects)
     {

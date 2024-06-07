@@ -6,6 +6,7 @@ import jpokebattle.controller.BattleController;
 import jpokebattle.enums.AttackResult;
 import jpokebattle.enums.MoveType;
 import jpokebattle.enums.PokeElement;
+import jpokebattle.interfaces.MoveInterface;
 import jpokebattle.model.AttackData;
 import jpokebattle.model.PokeStats;
 import jpokebattle.model.Pokemon;
@@ -72,7 +73,7 @@ public abstract class BaseMove implements MoveInterface {
         int level = attacker.getLevel();
         int attack, defense;
 
-        if (getType() == MoveType.ATTACK) {
+        if (getType() == MoveType.PHYSICAL) {
             attack = attacker.getTotAttack();
             defense = defender.getTotDefense();
         } else {

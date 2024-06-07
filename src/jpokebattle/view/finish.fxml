@@ -21,7 +21,7 @@
                </image>
             </ImageView>
             <Label fx:id="finishLabel" prefHeight="20.0" styleClass="finish-label" text="HAI_VINTO_UN_PANETTONE" StackPane.alignment="TOP_CENTER"/>
-            <LeaderboardGUI fx:id="leaderView" prefHeight="307.0" prefWidth="400.0" StackPane.alignment="TOP_CENTER"/>
+            <LeaderboardGUI fx:id="leaderView" prefWidth="400.0" StackPane.alignment="TOP_CENTER"/>
          </children>
          <padding>
             <Insets top="24.0" />

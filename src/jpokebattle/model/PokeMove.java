@@ -3,8 +3,8 @@ package jpokebattle.model;
 import jpokebattle.controller.BattleController;
 import jpokebattle.enums.MoveType;
 import jpokebattle.enums.PokeElement;
+import jpokebattle.interfaces.MoveInterface;
 import jpokebattle.move.BaseMove;
-import jpokebattle.move.MoveInterface;
 
 public class PokeMove implements MoveInterface {
     private BaseMove move;
@@ -35,10 +35,10 @@ public class PokeMove implements MoveInterface {
     public boolean canUse() {
         return usesLeft > 0;
     }
+    @Override
     public int getRequiredLevel() {
         return move.getRequiredLevel();
     }
-
     @Override
     public String getName() {
         return move.getName();

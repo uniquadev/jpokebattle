@@ -38,10 +38,36 @@ public class MoveService {
     private void registerMoves() {
         registerMove(PokeEnum.BULBASAUR, new Growl(1));
         registerMove(PokeEnum.BULBASAUR, new Tackle(1));
+        registerMove(PokeEnum.BULBASAUR, new VineWhip(3));
+
+        registerMove(PokeEnum.IVYSAUR, new Growl(1));
+        registerMove(PokeEnum.IVYSAUR, new Tackle(1));
+        registerMove(PokeEnum.IVYSAUR, new VineWhip(1));
+
+        registerMove(PokeEnum.VENUSAUR, new Growl(1));
+        registerMove(PokeEnum.VENUSAUR, new Tackle(1));
+        registerMove(PokeEnum.VENUSAUR, new VineWhip(1));
+        
         registerMove(PokeEnum.CHARMANDER, new Growl(1));
         registerMove(PokeEnum.CHARMANDER, new Scratch(1));
+        registerMove(PokeEnum.CHARMANDER, new Ember(4));
+        registerMove(PokeEnum.CHARMANDER, new DragonBreath(12));
+        
+        registerMove(PokeEnum.CHARMELEON, new Growl(1));
+        registerMove(PokeEnum.CHARMELEON, new Ember(1));
+        registerMove(PokeEnum.CHARMELEON, new DragonBreath(12));
+
+        registerMove(PokeEnum.CHARIZARD, new DragonClaw(1));
+        registerMove(PokeEnum.CHARIZARD, new Ember(1));
+        registerMove(PokeEnum.CHARIZARD, new DragonBreath(12));
+
         registerMove(PokeEnum.SQUIRTLE, new TailWhip(1));
         registerMove(PokeEnum.SQUIRTLE, new Tackle(1));
+        registerMove(PokeEnum.SQUIRTLE, new WaterGun(3));
+
+        registerMove(PokeEnum.WARTORTLE, new TailWhip(1));
+        registerMove(PokeEnum.WARTORTLE, new Tackle(1));
+        registerMove(PokeEnum.WARTORTLE, new WaterGun(1));
     }
 
     /**
@@ -64,6 +90,16 @@ public class MoveService {
     public ArrayList<BaseMove> getMoves(PokeEnum id) {
         ArrayList<BaseMove> res = library.get(id);
         return res == null ? new ArrayList<>() : res;
+    }
+
+    public BaseMove getMoveAtLevel(PokeEnum id, int level) {
+        ArrayList<BaseMove> moves = getMoves(id);
+        for (BaseMove move : moves) {
+            if (move.getRequiredLevel() == level) {
+                return move;
+            }
+        }
+        return null;
     }
 
     /**

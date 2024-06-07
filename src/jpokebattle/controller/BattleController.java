@@ -35,6 +35,7 @@ public class BattleController {
     private GameState game;
     private TurnManager turnManager;
     private SoundService sound;
+    private Pokemon catchedPokemon;
     
     @FXML
     private Label scoreLabel;
@@ -117,6 +118,7 @@ public class BattleController {
         pokemonBackButton.setText("< Indietro");
         pokemonBackButton.removeArrow();
         pokemonBackButton.getButton().setOnAction(e -> {
+            catchedPokemon = null;
             togglePokemonView(false);
         });
 
@@ -257,7 +259,7 @@ public class BattleController {
 
         if (attack.getType() == MoveType.MISS) {
             // playDialogAndWait("Mossa fallita!");
-        } else if (attack.getType() == MoveType.ATTACK) {
+        } else if (attack.getType() == MoveType.PHYSICAL) {
             // applica danno
             System.out.println("Applicando danno: " + attack.getDamage());
             botPokemon.damage(attack.getDamage());
@@ -270,7 +272,7 @@ public class BattleController {
         // playDialogAndWait("Il tuo " + playerPokemon.getName() + " usa " + move.getName());
     }
 
-    private void onBotHealthTweenFinished(ActionEvent e) {
+    private void onBotHealthTweenFinished() {
         menuPane.setDisable(false);
         Pokemon botPokemon = turnManager.getOpponent().getCurrentPokemon();
         // controlla se il pokemon e' morto
@@ -283,6 +285,12 @@ public class BattleController {
                 p.gainExp(botPokemon, playerPokemons.size());
                 if (p.getExp() >= p.getExpToNextLevel()) {
                     p.levelUp();
+                    PokeMove newMove = p.canLearnMove();
+                    if (newMove != null) {
+                        if(p.addMove(newMove) == null) {
+                            // TODO: make the player choose a move to replace
+                        };
+                    }
                 }
             }
             updatePokemons();
@@ -299,8 +307,11 @@ public class BattleController {
                 if (captured != null) {
                     if (game.getPlayer().getTeamSize() < 6) {
                         game.getPlayer().addPokemon(captured);
-                        togglePokemonView(true);
                     }
+                    else {
+                        catchedPokemon = captured;
+                    }
+                    togglePokemonView(true);
                 }
                 turnManager.generateNewOpponent();
                 updatePokemons();

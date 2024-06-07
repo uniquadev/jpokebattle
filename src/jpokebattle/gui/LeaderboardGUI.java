@@ -49,6 +49,7 @@ public class LeaderboardGUI extends VBox {
                 new PlayerScore("Michael", 35)
         );
 
+        setPrefHeight(307.0);
         getChildren().addAll(scoreLabel, tableView);
         getStyleClass().add("leaderboard");
     }

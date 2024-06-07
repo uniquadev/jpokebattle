@@ -1,4 +1,4 @@
-package jpokebattle.move;
+package jpokebattle.interfaces;
 
 import jpokebattle.controller.BattleController;
 import jpokebattle.enums.MoveType;

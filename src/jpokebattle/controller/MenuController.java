@@ -57,6 +57,9 @@ public class MenuController  {
                 break;
             case "Carica Partita":
                 break;
+            case "Classifica":
+                JPokeBattle.getInstance().setView("leader");
+                break;
             case "Opzioni":
                 break;
             case "Informazioni":
