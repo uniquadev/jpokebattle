@@ -2,8 +2,10 @@ package jpokebattle.model;
 
 import java.util.ArrayList;
 
+import jpokebattle.enums.LevelUpGroup;
 import jpokebattle.enums.PokeElement;
 import jpokebattle.enums.PokeEnum;
+import jpokebattle.interfaces.PokemonInterface;
 import jpokebattle.move.BaseMove;
 import jpokebattle.pokemon.PokemonInfo;
 import jpokebattle.service.MoveService;
@@ -11,7 +13,7 @@ import jpokebattle.service.MoveService;
 /**
  * Represents a Pokemon in the game.
  */
-public class Pokemon {
+public class Pokemon implements PokemonInterface {
     private PokeMove[] moves = new PokeMove[4];
     private int health = 0;
 
@@ -48,22 +50,6 @@ public class Pokemon {
      */
     public PokemonInfo getInfo() {
         return info;
-    }
-
-    /**
-     * Gets the ID of the Pokemon.
-     * @return The ID.
-     */
-    public PokeEnum getId() {
-        return info.getId();
-    }
-
-    /**
-     * Gets the name of the Pokemon.
-     * @return The name.
-     */
-    public String getName() {
-        return info.getName();
     }
 
     /**
@@ -378,5 +364,85 @@ public class Pokemon {
         effects.reset();
         for (PokeMove move : getMoves())
             move.resetUses();
+    }
+    
+    /**
+     * Returns the name of the Pokemon.
+     *
+     * @return the name of the Pokemon
+     */
+    @Override
+    public String getName() {
+        return info.getName();
+    }
+
+    /**
+     * Returns the ID of the Pokemon.
+     *
+     * @return the ID of the Pokemon
+     */
+    @Override
+    public PokeEnum getId() {
+        return info.getId();
+    }
+
+    /**
+     * Returns the level up group of the Pokemon.
+     *
+     * @return the level up group of the Pokemon
+     */
+    @Override
+    public LevelUpGroup getLevelType() {
+        return info.getLevelType();
+    }
+
+    /**
+     * Returns the current evolution of the Pokemon.
+     *
+     * @return the current evolution of the Pokemon
+     */
+    @Override
+    public int getCurrentEvolution() {
+        return info.getCurrentEvolution();
+    }
+
+    /**
+     * Returns the maximum evolution of the Pokemon.
+     *
+     * @return the maximum evolution of the Pokemon
+     */
+    @Override
+    public int getMaxEvolution() {
+        return info.getMaxEvolution();
+    }
+
+    /**
+     * Returns the amount of experience points that this Pokemon drops when defeated.
+     *
+     * @return the amount of experience points dropped by this Pokemon
+     */
+    @Override
+    public int getDropExp() {
+        return info.getDropExp();
+    }
+
+    /**
+     * Checks if the Pokemon has an evolution.
+     *
+     * @return true if the Pokemon has an evolution, false otherwise.
+     */
+    @Override
+    public boolean hasEvolution() {
+        return info.hasEvolution();
+    }
+
+    /**
+     * Returns the level at which this Pokemon evolves.
+     *
+     * @return the level at which this Pokemon evolves
+     */
+    @Override
+    public int evolveAtLevel() {
+        return info.evolveAtLevel();
     }
 }
