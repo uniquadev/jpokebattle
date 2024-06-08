@@ -27,7 +27,7 @@ import jpokebattle.gui.PokeInfoCard;
 import jpokebattle.gui.PokeTeamList;
 import jpokebattle.gui.PokemonView;
 import jpokebattle.gui.GridMenu.MenuOption;
-import jpokebattle.model.AttackResult;
+import jpokebattle.model.MoveResult;
 import jpokebattle.model.BattleAction;
 import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
@@ -322,7 +322,7 @@ public class BattleController {
         System.out.print(action.getTrainer().getName() + ": ");
         lastAction = action;
 
-        AttackResult attack = action.performAction();
+        MoveResult attack = action.performAction();
         HealthBar healthBar = getHealthBar(action.getOpponent());
         Trainer trainer = action.getTrainer();
         Trainer opponent = action.getOpponent();

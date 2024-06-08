@@ -3,7 +3,7 @@ package jpokebattle.model;
 import jpokebattle.enums.AttackEffectiveness;
 import jpokebattle.enums.MoveType;
 
-public class AttackResult {
+public class MoveResult {
     private int damage;
     private AttackEffectiveness moveResult;
     private AttackEffectiveness elemResult;
@@ -11,19 +11,19 @@ public class AttackResult {
     private PokeStats effects;
     private MoveType type;
 
-    public AttackResult(int damage, boolean critical, AttackEffectiveness moveResult, AttackEffectiveness elemResult) {
+    public MoveResult(int damage, boolean critical, AttackEffectiveness moveResult, AttackEffectiveness elemResult) {
         this.damage = damage;
         this.moveResult = moveResult;
         this.elemResult = elemResult;
         this.critical = critical;
         type = MoveType.PHYSICAL;
     }
-    public AttackResult(PokeStats effects)
+    public MoveResult(PokeStats effects)
     {
         this.effects = effects;
         type = MoveType.STATUS;
     }
-    public AttackResult() {
+    public MoveResult() {
         type = MoveType.MISS;
         moveResult = AttackEffectiveness.MISS;
         elemResult = AttackEffectiveness.MISS;

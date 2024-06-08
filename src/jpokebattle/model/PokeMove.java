@@ -26,7 +26,7 @@ public class PokeMove implements MoveInterface {
     public int getUsesLeft() {
         return usesLeft;
     }
-    public void consumeUse() {
+    public void consumeUses() {
         usesLeft--;
     }
     public void resetUses() {
@@ -64,7 +64,7 @@ public class PokeMove implements MoveInterface {
         return move.getAccuracy();
     }
     @Override
-    public AttackResult perform(Pokemon attacker, Pokemon defender) {
+    public MoveResult perform(Pokemon attacker, Pokemon defender) {
         return move.perform(attacker, defender);
     }
     @Override

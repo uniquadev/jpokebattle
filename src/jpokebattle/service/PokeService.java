@@ -78,15 +78,6 @@ public class PokeService {
     }
 
     /**
-     * Returns the PokemonInfo object for the specified Pokemon ID (static method).
-     * @param id The ID of the Pokemon.
-     * @return The PokemonInfo object for the specified Pokemon ID.
-     */
-    static public PokemonInfo getInfoStatic(PokeEnum id) {
-        return getSingleton().getInfo(id);
-    }
-
-    /**
      * Returns a list of starter Pokemon.
      * @return A list of starter Pokemon.
      */

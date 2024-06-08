@@ -71,7 +71,7 @@ public class PokeFactory {
      * @throws RuntimeException if the Pokemon with the specified ID is not found.
      */
     public Pokemon generate() {
-        PokemonInfo info = PokeService.getInfoStatic(id);
+        PokemonInfo info = PokeService.getSingleton().getInfo(id);
         if (info == null)
             throw new RuntimeException("Pokemon not found: " + id);
         

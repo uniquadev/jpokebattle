@@ -7,7 +7,7 @@ import jpokebattle.enums.AttackEffectiveness;
 import jpokebattle.enums.MoveType;
 import jpokebattle.enums.PokeElement;
 import jpokebattle.interfaces.MoveInterface;
-import jpokebattle.model.AttackResult;
+import jpokebattle.model.MoveResult;
 import jpokebattle.model.PokeStats;
 import jpokebattle.model.Pokemon;
 
@@ -43,27 +43,12 @@ public abstract class BaseMove implements MoveInterface {
     }
 
     /**
-     * Performs the move by calculating the damage or applying the status effects.
-     * @param attacker the attacking Pokemon
-     * @param defender the defending Pokemon
-     * @return an AttackData object representing the result of the move
-     */
-    @Override
-    public AttackResult perform(Pokemon attacker, Pokemon defender) {
-        if (getType() == MoveType.STATUS) {
-            PokeStats effects = getEffects();
-            return new AttackResult(effects);
-        }
-        return calculateDamage(attacker, defender);
-    }
-
-    /**
      * Calculates the damage of the move based on the attacker's and defender's stats.
      * @param attacker the attacking Pokemon
      * @param defender the defending Pokemon
      * @return an AttackData object representing the damage and other information of the move
      */
-    public AttackResult calculateDamage(Pokemon attacker, Pokemon defender) {
+    public MoveResult calculateDamage(Pokemon attacker, Pokemon defender) {
         Random randomGen = new Random();
         int critical = randomGen.nextInt(1, 3);
         int power = getPower();
@@ -75,7 +60,7 @@ public abstract class BaseMove implements MoveInterface {
         double hitChance = getAccuracy() * 2;
 
         if (randomGen.nextInt(256) > hitChance)
-            return new AttackResult();
+            return new MoveResult();
 
         if (getType() == MoveType.PHYSICAL) {
             attack = attacker.getTotAttack();
@@ -94,13 +79,28 @@ public abstract class BaseMove implements MoveInterface {
         damage *= random;
 
         if (damage == 0)
-            return new AttackResult();
+            return new MoveResult();
 
-        return new AttackResult(damage.intValue(),
+        return new MoveResult(damage.intValue(),
             critical == 2,
             moveResult,
             elemResult
         );
+    }
+
+    /**
+     * Performs the move by calculating the damage or applying the status effects.
+     * @param attacker the attacking Pokemon
+     * @param defender the defending Pokemon
+     * @return an AttackData object representing the result of the move
+     */
+    @Override
+    public MoveResult perform(Pokemon attacker, Pokemon defender) {
+        if (getType() == MoveType.STATUS) {
+            PokeStats effects = getEffects();
+            return new MoveResult(effects);
+        }
+        return calculateDamage(attacker, defender);
     }
 
     /**
