@@ -10,10 +10,9 @@ import jpokebattle.pokemon.PokemonInfo;
  * The TrainerFactory class is responsible for generating Trainer objects with random names and teams of Pokemon.
  */
 public class TrainerFactory {
-    private PokeFactory pokeBuilder = new PokeFactory();
+    private PokeFactory pokeFactory = new PokeFactory();
     private PokeRandomizer randomizer = new PokeRandomizer();
     private Random random = new Random();
-    private boolean generateName = true;
     private boolean generateTeam = true;
     private boolean useStarters = false;
 
@@ -34,9 +33,7 @@ public class TrainerFactory {
      */
     public Trainer generate() {
         Trainer trainer = new Trainer();
-        if (generateName) {
-            generateName(trainer);
-        }
+        generateName(trainer);
         if (generateTeam) {
             generateTeam(trainer);
         }
@@ -63,13 +60,13 @@ public class TrainerFactory {
         if (useStarters) {
             infos = randomizer.getRandomStarters(teamSize);
         } else {
-            infos = randomizer.getRandomUniqueData(teamSize);
+            infos = randomizer.getRandomUniqueInfo(teamSize);
         }
         
         for (int i = 0; i < Math.min(infos.size(), teamSize); i++) {
             PokemonInfo info = infos.get(i);
-            pokeBuilder.setId(info.getId());
-            trainer.setPokemon(i, pokeBuilder.generate());
+            pokeFactory.setId(info.getId());
+            trainer.setPokemon(i, pokeFactory.generate());
         }
         if (teamSize > 0) {
             trainer.setActivePokemon(0);
@@ -84,17 +81,6 @@ public class TrainerFactory {
     public static String getRandomName() {
         Random random = new Random();
         return NAMES[random.nextInt(NAMES.length)];
-    }
-
-    /**
-     * Sets whether to generate a random name for the Trainer object.
-     * 
-     * @param generateName True to generate a random name, false otherwise.
-     * @return The TrainerBuilder object.
-     */
-    public TrainerFactory setGenerateName(boolean generateName) {
-        this.generateName = generateName;
-        return this;
     }
 
     /**
@@ -126,7 +112,7 @@ public class TrainerFactory {
      * @return The TrainerBuilder object.
      */
     public TrainerFactory setMinPokeLevel(int minPokeLevel) {
-        pokeBuilder.setMinLevel(minPokeLevel);
+        pokeFactory.setMinLevel(minPokeLevel);
         return this;
     }
 
@@ -137,7 +123,7 @@ public class TrainerFactory {
      * @return The TrainerBuilder object.
      */
     public TrainerFactory setMaxPokeLevel(int maxPokeLevel) {
-        pokeBuilder.setMaxLevel(maxPokeLevel);
+        pokeFactory.setMaxLevel(maxPokeLevel);
         return this;
     }
 

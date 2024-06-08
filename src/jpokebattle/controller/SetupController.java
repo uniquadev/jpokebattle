@@ -28,8 +28,8 @@ public class SetupController {
     private AudioClip battleMusic;
 
     public void initialize() {
-        titleMusic = SoundService.getSingleton().getTitleMusic();
-        battleMusic = SoundService.getSingleton().getBattleMusic();
+        titleMusic = SoundService.getSingleton().getTitleAudio();
+        battleMusic = SoundService.getSingleton().getBattleAudio();
 
         backButton.setText("< Indietro");
         backButton.removeArrow();

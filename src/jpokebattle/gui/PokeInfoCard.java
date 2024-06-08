@@ -63,7 +63,7 @@ public class PokeInfoCard extends VBox  {
         leveLabel.setText(":L" + pokemon.getLevel());
     }
 
-    public void updateHealthLabel() {
+    private void updateHealthLabel() {
         hpLabel.setText(pokemon.getHealth() + "/" + pokemon.getTotPS());
     }
 

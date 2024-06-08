@@ -35,8 +35,8 @@ public class SoundService {
         MUSIC
     }
 
-    ArrayList<AudioClip> effects = new ArrayList<>();
-    ArrayList<AudioClip> musics = new ArrayList<>();
+    private ArrayList<AudioClip> effects = new ArrayList<>();
+    private ArrayList<AudioClip> musics = new ArrayList<>();
 
     private AudioClip battleMusic;
     private AudioClip titleMusic;
@@ -102,7 +102,7 @@ public class SoundService {
      *
      * @return The title music audio clip.
      */
-    public AudioClip getTitleMusic() {
+    public AudioClip getTitleAudio() {
         return titleMusic;
     }
 
@@ -111,7 +111,7 @@ public class SoundService {
      *
      * @return The battle music audio clip.
      */
-    public AudioClip getBattleMusic() {
+    public AudioClip getBattleAudio() {
         return battleMusic;
     }
 
@@ -120,7 +120,7 @@ public class SoundService {
      *
      * @return The victory music audio clip.
      */
-    public AudioClip getVictoryMusic() {
+    public AudioClip getVictoryAudio() {
         return victoryMusic;
     }
 }

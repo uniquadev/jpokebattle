@@ -15,7 +15,7 @@ public class HPokeBalls extends HBox {
         setSpacing(0);
     }
 
-    public ImageView getPokeball() {
+    private ImageView getPokeball() {
         Image image = new Image(
             JPokeBattle.class.getResourceAsStream("resources/sprites/pokeball.png"),
             256, 256, false, false

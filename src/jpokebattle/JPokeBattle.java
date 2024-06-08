@@ -7,16 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/**
- * The main class of the JPokeBattle application.
- * This class extends the JavaFX Application class and serves as the entry point for the application.
- */
 public class JPokeBattle extends Application {
-	
-	private static Stage stage = null;
-	
+    
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
+    private Stage stage = null;
 
     private static JPokeBattle instance = null;
 
@@ -92,11 +87,6 @@ public class JPokeBattle extends Application {
         return stage;
     }
 
-    /**
-     * The main method of the application.
-     * Launches the JavaFX application.
-     * @param args The command line arguments.
-     */
     public static void main(String[] args) {
         launch(args);
     }

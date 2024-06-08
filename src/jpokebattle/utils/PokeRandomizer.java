@@ -7,8 +7,8 @@ import jpokebattle.pokemon.PokemonInfo;
 import jpokebattle.service.PokeService;
 
 /**
- * The PokeRandomizer class is responsible for generating random Pokemon info based on certain criteria.
- * This class is useful for generating random Pokemon for battles or for other purposes.
+ * The PokeRandomizer class is responsible for getting random Pokemon info based on certain criteria.
+ * This class is useful for generating random Pokemon or for other purposes.
  */
 public class PokeRandomizer {
     private PokeService service = PokeService.getSingleton();
@@ -51,7 +51,7 @@ public class PokeRandomizer {
      * @param size The number of Pokemon data to generate.
      * @return An array of PokemonInfo objects.
      */
-    public PokemonInfo[] getRandomData(int size) {
+    public PokemonInfo[] getRandomInfo(int size) {
         PokemonInfo[] result = new PokemonInfo[size];
         ArrayList<PokemonInfo> keys = getAvailablePokemons();
         for (int i = 0; i < size; i++) {
@@ -66,7 +66,7 @@ public class PokeRandomizer {
      * @param size The number of unique Pokemon data to generate.
      * @return An ArrayList of PokemonInfo objects.
      */
-    public ArrayList<PokemonInfo> getRandomUniqueData(int size) {
+    public ArrayList<PokemonInfo> getRandomUniqueInfo(int size) {
         ArrayList<PokemonInfo> result = new ArrayList<>();
         ArrayList<PokemonInfo> keys = getAvailablePokemons();
 

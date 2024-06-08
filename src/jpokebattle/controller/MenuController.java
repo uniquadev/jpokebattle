@@ -19,11 +19,11 @@ public class MenuController  {
     private Label splashLabel;
 
     public void initialize() {
-        AudioClip titleMusic = SoundService.getSingleton().getTitleMusic();
+        AudioClip titleMusic = SoundService.getSingleton().getTitleAudio();
         if (!titleMusic.isPlaying())
             titleMusic.play();
 
-        gridMenu.Initialize(new MenuOption[]{
+        gridMenu.update(new MenuOption[]{
             new MenuOption("Nuova Partita", true),
             new MenuOption("Carica Partita", false),
             new MenuOption("Classifica", true),

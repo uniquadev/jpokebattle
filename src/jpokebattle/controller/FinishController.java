@@ -26,7 +26,7 @@ public class FinishController {
     private Leaderboard leaderboard;
 
     public void initialize() {
-        victoryMusic = SoundService.getSingleton().getVictoryMusic();
+        victoryMusic = SoundService.getSingleton().getVictoryAudio();
         victoryMusic.play();
 
         state = GameState.getSingleton();

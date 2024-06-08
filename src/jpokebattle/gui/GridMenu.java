@@ -66,7 +66,7 @@ public class GridMenu extends GridPane {
         super();
     }
 
-    public void Initialize(MenuOption[] options, int cols)
+    public void update(MenuOption[] options, int cols)
     {
         assert options.length == 0;
         this.getChildren().clear();
@@ -87,7 +87,7 @@ public class GridMenu extends GridPane {
         selectOption(options[0]);
     }
 
-    public void handleClick(MenuOption option)
+    private void handleClick(MenuOption option)
     {
         if (!option.enabled)
             return;

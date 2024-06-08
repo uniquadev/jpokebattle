@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Queue;
 
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -168,7 +167,7 @@ public class BattleController {
     }
 
     private void updateMainMenu() {
-        mainMenu.Initialize(new MenuOption[]{
+        mainMenu.update(new MenuOption[]{
             new GridMenu.MenuOption("Azioni", true),
             new GridMenu.MenuOption("Pokemon", true),
             new GridMenu.MenuOption("Oggetti", false),
@@ -241,7 +240,7 @@ public class BattleController {
             MenuOption option = new MenuOption(move.getName(), true, move.getSlot());
             options[i] = option;
         }
-        actionMenu.Initialize(options, 2);
+        actionMenu.update(options, 2);
     }
 
     private void toggleActionView(boolean flag) {
@@ -271,7 +270,7 @@ public class BattleController {
     }
 
     public void runAway() {
-        SoundService.getSingleton().getBattleMusic().stop();
+        SoundService.getSingleton().getBattleAudio().stop();
         if (game.getScore() > 0) {
             JPokeBattle.getInstance().setView("finish");
         } else {
