@@ -40,7 +40,7 @@ public class Trainer {
     public Pokemon getActivePokemon() {
         return pokemons[currentPokemon];
     }
-    public void setCurrentPokemon(int index) {
+    public void setActivePokemon(int index) {
         assert index >= 0 && index < 6;
         currentPokemon = index;
     }

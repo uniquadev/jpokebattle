@@ -17,13 +17,13 @@ public abstract class CPUHandler implements CPUInterface {
         this.opponent = opponent;
     }
 
-    public BattleAction makeAction(Pokemon pokemon) {
+    protected BattleAction makeAction(Pokemon pokemon) {
         return new BattleAction(
             cpu,
             pokemon
         );
     }
-    public BattleAction makeAction(PokeMove move) {
+    protected BattleAction makeAction(PokeMove move) {
         return new BattleAction(
             cpu,
             opponent,

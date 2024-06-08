@@ -10,25 +10,28 @@ public abstract class TurnHandler {
     protected Trainer player1;
     protected Trainer player2;
 
-    private BattleAction playerAction;
-    private BattleAction cpuAction;
+    private BattleAction player1Action;
+    private BattleAction player2Action;
 
-    public void setPlayerAction(BattleAction action) {
-        playerAction = action;
+    public void setPlayer1Action(BattleAction action) {
+        player1Action = action;
     }
-    public void setCPUAction(BattleAction action) {
-        cpuAction = action;
+    public void setPlayer2Action(BattleAction action) {
+        player2Action = action;
     }
     
     protected List<BattleAction> getOrderedActions() {
-        if (playerAction == null || cpuAction == null) {
+        if (player1Action == null || player2Action == null) {
             throw new IllegalStateException("Both player and CPU actions must be set before starting the turn.");
         }
 
         List<BattleAction> actions = new ArrayList<>(2);
-        actions.add(playerAction);
-        actions.add(cpuAction);
+        actions.add(player1Action);
+        actions.add(player2Action);
         Collections.sort(actions);
+
+        player1Action = null;
+        player2Action = null;
 
         return actions;
     }

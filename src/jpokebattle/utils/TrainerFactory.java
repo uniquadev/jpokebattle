@@ -72,7 +72,7 @@ public class TrainerFactory {
             trainer.setPokemon(i, pokeBuilder.generate());
         }
         if (teamSize > 0) {
-            trainer.setCurrentPokemon(0);
+            trainer.setActivePokemon(0);
         }
     }
 

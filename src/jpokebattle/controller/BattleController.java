@@ -307,7 +307,7 @@ public class BattleController {
     }
 
     private void startTurn(BattleAction playerAction) {
-        battleHandler.setPlayerAction(playerAction);
+        battleHandler.setPlayer1Action(playerAction);
         actions =  battleHandler.startTurn();
         menuPane.setDisable(true);
         

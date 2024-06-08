@@ -59,7 +59,7 @@ public class BattleHandler extends TurnHandler implements CPUInterface {
     }
 
     public Queue<BattleAction> startTurn() {
-        setCPUAction(handleTurn());
+        setPlayer2Action(handleTurn());
         return new LinkedList<>(getOrderedActions());
     }
 

@@ -19,7 +19,7 @@ public class Leaderboard {
         synchronized (Leaderboard.class) {
             if (singleton == null) {
                 try {
-                    singleton = LeaderboardFile.loadLeaderboardFromFile("leaderboard.txt");
+                    singleton = LeaderboardFile.loadFromFile("leaderboard.txt");
                 } catch (Exception e) {
                     singleton = new Leaderboard();
                 }
@@ -58,18 +58,6 @@ public class Leaderboard {
     }
 
     /**
-     * Saves the leaderboard to a file.
-     */
-    public void save() {
-        try {
-            LeaderboardFile.saveLeaderboardToFile(this, "leaderboard.txt");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Failed to save leaderboard to file.");
-        }
-    }
-
-    /**
      * Adds a player score to the leaderboard.
      * @param score The player score to add.
      * @return The position at which the score was added in the leaderboard.
@@ -87,5 +75,17 @@ public class Leaderboard {
         }
         scores.add(index, score);
         return index+1;
+    }
+
+    /**
+     * Saves the leaderboard to a file.
+     */
+    public void save() {
+        try {
+            LeaderboardFile.saveToFile(this, "leaderboard.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Failed to save leaderboard to file.");
+        }
     }
 }
