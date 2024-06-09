@@ -15,7 +15,7 @@ public enum AttackEffectiveness {
             case NORMAL:
                 return "";
             case EFFECTIVE:
-                return " facendo molti danni!";
+                return "facendo molti danni!";
             default:
                 return "";
         }

@@ -62,8 +62,8 @@ public abstract class BaseMove implements MoveInterface {
         if (randomGen.nextInt(256) < critChance)
             critical = 2;
 
-        double accuracy = getAccuracy() * 2.3;
-        if (randomGen.nextInt(256) < accuracy)
+        int accuracy =  (int) (getAccuracy() * 2.3);
+        if (randomGen.nextInt(256) >= accuracy)
             return new MoveResult();
 
         if (getType() == MoveType.PHYSICAL) {

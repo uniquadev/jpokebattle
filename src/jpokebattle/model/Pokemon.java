@@ -342,7 +342,7 @@ public class Pokemon implements PokemonInterface {
      */
     public boolean hasMove(BaseMove move) {
         for (PokeMove m : moves) {
-            if (m != null && m.getMove().equals(move))
+            if (m != null && m.getName() == move.getName())
                 return true;
         }
         return false;
