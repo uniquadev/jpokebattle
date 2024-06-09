@@ -16,7 +16,7 @@ public class InfoController {
     public void initialize() {
         String javaVersion = System.getProperty("java.version");
         String javafxVersion = System.getProperty("javafx.version");
-        label.setText("Ciao, JavaFX " + javafxVersion + "\nEseguendo su Java " + javaVersion + ".");
+        label.setText("JavaFX " + javafxVersion + "\nEseguendo su Java " + javaVersion + ".");
 
         backButton.setText("< Indietro");
         backButton.removeArrow();

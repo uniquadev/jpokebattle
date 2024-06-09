@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import jpokebattle.JPokeBattle;
+import jpokebattle.battle.BattleCommentor;
 import jpokebattle.battle.BattleHandler;
 import jpokebattle.enums.BattleActionType;
 import jpokebattle.enums.MoveType;
@@ -318,7 +319,6 @@ public class BattleController {
             menuPane.setDisable(false);
             return;
         }
-        System.out.print(action.getTrainer().getName() + ": ");
         lastAction = action;
 
         MoveResult attack = action.performAction();
@@ -327,16 +327,11 @@ public class BattleController {
         Trainer opponent = action.getOpponent();
         Pokemon attacker = trainer.getActivePokemon();
         PokeMove move = action.getMove();
+        System.out.println(BattleCommentor.comment(action, attack));
         
         if (attack != null) {
             Pokemon defender = opponent.getActivePokemon();
             move.draw(this, attacker, defender);
-            
-            String attackText = attacker.getName() + " ha usato " + move.getName();
-            if (attack.getMoveResult() != null) {
-                attackText += " " + attack.getMoveResult().getText();
-            }
-            System.out.println(attackText);
 
             if (attack.getType() == MoveType.PHYSICAL) {
                 healthBar.tweenHealth(defender, this::onHealthTweenFinished);
@@ -346,7 +341,6 @@ public class BattleController {
         }
         else {
             if (action.getType() == BattleActionType.POKEMON_SWITCH) {
-                System.out.println(action.getTrainer().getName() + " ha messo in campo " + action.getPokemon().getName());
                 updatePokemons();
             }
             handleAction(actions.poll());

@@ -21,6 +21,8 @@ public class MoveResult {
     public MoveResult(PokeStats effects)
     {
         this.effects = effects;
+        moveResult = AttackEffectiveness.NORMAL;
+        elemResult = AttackEffectiveness.NORMAL;
         type = MoveType.STATUS;
     }
     public MoveResult() {
