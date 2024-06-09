@@ -48,8 +48,11 @@ public class BattleAction implements Comparable<BattleAction> {
 
     @Override
     public int compareTo(BattleAction o) {
-        if (type == BattleActionType.POKEMON_SWITCH) return Integer.MAX_VALUE;
-        if (type == BattleActionType.ATTACK) return trainer.getActivePokemon().getTotSpeed();
+        if (o.type != type) {
+            if (type == BattleActionType.POKEMON_SWITCH) return -1;
+            if (o.type == BattleActionType.POKEMON_SWITCH) return 1;
+        }
+        if (trainer.getActivePokemon().getTotSpeed() > opponent.getActivePokemon().getTotSpeed()) return -1;
         return 0;
     }
 

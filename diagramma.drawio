@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-06-09T11:06:15.620Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="wdYeAL5IaB30-PPXp86i" version="24.5.2" type="device">
+<mxfile host="app.diagrams.net" modified="2024-06-09T17:16:02.786Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0" etag="fgxJalin6euBPpgVuY3l" version="24.5.2" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1501" dy="791" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -139,7 +139,7 @@
         <mxCell id="lLcAZoxgE9Pci_Ua1Ipe-100" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="lLcAZoxgE9Pci_Ua1Ipe-98" vertex="1">
           <mxGeometry y="150" width="240" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="lLcAZoxgE9Pci_Ua1Ipe-101" value="&lt;div&gt;+ getInfo(): PokemonInfo&lt;/div&gt;&lt;div&gt;+ isDead(): boolean&lt;/div&gt;+ canEvolve(): boolean&lt;div&gt;+ evolve()&lt;/div&gt;&lt;div&gt;+ getExpToNextLevel(): int&lt;/div&gt;&lt;div&gt;+ canLevelUp(): boolean&lt;/div&gt;&lt;div&gt;+ levelUp()&lt;/div&gt;&lt;div&gt;+ gainExp(Pokemon, int)&lt;/div&gt;&lt;div&gt;+ getMoves(): List&amp;lt;PokeMove&amp;gt;&lt;br&gt;+ hasMove(BaseMove) boolean&lt;/div&gt;&lt;div&gt;+ canLearnMove(): PokeMove&lt;/div&gt;&lt;div&gt;+ addMove(PokeMove)&lt;/div&gt;&lt;div&gt;+ getHealth()&lt;/div&gt;&lt;div&gt;+ restoreHealth()&lt;/div&gt;&lt;div&gt;+ restore()&lt;/div&gt;&lt;div&gt;+ setLevel()&lt;br&gt;+ getLevel(): int&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setPs(int)&lt;/div&gt;&lt;div&gt;+ getTotPs(): int&lt;/div&gt;&lt;div&gt;+ setSpeed(int)&lt;/div&gt;&lt;div&gt;+ getTotSpeed(): int&lt;/div&gt;&lt;div&gt;+ setAttack(int)&lt;/div&gt;&lt;div&gt;+ getTotAttack(): int&lt;/div&gt;&lt;div&gt;+ setDefense(int)&lt;/div&gt;&lt;div&gt;+ getTotDefense(): int&lt;/div&gt;&lt;div&gt;+ setSpecial(int)&lt;/div&gt;&lt;div&gt;+ getTotSpecial(): int&lt;/div&gt;&lt;div&gt;+ getTotStats(): PokeStats&lt;/div&gt;&lt;div&gt;+ heal(int)&lt;/div&gt;&lt;div&gt;+ damage(int)&lt;/div&gt;&lt;div&gt;- calculateStat(int base, int iv, int pa): int&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="lLcAZoxgE9Pci_Ua1Ipe-98" vertex="1">
+        <mxCell id="lLcAZoxgE9Pci_Ua1Ipe-101" value="&lt;div&gt;+ &lt;u&gt;Pokemon(PokemonInfo)&lt;/u&gt;&lt;/div&gt;&lt;div&gt;+ getInfo(): PokemonInfo&lt;/div&gt;&lt;div&gt;+ isDead(): boolean&lt;/div&gt;+ canEvolve(): boolean&lt;div&gt;+ evolve()&lt;/div&gt;&lt;div&gt;+ getExpToNextLevel(): int&lt;/div&gt;&lt;div&gt;+ canLevelUp(): boolean&lt;/div&gt;&lt;div&gt;+ levelUp()&lt;/div&gt;&lt;div&gt;+ gainExp(Pokemon, int)&lt;/div&gt;&lt;div&gt;+ getMoves(): List&amp;lt;PokeMove&amp;gt;&lt;br&gt;+ hasMove(BaseMove) boolean&lt;/div&gt;&lt;div&gt;+ canLearnMove(): PokeMove&lt;/div&gt;&lt;div&gt;+ addMove(PokeMove)&lt;/div&gt;&lt;div&gt;+ getHealth()&lt;/div&gt;&lt;div&gt;+ restoreHealth()&lt;/div&gt;&lt;div&gt;+ restore()&lt;/div&gt;&lt;div&gt;+ setLevel()&lt;br&gt;+ getLevel(): int&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ setPs(int)&lt;/div&gt;&lt;div&gt;+ getTotPs(): int&lt;/div&gt;&lt;div&gt;+ setSpeed(int)&lt;/div&gt;&lt;div&gt;+ getTotSpeed(): int&lt;/div&gt;&lt;div&gt;+ setAttack(int)&lt;/div&gt;&lt;div&gt;+ getTotAttack(): int&lt;/div&gt;&lt;div&gt;+ setDefense(int)&lt;/div&gt;&lt;div&gt;+ getTotDefense(): int&lt;/div&gt;&lt;div&gt;+ setSpecial(int)&lt;/div&gt;&lt;div&gt;+ getTotSpecial(): int&lt;/div&gt;&lt;div&gt;+ getTotStats(): PokeStats&lt;/div&gt;&lt;div&gt;+ heal(int)&lt;/div&gt;&lt;div&gt;+ damage(int)&lt;/div&gt;&lt;div&gt;- calculateStat(int base, int iv, int pa): int&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="lLcAZoxgE9Pci_Ua1Ipe-98" vertex="1">
           <mxGeometry y="158" width="240" height="462" as="geometry" />
         </mxCell>
         <mxCell id="lLcAZoxgE9Pci_Ua1Ipe-114" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="lLcAZoxgE9Pci_Ua1Ipe-98" target="lLcAZoxgE9Pci_Ua1Ipe-19" edge="1">
@@ -466,7 +466,7 @@
         </mxCell>
         <mxCell id="IXkr3s8jdsAMDehXmGQa-77" value="BattleAction" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1330" y="600" width="310" height="300" as="geometry">
-            <mxRectangle x="780" y="280" width="100" height="30" as="alternateBounds" />
+            <mxRectangle x="1330" y="600" width="100" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="IXkr3s8jdsAMDehXmGQa-78" value="- type: BattleActionType&lt;div&gt;- trainer: Trainer&lt;/div&gt;&lt;div&gt;- opponent: Trainer&lt;/div&gt;&lt;div&gt;- pokemon: Pokemon&lt;/div&gt;&lt;div&gt;- move: PokeMove&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IXkr3s8jdsAMDehXmGQa-77" vertex="1">
@@ -559,7 +559,7 @@
             <mxPoint x="70" y="92" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="YUM59Ipy6oBgCPpVZzS_-0" value="Possiede dei Pokemon" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IXkr3s8jdsAMDehXmGQa-91">
+        <mxCell id="YUM59Ipy6oBgCPpVZzS_-0" value="Possiede dei Pokemon" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="IXkr3s8jdsAMDehXmGQa-91" vertex="1" connectable="0">
           <mxGeometry x="0.3841" y="-2" relative="1" as="geometry">
             <mxPoint x="69" y="2" as="offset" />
           </mxGeometry>
@@ -700,7 +700,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="IXkr3s8jdsAMDehXmGQa-137" value="EasyCPUHandler" style="html=1;whiteSpace=wrap;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="2255" y="1388" width="110" height="50" as="geometry" />
+          <mxGeometry x="2180" y="1388" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="IXkr3s8jdsAMDehXmGQa-139" value="Azioni battaglia&lt;div&gt;ordinate per priorita&#39;&lt;/div&gt;" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=0;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="IXkr3s8jdsAMDehXmGQa-117" target="IXkr3s8jdsAMDehXmGQa-80" edge="1">
           <mxGeometry x="0.1889" relative="1" as="geometry">
@@ -1006,7 +1006,7 @@
             <mxPoint x="610" y="310" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="IXkr3s8jdsAMDehXmGQa-183" value="Esci/Fuggi[score==0]" style="endArrow=open;endSize=12;html=1;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="IXkr3s8jdsAMDehXmGQa-305" source="IXkr3s8jdsAMDehXmGQa-174" target="IXkr3s8jdsAMDehXmGQa-155" edge="1">
+        <mxCell id="IXkr3s8jdsAMDehXmGQa-183" value="Esci/Fuga[score==0]" style="endArrow=open;endSize=12;html=1;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="IXkr3s8jdsAMDehXmGQa-305" source="IXkr3s8jdsAMDehXmGQa-174" target="IXkr3s8jdsAMDehXmGQa-155" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="555" y="363.5" as="sourcePoint" />
             <mxPoint x="645" y="363.5" as="targetPoint" />
@@ -1044,12 +1044,6 @@
         <mxCell id="IXkr3s8jdsAMDehXmGQa-310" value="+ &lt;u&gt;PokeFactory(PokeEnum)&lt;/u&gt;&lt;div&gt;+ &lt;u&gt;PokeFactory()&lt;/u&gt;&lt;/div&gt;&lt;div&gt;+ setId(PokeEnum)&lt;/div&gt;&lt;div&gt;+ setMinLevel(int)&lt;/div&gt;&lt;div&gt;+ setMaxLevel(int)&lt;/div&gt;&lt;div&gt;+ generate(): Pokemon&lt;/div&gt;&lt;div&gt;- generateMoves(Pokemon)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IXkr3s8jdsAMDehXmGQa-307" vertex="1">
           <mxGeometry y="168" width="160" height="112" as="geometry" />
         </mxCell>
-        <mxCell id="IXkr3s8jdsAMDehXmGQa-178" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;fillColor=#d80073;strokeColor=#A50040;exitX=0.003;exitY=0.563;exitDx=0;exitDy=0;exitPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="IXkr3s8jdsAMDehXmGQa-208" target="IXkr3s8jdsAMDehXmGQa-88" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="1070" y="1320" as="sourcePoint" />
-            <mxPoint x="1230" y="1320" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="IXkr3s8jdsAMDehXmGQa-311" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="120" y="1450" width="50" height="103" as="geometry" />
         </mxCell>
@@ -1062,7 +1056,7 @@
         <mxCell id="IXkr3s8jdsAMDehXmGQa-314" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="IXkr3s8jdsAMDehXmGQa-312" vertex="1">
           <mxGeometry y="150" width="180" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="IXkr3s8jdsAMDehXmGQa-315" value="+ generate(): Trainer&lt;div&gt;- generateName(Trainer)&lt;/div&gt;&lt;div&gt;- generateTeam(Trainer)&lt;/div&gt;&lt;div&gt;- getRandomName(): String&lt;/div&gt;&lt;div&gt;- setMinTeamSize(int)&lt;/div&gt;&lt;div&gt;- setMaxTeamSize(int)&lt;/div&gt;&lt;div&gt;- setMinPokeLevel(int)&lt;/div&gt;&lt;div&gt;- setMaxPokeLevel(int)&lt;/div&gt;&lt;div&gt;- setMinEvolution(int)&lt;/div&gt;&lt;div&gt;- setMaxEvolution(int)&lt;/div&gt;&lt;div&gt;- useStarters(boolean)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IXkr3s8jdsAMDehXmGQa-312" vertex="1">
+        <mxCell id="IXkr3s8jdsAMDehXmGQa-315" value="+ generate(): Trainer&lt;div&gt;- generateName(Trainer)&lt;/div&gt;&lt;div&gt;- generateTeam(Trainer)&lt;/div&gt;&lt;div&gt;- getRandomName(): String&lt;/div&gt;&lt;div&gt;+ setMinTeamSize(int)&lt;/div&gt;&lt;div&gt;+ setMaxTeamSize(int)&lt;/div&gt;&lt;div&gt;+ setMinPokeLevel(int)&lt;/div&gt;&lt;div&gt;+ setMaxPokeLevel(int)&lt;/div&gt;&lt;div&gt;+ setMinEvolution(int)&lt;/div&gt;&lt;div&gt;+ setMaxEvolution(int)&lt;/div&gt;&lt;div&gt;+ useStarters(boolean)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="IXkr3s8jdsAMDehXmGQa-312" vertex="1">
           <mxGeometry y="158" width="180" height="172" as="geometry" />
         </mxCell>
         <mxCell id="IXkr3s8jdsAMDehXmGQa-316" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="IXkr3s8jdsAMDehXmGQa-312" target="IXkr3s8jdsAMDehXmGQa-307" edge="1">
@@ -1139,6 +1133,18 @@
               <mxPoint x="1600" y="1322" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="YJ3lSR1kjLrBBJIEawcd-0" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;fillColor=#d80073;strokeColor=#A50040;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="IXkr3s8jdsAMDehXmGQa-208" target="IXkr3s8jdsAMDehXmGQa-312">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="1150" y="1270" as="sourcePoint" />
+            <mxPoint x="1310" y="1270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YJ3lSR1kjLrBBJIEawcd-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="YJ3lSR1kjLrBBJIEawcd-2" target="IXkr3s8jdsAMDehXmGQa-131">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YJ3lSR1kjLrBBJIEawcd-2" value="MediumCPUHandler" style="html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="2330" y="1388" width="120" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -30,7 +30,7 @@ public class BattleCommentor {
         Trainer trainer = action.getTrainer();
         switch (action.getType()) {
             case POKEMON_SWITCH:
-                return trainer.getName() + " ha richiamato " + trainer.getActivePokemon().getName() + " e ha mandato in campo " + action.getPokemon().getName();
+                return trainer.getName() + " ha richiamato il pokemon e ha mandato in campo " + action.getPokemon().getName();
             case ATTACK:
                 return trainer.getName() + ": " + trainer.getActivePokemon().getName() + " ha attaccato con " + action.getMove().getName() + " " + getEffectivenessText(result.getMoveResult());
             case SKIP:

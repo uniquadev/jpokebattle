@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import jpokebattle.enums.MoveType;
 import jpokebattle.model.BattleAction;
+import jpokebattle.model.PokeMove;
 import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 
@@ -17,9 +18,7 @@ public class EasyCPUHandler extends CPUHandler {
     public Pokemon handlePokemonChange() {
         ArrayList<Pokemon> available = cpu.getAvailablePokemons();
         Pokemon selected = null;
-        if (available.size() == 0) {
-            return null;
-        }
+        if (available.size() == 0) return null;
         else {
             selected = available.get(0);
         }
@@ -34,22 +33,14 @@ public class EasyCPUHandler extends CPUHandler {
         if (moves.size() == 0) {
             return null;
         }
-        if (attDecision == 0) {
-            for (var move : moves) {
-                if (move.getType() == MoveType.STATUS)
-                    continue;
-                return makeAction(move);
-            }
-        }
-        else {
-            for (var move : moves) {
-                if (move.getType() == MoveType.PHYSICAL)
-                    continue;
-                return makeAction(move);
-            }
-        }
-        // just use the first move if no move is found for the decision
-        return makeAction(moves.get(0));
+        PokeMove move = null;
+        if (attDecision == 0)
+            move = getFirstMove(MoveType.PHYSICAL);
+        else
+            move = getFirstMove(MoveType.STATUS);
+        if (move == null)
+            move = moves.get(0);    // just use the first move if no move is found for the decision
+        return makeAction(move);
     }
     
 }

@@ -2,6 +2,7 @@ package jpokebattle.battle;
 
 import jpokebattle.cpu.CPUHandler;
 import jpokebattle.cpu.EasyCPUHandler;
+import jpokebattle.cpu.MediumCPUHandler;
 import jpokebattle.interfaces.CPUInterface;
 import jpokebattle.model.BattleAction;
 import jpokebattle.model.Pokemon;
@@ -36,8 +37,11 @@ public class BattleHandler extends TurnHandler implements CPUInterface {
             case EASY:
                 cpuHandler = new EasyCPUHandler(player2, player1);
                 break;
+            case MEDIUM:
+                cpuHandler = new MediumCPUHandler(player2, player1);
+                break;
             default:
-                cpuHandler = new EasyCPUHandler(player2, player1);
+                cpuHandler = new MediumCPUHandler(player2, player1);
                 break;
         }
     }

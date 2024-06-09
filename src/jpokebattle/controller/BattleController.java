@@ -172,7 +172,7 @@ public class BattleController {
             new GridMenu.MenuOption("Azioni", true),
             new GridMenu.MenuOption("Pokemon", true),
             new GridMenu.MenuOption("Oggetti", false),
-            new GridMenu.MenuOption("Fuggi", true)
+            new GridMenu.MenuOption("Fuga", true)
         }, 2);
     }
 
@@ -254,7 +254,7 @@ public class BattleController {
 
     private void onMainGridClick(MenuOption option) {
         switch (option.getText()) {
-            case "Fuggi":
+            case "Fuga":
                 runAway();
                 break;
             case "Pokemon":

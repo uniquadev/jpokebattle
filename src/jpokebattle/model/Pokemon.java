@@ -16,7 +16,6 @@ import jpokebattle.service.PokeService;
  */
 public class Pokemon implements PokemonInterface {
     private PokeMove[] moves = new PokeMove[4];
-    private int health = 0;
 
     private PokeStats iv = new PokeStats(15);
     private PokeStats ev = new PokeStats(255);
@@ -24,8 +23,9 @@ public class Pokemon implements PokemonInterface {
     
     private int level = 0;
     private int exp = 0;
+    private int health = 0;
 
-    // dati base del pokemon
+    // pokemon info
     private PokemonInfo info;
 
     /**
