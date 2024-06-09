@@ -1,9 +1,11 @@
 package jpokebattle.pokemon;
 
 import jpokebattle.enums.LevelUpGroup;
+import jpokebattle.enums.PokeEnum;
 import jpokebattle.interfaces.PokemonInterface;
 import jpokebattle.interfaces.StatsInterface;
 import jpokebattle.model.PokeStats;
+import jpokebattle.service.PokeService;
 
 /**
  * The abstract class PokemonInfo represents the basic information and stats of a Pokemon.
@@ -19,7 +21,7 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
      */
     @Override
     public LevelUpGroup getLevelType() {
-        return LevelUpGroup.MEDIUM_SLOW;
+        return LevelUpGroup.FAST;
     }
 
     /**
@@ -94,12 +96,26 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
         return 0;
     }
 
+
+    /**
+     * Returns the next evolution of the Pokemon.
+     * If the Pokemon does not have an evolution, null is returned.
+     *
+     * @return The next evolution of the Pokemon, or null if there is none.
+     */
+    public PokemonInfo getNextEvolution() {
+        if (!hasEvolution()) return null;
+        PokeEnum next = PokeEnum.values()[getId().ordinal() + 1];
+        PokemonInfo nextInfo = PokeService.getSingleton().getInfo(next);
+        return nextInfo;
+    }
+
     /**
      * Returns the required experience points to reach the specified level.
      * @param level The level to calculate the required experience points for.
      * @return The required experience points to reach the specified level.
      */
-    public int getLeveRequiredExp(int level) {
+    public int getLevelRequiredExp(int level) {
         int result = 0;
         switch (getLevelType()) {
             case MEDIUM_FAST:
@@ -115,6 +131,6 @@ public abstract class PokemonInfo implements PokemonInterface, StatsInterface {
                 result = (int) (5 * Math.pow(level, 3) / 5);
                 break;
         }
-        return Math.max(0, result);
+        return Math.max(0, result / 8); // divided by 8 to make game levelup easier
     }
 }

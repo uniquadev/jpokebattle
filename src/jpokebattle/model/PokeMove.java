@@ -16,6 +16,10 @@ public class PokeMove implements MoveInterface {
         this.usesLeft = getMaxUses();
     }
 
+    public BaseMove getMove() {
+        return move;
+    }
+
     public void setSlot(int slot) {
         this.slot = slot;
     }

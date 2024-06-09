@@ -9,6 +9,7 @@ import jpokebattle.interfaces.PokemonInterface;
 import jpokebattle.move.BaseMove;
 import jpokebattle.pokemon.PokemonInfo;
 import jpokebattle.service.MoveService;
+import jpokebattle.service.PokeService;
 
 /**
  * Represents a Pokemon in the game.
@@ -53,27 +54,11 @@ public class Pokemon implements PokemonInterface {
     }
 
     /**
-     * Gets the element type of the Pokemon.
-     * @return The element type.
-     */
-    public PokeElement getElement() {
-        return info.getElement();
-    }
-
-    /**
      * Gets the current health points of the Pokemon.
      * @return The current health points.
      */
     public int getHealth() {
         return health;
-    }
-
-    /**
-     * Sets the current health points of the Pokemon.
-     * @param health The new health points.
-     */
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     /**
@@ -236,7 +221,7 @@ public class Pokemon implements PokemonInterface {
      */
     public void setLevel(int level) {
         this.level = level;
-        this.exp = info.getLeveRequiredExp(level); // imposta l'exp necessaria per il livello attuale
+        this.exp = info.getLevelRequiredExp(level); // imposta l'exp necessaria per il livello attuale
     }
 
     /**
@@ -252,7 +237,7 @@ public class Pokemon implements PokemonInterface {
      * @return The experience points required to reach the next level.
      */
     public int getExpToNextLevel() {
-        return info.getLeveRequiredExp(level + 1) - exp;
+        return info.getLevelRequiredExp(level + 1) - exp;
     }
 
     /**
@@ -260,7 +245,28 @@ public class Pokemon implements PokemonInterface {
      * @return true if the Pokemon can level up, false otherwise.
      */
     public boolean canLevelUp() {
-        return exp >= info.getLeveRequiredExp(level + 1);
+        return getExpToNextLevel() <= 0;
+    }
+
+    /**
+     * Checks if the Pokemon can evolve.
+     * 
+     * @return true if the Pokemon can evolve, false otherwise.
+     */
+    public boolean canEvolve() {
+        return info.evolveAtLevel() <= level;
+    }
+
+    /**
+     * Evolves the Pokemon to its next form, if it has an evolution.
+     * If the Pokemon does not have an evolution or the next form is not found, the method returns without making any changes.
+     * Otherwise, the Pokemon's information is updated to the next form and its stats are restored to their original values.
+     */
+    public void evolve() {
+        PokemonInfo nextInfo = info.getNextEvolution();
+        if (nextInfo == null) return;
+        info = nextInfo;
+        restore();
     }
 
     /**
@@ -277,10 +283,12 @@ public class Pokemon implements PokemonInterface {
     }
 
     /**
-     * Levels up the Pokemon.
+     * Levels up the Pokemon until it reach exp level.
      */
     public void levelUp() {
-        level++;
+        while (canLevelUp()) {
+            level++;
+        }
         // siccome non ci si puo' curare durante la battaglia, il pokemon viene 
         // curato automaticamente quando sale di livello
         restore();
@@ -327,15 +335,31 @@ public class Pokemon implements PokemonInterface {
     }
 
     /**
+     * Checks if the Pokemon has a specific move.
+     *
+     * @param move the move to check
+     * @return true if the Pokemon has the move, false otherwise
+     */
+    public boolean hasMove(BaseMove move) {
+        for (PokeMove m : moves) {
+            if (m != null && m.getMove().equals(move))
+                return true;
+        }
+        return false;
+    }
+
+    /**
      * Checks if the Pokemon can learn a move at its current level.
      * 
      * @return A PokeMove object representing the move that the Pokemon can learn, or null if it cannot learn any move.
      */
     public PokeMove canLearnMove() {
-        BaseMove move = MoveService.getSingleton().getMoveAtLevel(getId(), getLevel());
-        if (move == null)
-            return null;
-        return new PokeMove(move);
+        var moves = MoveService.getSingleton().getMovesAtLevel(getId(), getLevel());
+        for (BaseMove move : moves) {
+            if (!hasMove(move))
+                return new PokeMove(move);
+        }
+        return null; 
     }
 
     /**
@@ -384,6 +408,15 @@ public class Pokemon implements PokemonInterface {
     @Override
     public PokeEnum getId() {
         return info.getId();
+    }
+
+    /**
+     * Gets the element type of the Pokemon.
+     * @return The element type.
+     */
+    @Override
+    public PokeElement getElement() {
+        return info.getElement();
     }
 
     /**

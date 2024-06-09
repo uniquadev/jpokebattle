@@ -52,8 +52,8 @@ public class BattleHandler extends TurnHandler implements CPUInterface {
             .setMaxTeamSize(settings.getMaxTeamSize())
             .setMinPokeLevel(player1.getTeamLevel() + settings.getMinLevelOffset())
             .setMaxPokeLevel(player1.getTeamLevel() + settings.getMaxLevelOffset())
-            .setMinEvolution(player1.getBestEvolution() + settings.getMinEvolutionOffset())
-            .setMaxEvolution(player1.getBestEvolution() + settings.getMaxEvolutionOffset());
+            .setMinEvolution(settings.getMinEvolution())
+            .setMaxEvolution(settings.getMaxEvolution());
         player2 = builder.generate();
         setupCPU();
     }

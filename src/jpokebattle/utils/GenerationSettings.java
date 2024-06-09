@@ -9,8 +9,8 @@ import jpokebattle.enums.Difficulty;
 public class GenerationSettings {
     private int maxEvolution = 0;
     private int minEvolution = 0;
-    private int maxLevel = 1;
-    private int minLevel = 1;
+    private int maxLevelOff = 1;
+    private int minLevelOff = 1;
     private int maxTeamSize = 1;
     private int minTeamSize = 1;
 
@@ -22,38 +22,38 @@ public class GenerationSettings {
     public GenerationSettings(Difficulty difficulty) {
         switch (difficulty) {
             case EASY:
-                minLevel = -4;
-                maxLevel = 0;
+                minLevelOff = -2;
+                maxLevelOff = 0;
                 break;
             case MEDIUM:
-                minLevel = -3;
-                maxLevel = 2;
-                minEvolution = -1;
-                maxEvolution = 0;
+                minLevelOff = -1;
+                maxLevelOff = 2;
+                minEvolution = 0;
+                maxEvolution = 1;
                 minTeamSize = 1;
                 maxTeamSize = 2;
                 break;
             case HARD:
-                minLevel = 0;
-                maxLevel = 5;
-                minEvolution = 0;
+                minLevelOff = 0;
+                maxLevelOff = 3;
+                minEvolution = 1;
                 maxEvolution = 1;
                 minTeamSize = 2;
                 maxTeamSize = 3;
                 break;
             case IMPOSSIBLE:
-                minLevel = 4;
-                maxLevel = 8;
-                minEvolution = 0;
-                maxEvolution = 1;
+                minLevelOff = 3;
+                maxLevelOff = 8;
+                minEvolution = 2;
+                maxEvolution = 2;
                 minTeamSize = 4;
                 maxTeamSize = 5;
                 break;
             case HAHAHAHAHA:
-                minLevel = 8;
-                maxLevel = 12;
-                minEvolution = 1;
-                maxEvolution = 2;
+                minLevelOff = 8;
+                maxLevelOff = 15;
+                minEvolution = 2;
+                maxEvolution = 3;
                 minTeamSize = 6;
                 maxTeamSize = 6;
                 break;
@@ -65,7 +65,7 @@ public class GenerationSettings {
      *
      * @return the maximum evolution offset
      */
-    public int getMaxEvolutionOffset() {
+    public int getMaxEvolution() {
         return maxEvolution;
     }
 
@@ -74,7 +74,7 @@ public class GenerationSettings {
      *
      * @return the minimum evolution offset
      */
-    public int getMinEvolutionOffset() {
+    public int getMinEvolution() {
         return minEvolution;
     }
 
@@ -84,7 +84,7 @@ public class GenerationSettings {
      * @return the maximum level offset
      */
     public int getMaxLevelOffset() {
-        return maxLevel;
+        return maxLevelOff;
     }
 
     /**
@@ -93,7 +93,7 @@ public class GenerationSettings {
      * @return the minimum level offset
      */
     public int getMinLevelOffset() {
-        return minLevel;
+        return minLevelOff;
     }
 
     /**

@@ -101,14 +101,4 @@ public class Trainer {
     public String getName() {
         return name;
     }
-
-    public int getBestEvolution() {
-        int max = 0;
-        for (int i = 0; i < 6; i++) {
-            if (pokemons[i] == null)
-                continue;
-            max = Math.max(max, pokemons[i].getInfo().getCurrentEvolution());
-        }
-        return max;
-    }
 }

@@ -2,6 +2,7 @@ package jpokebattle.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import jpokebattle.enums.PokeEnum;
 import jpokebattle.model.Pokemon;
@@ -92,14 +93,15 @@ public class MoveService {
         return res == null ? new ArrayList<>() : res;
     }
 
-    public BaseMove getMoveAtLevel(PokeEnum id, int level) {
+    public List<BaseMove> getMovesAtLevel(PokeEnum id, int level) {
         ArrayList<BaseMove> moves = getMoves(id);
+        ArrayList<BaseMove> result = new ArrayList<>();
         for (BaseMove move : moves) {
-            if (move.getRequiredLevel() == level) {
-                return move;
+            if (move.getRequiredLevel() <= level) {
+                result.add(move);
             }
         }
-        return null;
+        return result;
     }
 
     /**

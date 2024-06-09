@@ -370,8 +370,14 @@ public class BattleController {
             ArrayList<Pokemon> attackers = trainer.getAvailablePokemons();
             for (Pokemon p : attackers) {
                 p.gainExp(damanged, attackers.size());
-                if (p.getExp() >= p.getExpToNextLevel()) {
+                if (p.canLevelUp()) {
                     p.levelUp();
+                    // try evolve
+                    if (p.canEvolve()) {
+                        p.evolve();
+                        updatePokemons();
+                    }
+                    // try learn new move
                     PokeMove newMove = p.canLearnMove();
                     if (newMove != null) {
                         if(p.addMove(newMove) == null) {
@@ -399,11 +405,11 @@ public class BattleController {
                     }
                     else {
                         catchingPokemon = captured;
+                        togglePokemonView(true);
                     }
                 }
                 if (player.getAvailablePokemons().size() > 1) {
                     freeSwitch = true;
-                    togglePokemonView(true);
                 }
                 battleHandler.generateNewOpponent();
                 updatePokemons();
