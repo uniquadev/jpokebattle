@@ -5,6 +5,10 @@ import jpokebattle.model.BattleAction;
 import jpokebattle.model.MoveResult;
 import jpokebattle.model.Trainer;
 
+/**
+ * The BattleCommentor class is responsible for generating comments for battle actions in a Pokemon battle.
+ * It provides methods to get the effectiveness text for a move, as well as generate comments for different types of battle actions.
+ */
 public class BattleCommentor {
 
     public static String getEffectivenessText(AttackEffectiveness effectiveness) {
@@ -30,7 +34,7 @@ public class BattleCommentor {
         Trainer trainer = action.getTrainer();
         switch (action.getType()) {
             case POKEMON_SWITCH:
-                return trainer.getName() + " ha richiamato il pokemon e ha mandato in campo " + action.getPokemon().getName();
+                return trainer.getName() + " ha richiamato " + action.getPokemon().getName() + " e ha mandato in campo " + trainer.getActivePokemon().getName();
             case ATTACK:
                 return trainer.getName() + ": " + trainer.getActivePokemon().getName() + " ha attaccato con " + action.getMove().getName() + " " + getEffectivenessText(result.getMoveResult());
             case SKIP:

@@ -15,9 +15,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-// aggiunge la gestione della battaglia
-// generando nuovi avversari in base allo stato del gioco
-
+/**
+ * The `BattleHandler` class is responsible for managing the battle between the player and the CPU opponent.
+ * It extends the `TurnHandler` class and implements the `CPUInterface`.
+ */
 public class BattleHandler extends TurnHandler implements CPUInterface {
     private GameState state;
     private CPUHandler cpuHandler;
@@ -62,6 +63,11 @@ public class BattleHandler extends TurnHandler implements CPUInterface {
         setupCPU();
     }
 
+    /**
+     * Starts a new turn in the battle.
+     * 
+     * @return A queue of BattleAction objects representing the ordered actions for the turn.
+     */
     public Queue<BattleAction> startTurn() {
         setPlayer2Action(handleTurn());
         return new LinkedList<>(getOrderedActions());

@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 
+/**
+ * The abstract class TurnHandler represents a handler for a turn in a battle between two trainers.
+ * It provides methods to set the actions of the players and retrieve the ordered actions for the turn.
+ */
 public abstract class TurnHandler {
     protected Trainer player1;
     protected Trainer player2;
