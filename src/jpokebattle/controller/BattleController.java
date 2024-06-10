@@ -358,6 +358,7 @@ public class BattleController {
         }
             
         if (!wasCPU) {
+            trainer.getActivePokemon().gainEv();
             ArrayList<Pokemon> attackers = trainer.getAvailablePokemons();
             for (Pokemon p : attackers) {
                 p.gainExp(damanged, attackers.size());

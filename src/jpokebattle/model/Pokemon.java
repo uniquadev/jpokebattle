@@ -10,6 +10,7 @@ import jpokebattle.move.BaseMove;
 import jpokebattle.pokemon.PokemonInfo;
 import jpokebattle.service.MoveService;
 import jpokebattle.service.PokeService;
+import java.util.Random;
 
 /**
  * Represents a Pokemon in the game.
@@ -267,6 +268,36 @@ public class Pokemon implements PokemonInterface {
         if (nextInfo == null) return;
         info = nextInfo;
         restore();
+    }
+
+    /**
+     * Gains effort values randomly, usually called after defeating an enemy.
+     */
+    public void gainEv() {
+        Random r = new Random();
+        int stat = r.nextInt(1, 5);
+        int choice = r.nextInt(5);
+        PokeStats add = new PokeStats();
+        switch (choice) {
+            case 0:
+                add.setAttack(stat);
+                break;
+            case 1:
+                add.setDefense(stat);
+                break;
+            case 2:
+                add.setSpeed(stat);
+                break;
+            case 3:
+                add.setSpecial(stat);
+                break;
+            case 4:
+                add.setPS(stat);
+                break;
+            default:
+                break;
+        }
+        ev.sum(add);
     }
 
     /**
