@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import jpokebattle.JPokeBattle;
 import jpokebattle.service.SoundService;
 
 public class ArrowButton extends Button {
@@ -21,7 +22,7 @@ public class ArrowButton extends Button {
 
         this.getStyleClass().add("simple-button");
         arrow = new Image(
-            getClass().getResourceAsStream("../resources/sprites/arrow.png"),
+            JPokeBattle.class.getResourceAsStream("resources/sprites/arrow.png"),
             width,
             height,
             false,
