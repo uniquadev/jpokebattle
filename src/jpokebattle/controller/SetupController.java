@@ -12,6 +12,10 @@ import jpokebattle.service.GameState;
 import jpokebattle.service.SoundService;
 import jpokebattle.utils.TrainerFactory;;
 
+/**
+ * The SetupController class is responsible for handling the setup screen of the JPokeBattle application.
+ * It controls the user interface elements and manages the initialization and submission of player data.
+ */
 public class SetupController {
     private final int MAX_NAME_LEN = 16;
     ChangeListener<Boolean> focusListener;
@@ -57,7 +61,7 @@ public class SetupController {
             submit();
         });
 
-        // ringraziamo javafx per triggerare il focus automaticamente :D
+        // I hate you javafx :D
         // https://stackoverflow.com/questions/29051225/remove-default-focus-from-textfield-javafx
         focusListener = (observable, oldValue, newValue) -> {
             if (newValue) {

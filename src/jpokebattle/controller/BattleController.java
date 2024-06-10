@@ -1,7 +1,6 @@
 package jpokebattle.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Queue;
 
 import javafx.animation.TranslateTransition;
@@ -36,6 +35,12 @@ import jpokebattle.service.GameState;
 import jpokebattle.service.SoundService;
 //import jpokebattle.utils.OldTurnManager;
 
+/**
+ * The `BattleController` class is responsible for controlling the battle logic and user interface in a Pokémon battle.
+ * It manages the game state, battle handler, actions queue, and various UI elements such as labels, buttons, and panes.
+ * The `BattleController` initializes the battle, updates the UI, handles user actions, and performs battle actions.
+ * It also handles the animation and transition effects during the battle.
+ */
 public class BattleController {
 
     private GameState game;
@@ -43,9 +48,6 @@ public class BattleController {
     private Queue<BattleAction> actions;
     private BattleAction lastAction;
     private boolean freeSwitch = false;
-
-    //private OldTurnManager turnManager;
-    private SoundService sound;
 
     private Trainer player;
     private Pokemon catchingPokemon;
@@ -112,7 +114,6 @@ public class BattleController {
 
     public BattleController() {
         game = GameState.getSingleton();
-        sound = SoundService.getSingleton();
         battleHandler = new BattleHandler(game);
         player = game.getPlayer();
     }
@@ -323,15 +324,11 @@ public class BattleController {
 
         MoveResult attack = action.performAction();
         HealthBar healthBar = getHealthBar(action.getOpponent());
-        Trainer trainer = action.getTrainer();
         Trainer opponent = action.getOpponent();
-        Pokemon attacker = trainer.getActivePokemon();
-        PokeMove move = action.getMove();
         System.out.println(BattleCommentor.comment(action, attack));
         
         if (attack != null) {
             Pokemon defender = opponent.getActivePokemon();
-            move.draw(this, attacker, defender);
 
             if (attack.getType() == MoveType.PHYSICAL) {
                 healthBar.tweenHealth(defender, this::onHealthTweenFinished);

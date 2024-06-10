@@ -11,6 +11,12 @@ import jpokebattle.service.GameState;
 import jpokebattle.service.Leaderboard;
 import jpokebattle.service.SoundService;
 
+/**
+ * The controller class for the finish screen of the game.
+ * This class handles the logic and functionality of the finish screen,
+ * including updating the leaderboard, displaying the player's score,
+ * and handling the back button action.
+ */
 public class FinishController {
 
     @FXML

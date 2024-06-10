@@ -6,6 +6,10 @@ import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.gui.LeaderboardGUI;
 import jpokebattle.service.Leaderboard;
 
+/**
+ * The controller class for the Leaderboard view.
+ * This class handles the initialization and event handling for the Leaderboard view.
+ */
 public class LeaderController {
     @FXML
     private ArrowTextButton backButton;

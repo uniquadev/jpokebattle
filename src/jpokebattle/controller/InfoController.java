@@ -5,6 +5,10 @@ import javafx.scene.control.Label;
 import jpokebattle.JPokeBattle;
 import jpokebattle.gui.ArrowTextButton;
 
+/**
+ * The controller class for the Info view.
+ * Used mainly for debugging purposes to display information about the JavaFX version.
+ */
 public class InfoController {
 
     @FXML

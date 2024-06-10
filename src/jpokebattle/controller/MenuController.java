@@ -11,6 +11,10 @@ import jpokebattle.gui.GridMenu.MenuOption;
 import jpokebattle.service.SoundService;
 import jpokebattle.utils.SplashText;
 
+/**
+ * The MenuController class is responsible for controlling the menu screen of the application.
+ * It handles the initialization of the menu, updates the menu options, and handles user clicks on the menu options.
+ */
 public class MenuController  {
 
     @FXML
@@ -79,9 +83,5 @@ public class MenuController  {
             default:
                 break;
         }
-    }
-
-    private void caricaPartita() {
-        
     }
 }

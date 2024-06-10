@@ -10,6 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+/**
+ * The StartController class is responsible for controlling the start screen of the application.
+ * It handles the initialization of the screen, including setting up animations and event listeners.
+ */
 public class StartController {
 
     private FadeTransition fadeTransition;

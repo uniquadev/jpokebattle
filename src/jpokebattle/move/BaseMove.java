@@ -133,13 +133,4 @@ public abstract class BaseMove implements MoveInterface {
     public int getMaxUses() {
         return 10;
     }
-
-    /**
-     * Draws the move on the battle controller.
-     * @param bc the battle controller
-     * @param attacker the attacking Pokemon
-     * @param defender the defending Pokemon
-     */
-    @Override
-    public void draw(BattleController bc, Pokemon attacker, Pokemon defender) {}
 }
