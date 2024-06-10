@@ -69,7 +69,7 @@ public class Pokemon implements PokemonInterface {
     }
 
     /**
-     * Checks if the Pokemon is dead (health points <= 0).
+     * Checks if the Pokemon is dead.
      * @return true if the Pokemon is dead, false otherwise.
      */
     public boolean isDead() {

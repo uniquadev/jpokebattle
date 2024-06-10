@@ -7,8 +7,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import jpokebattle.interfaces.PokeCallback;
 import jpokebattle.model.Pokemon;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 public class PokeInfoCard extends VBox  {
     private Label nameLabel;

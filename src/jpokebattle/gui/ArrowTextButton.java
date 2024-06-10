@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import jpokebattle.JPokeBattle;
 import jpokebattle.service.SoundService;
 
 public class ArrowTextButton extends HBox {
@@ -32,7 +33,7 @@ public class ArrowTextButton extends HBox {
         });
 
         Image arrowImage = new Image(
-            getClass().getResourceAsStream("../resources/sprites/arrow.png"),
+            JPokeBattle.class.getResourceAsStream("resources/sprites/arrow.png"),
             30,
             30,
             false,
