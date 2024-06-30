@@ -10,7 +10,7 @@ import jpokebattle.gui.ArrowTextButton;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
 import jpokebattle.service.SoundService;
-import jpokebattle.utils.TrainerFactory;;
+import jpokebattle.utils.TrainerBuilder;;
 
 /**
  * The SetupController class is responsible for handling the setup screen of the JPokeBattle application.
@@ -19,7 +19,7 @@ import jpokebattle.utils.TrainerFactory;;
 public class SetupController {
     private final int MAX_NAME_LEN = 16;
     ChangeListener<Boolean> focusListener;
-    private String defaultName = TrainerFactory.getRandomName();
+    private String defaultName = TrainerBuilder.getRandomName();
 
     @FXML
     ArrowTextButton backButton;
@@ -81,7 +81,7 @@ public class SetupController {
 
     private void submit() {
         GameState game = GameState.getSingleton();
-        Trainer player = new TrainerFactory()
+        Trainer player = new TrainerBuilder()
             .setMaxTeamSize(1)
             .setMaxPokeLevel(2)
             .useStarters(true)

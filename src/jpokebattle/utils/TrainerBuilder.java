@@ -9,8 +9,8 @@ import jpokebattle.pokemon.PokemonInfo;
 /**
  * The TrainerFactory class is responsible for generating Trainer objects with random names and teams of Pokemon.
  */
-public class TrainerFactory {
-    private PokeFactory pokeFactory = new PokeFactory();
+public class TrainerBuilder {
+    private PokeBuilder pokeFactory = new PokeBuilder();
     private PokeRandomizer randomizer = new PokeRandomizer();
     private Random random = new Random();
     private boolean generateTeam = true;
@@ -89,7 +89,7 @@ public class TrainerFactory {
      * @param teamSize The minimum team size.
      * @return The TrainerBuilder object.
      */
-    public TrainerFactory setMinTeamSize(int teamSize) {
+    public TrainerBuilder setMinTeamSize(int teamSize) {
         this.minTeamSize = Math.max(1, teamSize);
         return this;
     }
@@ -100,7 +100,7 @@ public class TrainerFactory {
      * @param teamSize The maximum team size.
      * @return The TrainerBuilder object.
      */
-    public TrainerFactory setMaxTeamSize(int teamSize) {
+    public TrainerBuilder setMaxTeamSize(int teamSize) {
         this.maxTeamSize = Math.min(6, teamSize);
         return this;
     }
@@ -111,7 +111,7 @@ public class TrainerFactory {
      * @param minPokeLevel The minimum level.
      * @return The TrainerBuilder object.
      */
-    public TrainerFactory setMinPokeLevel(int minPokeLevel) {
+    public TrainerBuilder setMinPokeLevel(int minPokeLevel) {
         pokeFactory.setMinLevel(minPokeLevel);
         return this;
     }
@@ -122,7 +122,7 @@ public class TrainerFactory {
      * @param maxPokeLevel The maximum level.
      * @return The TrainerBuilder object.
      */
-    public TrainerFactory setMaxPokeLevel(int maxPokeLevel) {
+    public TrainerBuilder setMaxPokeLevel(int maxPokeLevel) {
         pokeFactory.setMaxLevel(maxPokeLevel);
         return this;
     }
@@ -133,7 +133,7 @@ public class TrainerFactory {
      * @param maxEvolution The maximum evolution stage.
      * @return The TrainerBuilder object.
      */
-    public TrainerFactory setMaxEvolution(int maxEvolution) {
+    public TrainerBuilder setMaxEvolution(int maxEvolution) {
         randomizer.setMaxEvolution(maxEvolution);
         return this;
     }
@@ -144,7 +144,7 @@ public class TrainerFactory {
      * @param minEvolution The minimum evolution stage.
      * @return The TrainerBuilder object.
      */
-    public TrainerFactory setMinEvolution(int minEvolution) {
+    public TrainerBuilder setMinEvolution(int minEvolution) {
         randomizer.setMinEvolution(minEvolution);
         return this;
     }
@@ -155,7 +155,7 @@ public class TrainerFactory {
      * @param useStarters True to use starter Pokemon, false otherwise.
      * @return The TrainerBuilder object.
      */
-    public TrainerFactory useStarters(boolean useStarters) {
+    public TrainerBuilder useStarters(boolean useStarters) {
         this.useStarters = useStarters;
         return this;
     }

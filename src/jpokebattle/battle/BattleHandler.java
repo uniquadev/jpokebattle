@@ -9,7 +9,7 @@ import jpokebattle.model.Pokemon;
 import jpokebattle.model.Trainer;
 import jpokebattle.service.GameState;
 import jpokebattle.utils.GenerationSettings;
-import jpokebattle.utils.TrainerFactory;
+import jpokebattle.utils.TrainerBuilder;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -52,7 +52,7 @@ public class BattleHandler extends TurnHandler implements CPUInterface {
      */
     public void generateNewOpponent() {
         GenerationSettings settings = new GenerationSettings(state.getCurrentDifficulty());
-        TrainerFactory builder = new TrainerFactory()
+        TrainerBuilder builder = new TrainerBuilder()
             .setMinTeamSize(settings.getMinTeamSize())
             .setMaxTeamSize(settings.getMaxTeamSize())
             .setMinPokeLevel(player1.getTeamLevel() + settings.getMinLevelOffset())
