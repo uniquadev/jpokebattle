@@ -61,7 +61,7 @@ Other useful tasks:
 
 The fat jar contains JavaFX for one operating system only, the one you build on. To build for another one, add `-PjavafxPlatform=win`, `linux`, `mac` or `mac-aarch64`.
 
-**Prebuilt jar:** download `jpokebattle-1.0.0-all.jar` from the [Releases page](https://github.com/uniquadev/jpokebattle/releases) (placeholder: no release has been published yet). Run it with `java -jar jpokebattle-1.0.0-all.jar` (Java 17 or newer).
+Run the fat jar with `java -jar jpokebattle-1.0.0-all.jar` (Java 17 or newer).
 
 **No JDK installed?** You can build inside Docker:
 
@@ -148,13 +148,4 @@ All rights to these assets remain with their owners.
 ## License
 
 The source code is released under the [MIT License](LICENSE).
-
-> **Note for the owner:** `LICENSE` is a placeholder. Confirm the license before publishing.
-
 The MIT License covers only the original source code. It does not cover the Pokémon assets listed in the disclaimer.
-
-## Support
-
-If this project helped you, you can buy me a coffee:
-
-<a href="https://www.buymeacoffee.com/BMC_USERNAME"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=BMC_USERNAME&button_colour=FFDD00&font_colour=000000&font_family=Inter&outline_colour=000000&coffee_colour=ffffff" height="42"></a>
