@@ -149,3 +149,9 @@ All rights to these assets remain with their owners.
 
 The source code is released under the [MIT License](LICENSE).
 The MIT License covers only the original source code. It does not cover the Pokémon assets listed in the disclaimer.
+
+## Support ☕
+
+If this game helped you with your own Programming Methodologies project, or you just had fun playing it, you can buy me a coffee. It keeps more university projects coming to GitHub.
+
+<a href="https://buymeacoffee.com/uniqua"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" height="48"></a>
