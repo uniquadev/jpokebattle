@@ -1,0 +1,76 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'dev.uniquadev'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    // Any JDK 17+ can build the game; the bytecode targets Java 17.
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}
+
+// The project keeps its original (Eclipse) layout: Java sources, FXML views
+// and assets all live under src/jpokebattle.
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            srcDirs = ['src']
+            exclude '**/*.java'
+        }
+    }
+}
+
+javafx {
+    version = '21.0.5'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
+    // Build for another OS with -PjavafxPlatform=win|linux|mac|mac-aarch64
+    if (project.hasProperty('javafxPlatform')) {
+        platform = project.property('javafxPlatform')
+    }
+}
+
+application {
+    // Launcher is a plain main class that calls JPokeBattle (the JavaFX
+    // Application), so the game also starts from a classpath-only fat jar.
+    mainClass = 'jpokebattle.Launcher'
+    applicationName = 'jpokebattle'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': application.mainClass
+    }
+}
+
+// Self-contained runnable jar: ./gradlew fatJar, then java -jar build/libs/jpokebattle-<version>-all.jar
+// It bundles the JavaFX natives of one OS (the build machine's, or -PjavafxPlatform).
+tasks.register('fatJar', Jar) {
+    group = 'distribution'
+    description = 'Assembles a runnable jar that bundles JavaFX for one platform.'
+    archiveClassifier = 'all'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes 'Main-Class': application.mainClass
+    }
+    from sourceSets.main.output
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('.jar') }.collect { zipTree(it) }
+    }
+    exclude 'module-info.class', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/INDEX.LIST'
+}

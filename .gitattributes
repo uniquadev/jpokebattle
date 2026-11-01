@@ -1,0 +1,13 @@
+* text=auto
+gradlew text eol=lf
+*.bat text eol=crlf
+*.jar binary
+*.png binary
+*.gif binary
+*.webm binary
+*.wav binary
+*.mp3 binary
+*.ttf binary
+*.pdf binary
+*.odt binary
+*.aseprite binary
